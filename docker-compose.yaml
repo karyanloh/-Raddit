@@ -12,7 +12,7 @@ services:
         context: ./fastapi-service
         dockerfile: ./Dockerfile.dev
     ports:
-        - "YOUR PORT NUMBER:8000"
+        - "8000:8000"
     volumes:
         - ./fastapi-service:/app
     environment:
