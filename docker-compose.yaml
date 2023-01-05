@@ -1,4 +1,6 @@
-# volumes:
+volumes:
+  mongo-data:
+    external: true
 services:
   mongo:
         image: mongo:5
@@ -25,8 +27,6 @@ services:
     command: /bin/bash run.sh
     working_dir: /app
     volumes:
-        mongo-data:
-          external: true
       - ./ghi:/app
     ports:
       - "3000:3000"
