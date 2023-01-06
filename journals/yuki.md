@@ -6,3 +6,10 @@ Today, I worked on:
 Today, I worked on: 
 * continue working on issues and features
 * self-study MongoDB database and pymongo library
+
+## January 5, 2023
+Today, I worked on:
+
+* revised issues and features
+* distributed the features to each group member 
+* reviewed mongodb set-up with fastapi
