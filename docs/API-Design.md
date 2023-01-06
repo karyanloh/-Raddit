@@ -33,21 +33,6 @@
       ]
     }
     ```
-### Get comments
-* Endpoint path: /Raddit/id/comments
-* Endpoint method: GET
-* Response: A list of comments for a post
-* Response shape:
-    ```json
-    {
-      "post": [
-        {
-          "body" : string,
-          "upvote_count": number,
-        }
-      ]
-    }
-    ``` 
 
 ### Create a new post
 
@@ -75,14 +60,38 @@
       "message": string
     }
     ```
+
+### Get comments
+* Endpoint path: /Raddit/id/comments
+* Endpoint method: GET
+* Response: A list of comments for a post
+* Response shape:
+    ```json
+    {
+      "post": [
+        {
+          "body" : string,
+          "upvote_count": number,
+        }
+      ]
+    }
+    ``` 
     
 ### Post comments 
-* Endpoint path: /Raddit/id/comments/id
+* Endpoint path: /Raddit/id/comments
 * Endpoint method: POST
 
 * Headers:
   * Authorization: Bearer token
-  
+
+* Request body:
+    ```json
+    {
+      "title": string,
+      "body": string
+    }
+    ```
+
 * Response: A list of comments for a post
 * Response shape:
     ```json
@@ -90,7 +99,7 @@
       "post": [
         {
           "title": string,
-          "comments" : {<<key>>: type>>} 
+          "body" : string
         }
       ]
     }
@@ -143,9 +152,8 @@
     true
     ```
 
-### Update
+### Update a raddit post 
 
-* Endpoint path: /Raddit
 * Endpoint path: /Raddit/<int:pk>/
 * Endpoint method: PUT
 
@@ -153,24 +161,29 @@
   * Authorization: Bearer token
 
 
-* Response: Update a post
+* Request: Update a post
+* Request body:
+    ```json
+    {
+      "title": string,
+      "text": string,
+      "my_profile":boolean,
+      "subraddit_choice":string
+    }
+    ```
+* Response: An indication of success or failure
 * Response shape:
     ```json
+    {
+      "success": boolean,
+      "message": string
+    }
+    ```
 
-* Endpoint path: Raddit/comments/<int:pk>/
-* Endpoint method: PUT
-
-* Headers:
-  * Authorization: Bearer token
-
-  
-* Response: Update a Comment
-* Response shape:
-    ```json
 
 ### Delete a raddit post
 
-* Endpoint path: /raddit
+* Endpoint path: /raddit/<int:id>/
 * Endpoint method: DELETE
 
 * Headers:
