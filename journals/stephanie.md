@@ -18,3 +18,8 @@ Today, I worked on:
 * discussing work distribution amongst team members
 * followed-up with assigning issues in Gitlab to members assigned to the features
 * had a discussion with Yuki and Mack and wanted to learn more about using MongoDB for our database and how it would work with comments being linked to posts
+
+## January 6, 2023
+Today, I worked on:
+* setting up MongoDB with the team 
+* created branches for the individual features
