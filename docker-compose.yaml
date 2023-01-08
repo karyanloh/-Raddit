@@ -21,10 +21,12 @@ services:
         - ./user-service:/app
     environment:
       DATABASE_URL: mongodb://root:password@mongo
-      DATABASE_NAME: db-name
+      DATABASE_NAME: users
       MONGO_USER : root
       MONGO_PASSWORD: password
       WAIT_HOSTS: mongo:27017
+      SIGNING_KEY: alohamora
+
   mongo-express:
     image: mongo-express:latest
     depends_on:
@@ -53,10 +55,11 @@ services:
         - ./content-service:/app
     environment:
       DATABASE_URL: mongodb://root:password@mongo2
-      DATABASE_NAME: db-name
+      DATABASE_NAME: users
       MONGO_USER : root
       MONGO_PASSWORD: password
       WAIT_HOSTS: mongo2:27017
+      SIGNING_KEY: alohamora
   mongo2-express:
     image: mongo-express:latest
     depends_on:
