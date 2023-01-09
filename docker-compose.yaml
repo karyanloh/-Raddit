@@ -55,7 +55,7 @@ services:
         - ./content-service:/app
     environment:
       DATABASE_URL: mongodb://root:password@mongo2
-      DATABASE_NAME: users
+      DATABASE_NAME: content
       MONGO_USER : root
       MONGO_PASSWORD: password
       WAIT_HOSTS: mongo2:27017
