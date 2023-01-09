@@ -52,3 +52,6 @@ def create_user(
     user_queries: UserQueries = Depends(),
 ):
     return user_queries.get_user_by_id(id)
+
+
+#test
