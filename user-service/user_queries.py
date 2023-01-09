@@ -23,3 +23,9 @@ class UserQueries:
         result = db.users.find_one({ "_id": ObjectId(id) })
         result['id'] = str(result['_id']) # ObjectId
         return result
+
+    def get_by_username(self, username):
+        db = client[mongodb]
+        result = db.users.find_one({ "username": username })
+        result['id'] = str(result['_id']) # ObjectId
+        return result
