@@ -13,3 +13,9 @@ Today, I worked on:
 * revised issues and features
 * distributed the features to each group member 
 * reviewed mongodb set-up with fastapi
+
+## January 6, 2023
+Today, I worked on:
+
+* set up mongo db with fastapi for user service and content service with teammates 
+
