@@ -52,6 +52,13 @@ class PostOutDetail(BaseModel):
 class EditPost(BaseModel):
     description: str
 
+class PostScoreIn(BaseModel):
+    id: str
+    post_id: str
+    score: str
+    upvote_users: list[str]
+    downvote_users: list
+
 
 
 @app.post('/api/posts', response_model=PostIn)
@@ -89,5 +96,3 @@ def update_post_by_id(
     content_queries: ContentQueries = Depends(),
 ):
     return content_queries.edit_post(id, description)
-
-

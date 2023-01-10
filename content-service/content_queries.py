@@ -28,13 +28,10 @@ class ContentQueries:
         db = client[mongodb]
         result = db.posts.delete_one({ "_id": ObjectId(id) })
         return 'Post Deleted'
-    
+
     def edit_post(self, id, description):
         db = client[mongodb]
         a = description
         print(a)
         result = db.posts.update_one({ "_id": ObjectId(id) }, {"$set": {"description": a.description}})
         return 'Post Edited'
-        
-
-
