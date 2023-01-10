@@ -34,9 +34,6 @@ class ContentQueries:
         db = client[mongodb]
         a = description
         result = db.posts.update_one({ "_id": ObjectId(id) }, {"$set": {"description": a.description}})
-<<<<<<< HEAD
-        return 'Post Edited'
-=======
         post = self.get_post_by_id(id)
         return post
 
@@ -64,4 +61,26 @@ class ContentQueries:
         result = db.comments.update_one({ "_id": ObjectId(id) }, {"$set": {"body": body.body}})
         comment = self.get_comment_by_id(id)
         return comment
->>>>>>> main
+
+    def create_post_score(self, new_post_score):
+        db = client[mongodb]
+        result = db.postVotes.insert_one(new_post_score.dict())
+        post_score = self.get_post_score_by_id(result.inserted_id)
+        return post_score
+
+    def get_post_score_by_id(self, id):
+        db = client[mongodb]
+        result = db.postVotes.find_one({ "_id": ObjectId(id) })
+        result['id'] = str(result['_id']) # ObjectId
+        return result
+
+    def edit_post_score(self, id, score):
+        db = client[mongodb]
+        result = db.postVotes.update_one({ "_id": ObjectId(id) }, {"$set": {"score": score.score}})
+        post_score = self.get_post_score_by_id(id)
+        return post_score
+
+    def delete_post_score(self, id):
+        db = client[mongodb]
+        result = db.postVotes.delete_one({ "_id": ObjectId(id) })
+        return 'Vote Deleted'

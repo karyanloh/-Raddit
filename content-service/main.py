@@ -52,12 +52,7 @@ class PostOutDetail(BaseModel):
 class EditPost(BaseModel):
     description: str
 
-class PostScoreIn(BaseModel):
-    id: str
-    post_id: str
-    score: str
-    upvote_users: list[str]
-    downvote_users: list
+
 
 
 
@@ -139,3 +134,46 @@ def update_comment_by_id(
     content_queries: ContentQueries = Depends(),
 ):
     return content_queries.edit_comment(id, body)
+
+
+class PostScoreIn(BaseModel):
+    post_id: str
+    score: int
+    upvote_users: list[str]
+    downvote_users: list[str]
+
+class PostScoreOut(BaseModel):
+    post_id: str
+    score: int
+
+class EditPostScore(BaseModel):
+    score: int
+
+@app.post('/api/postScore', response_model=PostScoreIn)
+def create_post_score(
+    new_post_score: PostScoreIn,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.create_post_score(new_post_score)
+
+@app.get('/api/postScore/{id}', response_model=PostScoreOut)
+def get_post_score_by_id(
+    id: str,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.get_post_score_by_id(id)
+
+@app.delete('/api/postScore/{id}')
+def delete_post_score_by_id(
+    id: str,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.delete_post_score(id)
+
+@app.put('/api/postScore/{id}', response_model=PostScoreOut)
+def update_post_score_by_id(
+    id: str,
+    score: EditPostScore,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.edit_post_score(id, score)
