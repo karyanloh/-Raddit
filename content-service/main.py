@@ -89,10 +89,53 @@ def delete_post_by_id(
 ):
     return content_queries.delete_post(id)
 
-@app.put('/api/post/{id}')
+@app.put('/api/post/{id}', response_model=PostOutDetail)
 def update_post_by_id(
     id: str,
     description: EditPost,
     content_queries: ContentQueries = Depends(),
 ):
     return content_queries.edit_post(id, description)
+
+
+class CommentIn(BaseModel):
+    post: str
+    body: str
+    user: str
+
+class CommentOut(BaseModel):
+    id: str
+    post: str
+    body: str
+
+class EditComment(BaseModel):
+    body: str
+
+@app.post('/api/comments', response_model=CommentIn)
+def create_comment(
+    new_comment: CommentIn,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.create_comment(new_comment)
+
+@app.get('/api/comment/{id}', response_model=CommentOut)
+def get_comment_by_id(
+    id: str,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.get_comment_by_id(id)
+
+@app.delete('/api/comment/{id}')
+def delete_comment_by_id(
+    id: str,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.delete_comment(id)
+
+@app.put('/api/comment/{id}', response_model=CommentOut)
+def update_comment_by_id(
+    id: str,
+    body: EditComment,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.edit_comment(id, body)
