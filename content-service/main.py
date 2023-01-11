@@ -53,15 +53,21 @@ class EditPost(BaseModel):
     description: str
 
 
-
-
-
 @app.post('/api/posts', response_model=PostIn)
 def create_post(
     new_post: PostIn,
     content_queries: ContentQueries = Depends(),
 ):
-    return content_queries.create_post(new_post)
+    result = content_queries.create_post(new_post)
+    post_id = result['id']
+    print('\n\n\n')
+    # print(type(new_post))
+    # print('\n\n\n')
+    # new_post_score : post_id
+    submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
+    newer_score = content_queries.create_post_score(submit)
+    # newer_score = content_queries.create_post_score(new_post_score)
+    return result
 
 @app.get('/api/main/{id}', response_model=PostOutShort)
 def get_post_short_by_id(
@@ -148,6 +154,8 @@ class PostScoreOut(BaseModel):
 
 class EditPostScore(BaseModel):
     score: int
+    upvoted_users: list[str]
+    downvoted_users: list[str]
 
 @app.post('/api/postScore', response_model=PostScoreIn)
 def create_post_score(

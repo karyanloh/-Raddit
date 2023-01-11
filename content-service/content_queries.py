@@ -64,7 +64,8 @@ class ContentQueries:
 
     def create_post_score(self, new_post_score):
         db = client[mongodb]
-        result = db.postVotes.insert_one(new_post_score.dict())
+        result = db.postVotes.insert_one(new_post_score)
+        # result = db.postVotes.insert_one(new_post_score.dict())
         post_score = self.get_post_score_by_id(result.inserted_id)
         return post_score
 
@@ -76,7 +77,7 @@ class ContentQueries:
 
     def edit_post_score(self, id, score):
         db = client[mongodb]
-        result = db.postVotes.update_one({ "_id": ObjectId(id) }, {"$set": {"score": score.score}})
+        result = db.postVotes.update_one({ "_id": ObjectId(id) }, {"$set": {"score": score.score, "upvoted_users": score.upvoted_users, "downvoted_users": score.downvoted_users }})
         post_score = self.get_post_score_by_id(id)
         return post_score
 
