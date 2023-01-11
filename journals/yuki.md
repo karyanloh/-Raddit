@@ -19,3 +19,13 @@ Today, I worked on:
 
 * set up mongo db with fastapi for user service and content service with teammates 
 
+## January 9, 2023
+Today, I worked on:
+
+* on weekends,I setup authentication for our FastAPI backend service
+* today, I protected our views on the backend for content service, and worked on create login form with stephanie
+
+## January 10, 2023
+Today, I worked on:
+
+* I continued worked on the authentication for backend endpoints with teammates.
