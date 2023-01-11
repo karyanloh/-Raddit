@@ -65,8 +65,8 @@ def create_post(
     if account['id'] is not None:
         result = content_queries.create_post(new_post)
         post_id = result['id']
-        submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
-        newer_score = content_queries.create_post_score(submit)
+        # submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
+        # newer_score = content_queries.create_post_score(submit)
         return result
 
 
@@ -196,4 +196,3 @@ def update_post_score_by_id(
     content_queries: ContentQueries = Depends(),
 ):
     return content_queries.edit_post_score(id, score)
-    
