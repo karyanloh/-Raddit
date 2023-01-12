@@ -4,7 +4,7 @@ function LoginForm() {
 		<h1 className="display-5 fw-bold">Raddit</h1>
 		<div className="col-lg-6 mx-auto">
 		<p className="lead mb-4">
-			Login
+			Login form goes here
 		</p>
 		</div>
 	</div>
