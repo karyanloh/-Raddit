@@ -12,7 +12,11 @@ mongo_str = f"mongodb://{dbuser}:{dbpass}@{dbhost}"
 client = pymongo.MongoClient(mongo_str)
 
 class ContentQueries:
+
+
     #posts
+
+
     def create_post(self, new_post):
         db = client[mongodb]
         result = db.posts.insert_one(new_post.dict())
@@ -37,7 +41,9 @@ class ContentQueries:
         post = self.get_post_by_id(id)
         return post
 
+
     # comments
+
 
     def create_comment(self, new_comment):
         db = client[mongodb]
@@ -68,6 +74,10 @@ class ContentQueries:
         # result = db.postVotes.insert_one(new_post_score.dict())
         post_score = self.get_post_score_by_id(result.inserted_id)
         return post_score
+
+
+    # scores
+
 
     def get_post_score_by_id(self, id):
         db = client[mongodb]

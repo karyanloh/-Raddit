@@ -4,6 +4,8 @@ import os
 from pydantic import BaseModel
 from content_queries import ContentQueries
 from auth import authenticator
+from routers import posts, comments, score
+
 
 
 app = FastAPI()
@@ -65,8 +67,8 @@ def create_post(
     if account['id'] is not None:
         result = content_queries.create_post(new_post)
         post_id = result['id']
-        # submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
-        # newer_score = content_queries.create_post_score(submit)
+        submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
+        newer_score = content_queries.create_post_score(submit)
         return result
 
 

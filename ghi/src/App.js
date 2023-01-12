@@ -51,16 +51,16 @@ function App() {
     <div>
       {/* <AuthProvider>
         <GetToken /> */}
-          <BrowserRouter>
-            <Nav />
-            <div className="container">
-              <Routes>
-                <Route path="login">
-                  <Route index element={<LoginForm />} />
-                </Route>
-              </Routes>
-            </div>
-          </BrowserRouter>
+      <BrowserRouter>
+        <Nav />
+        <div className="container">
+          <Routes>
+            <Route path="login">
+              <Route index element={<LoginForm />} />
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
       {/* </AuthProvider> */}
     </div>
   );
