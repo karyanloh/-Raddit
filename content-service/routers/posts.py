@@ -5,6 +5,7 @@ from model import PostIn, PostOutShort, PostOutDetail, EditPost
 
 router = APIRouter()
 
+
 @router.post('/api/posts', response_model=PostIn)
 def create_post(
     new_post: PostIn,
@@ -17,6 +18,8 @@ def create_post(
         submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
         newer_score = content_queries.create_post_score(submit)
         return result
+
+
 @router.get('/api/main/{id}', response_model=PostOutShort)
 def get_post_short_by_id(
     id: str,
