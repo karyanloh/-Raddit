@@ -34,6 +34,9 @@ function App() {
             <Route path="newpost">
               <Route index element={<CreatePostForm />} />
             </Route>
+            <Route path="posts">
+              <Route index element={<CreatePostForm />} />
+            </Route>
             <Route path="signup">
               <Route index element={<SignupForm />} />
             </Route>

@@ -46,6 +46,10 @@ function Nav() {
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/">Logout</NavLink>
                     </li>
+                    <li class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                      <button class="nav-link btn btn-link text-dark" type="submit">Logout</button>
+                    </li>
                 </ul>
             </div>
         </div>
