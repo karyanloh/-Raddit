@@ -27,5 +27,3 @@ function MainPage(props) {
 }
 
 export default MainPage;
-
-export default MainPage;

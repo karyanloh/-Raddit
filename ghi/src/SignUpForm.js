@@ -1,60 +1,37 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function SignUpForm(props) {
-  const [signupInfo, setSignupInfo] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-  useEffect(
-    () =>
-      //   async function handleSubmit(e){
-      //     e.preventDefault();
-      //     const url = "http://localhost:8000/api/users/"
-      //     const fetchOptions={
-      //         method: 'post',
-      //         body: JSON.stringify(signupInfo),
-      //         headers:{
-      //             "Content-Type": "application/json",
-      //         }
-      //     }
-      //     const response = await fetch(url, fetchOptions)
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-      async function signup(username, password, email) {
-        const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/users/`;
-        const response = await fetch(url, {
-          method: "post",
-          body: JSON.stringify({
-            username,
-            password,
-            email,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.ok) {
-               setSignupInfo({ username: "", email: "", password: "" });
-
-          },[signupInfo]
-        }
-        return false;
-      }
-  );
+  async function SignUp(username, email, password) {
+    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/users/`;
+    const response = await fetch(url, {
+      method: "post",
+      body: JSON.stringify({
+        username,
+        password,
+        email,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      setUsername("");
+      setEmail("");
+      setPassword("");
+    }
+  }
 
   return (
-    <form
-      onSubmit={() =>
-        signup(signupInfo.username, signupInfo.password, signupInfo.password)
-      }
-    >
+    <form onSubmit={() => SignUp(username, email, password)}>
       <div className="mb-4">
         <label htmlFor="username">Username</label>
         <input
           type="username"
-          //   value={signupInfo.username}
-          onChange={(e) => setSignupInfo.username(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
           className="form-control"
           id="username"
           aria-describedby="username"
@@ -65,8 +42,7 @@ function SignUpForm(props) {
         <label htmlFor="email">Email address</label>
         <input
           type="email"
-          //   value={signupInfo.email}
-          onChange={(e) => setSignupInfo(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           className="form-control"
           id="email"
           aria-describedby="email"
@@ -77,7 +53,7 @@ function SignUpForm(props) {
         <label htmlFor="password">Password</label>
         <input
           type="password"
-          onChange={(e) => setSignupInfo(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           className="form-control"
           id="password"
           aria-describedby="password"

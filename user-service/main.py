@@ -1,8 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from routers.auth import authenticator
 import os
 from routers import auth
 from routers import accounts
+from models import User, UserIn, UserOut
+from user_queries import UserQueries
 
 app = FastAPI()
 
@@ -19,9 +22,11 @@ app.add_middleware(
 
 @app.post('/api/users', response_model=UserOut)
 def create_user(
+
     new_user: UserIn,
     user_queries: UserQueries = Depends(),
 ):
+    print('createUser triggered')
     new_user.password = authenticator.hash_password(new_user.password)
     return user_queries.create_user(new_user)
 
