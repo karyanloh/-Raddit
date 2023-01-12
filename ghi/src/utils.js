@@ -7,8 +7,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-//   const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/me/token/`;
-  const url = "https://localhost:3000/token";
+const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/me/token/`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -22,7 +21,7 @@ export async function getTokenInternal() {
   return false;
 }
 
-function handleErrorMessage(error) {
+export function handleErrorMessage(error) {
   if ("error" in error) {
     error = error.error;
     try {

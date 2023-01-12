@@ -27,13 +27,17 @@ function Login() {
         if (response.ok) {
           const data = await response.json();
           const token = data.access_token;
+          alert("success!");
           // DO SOMETHING WITH THE TOKEN SO YOU CAN USE IT
           // IN REQUESTS TO YOUR NON-ACCOUNTS SERVICES
         }
-      } catch (e) {}
+      } catch (e) {
+
+      }
       return false;
     }
     let error = await response.json();
+    alert(`Error: ${error.detail}`);
     // DO SOMETHING WITH THE ERROR, IF YOU WANT
   }
   return (

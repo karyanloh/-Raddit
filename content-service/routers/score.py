@@ -6,15 +6,6 @@ from model import PostScoreIn, PostScoreOut, EditPostScore
 router = APIRouter()
 
 
-@router.post('/api/postScore', response_model=PostScoreIn)
-def create_post_score(
-    new_post_score: PostScoreIn,
-    content_queries: ContentQueries = Depends(),
-    account: dict = Depends(authenticator.get_current_account_data)
-):
-    if account['id'] is not None:
-        return content_queries.create_post_score(new_post_score)
-
 @router.get('/api/postScore/{id}', response_model=PostScoreOut)
 def get_post_score_by_id(
     id: str,

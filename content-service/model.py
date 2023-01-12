@@ -22,13 +22,13 @@ class EditPost(BaseModel):
     description: str
 
 class CommentIn(BaseModel):
-    post: str
+    post_id: str
     body: str
     user_id: str
 
 class CommentOut(BaseModel):
     id: str
-    post: str
+    post_id: str
     body: str
 
 class EditComment(BaseModel):

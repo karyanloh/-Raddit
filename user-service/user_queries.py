@@ -27,5 +27,8 @@ class UserQueries:
     def get_by_username(self, username):
         db = client[mongodb]
         result = db.users.find_one({ "username": username })
-        result['id'] = str(result['_id']) # ObjectId
-        return result
+        try:
+            result['id'] = str(result['_id']) # ObjectId
+            return result
+        except Exception as e:
+            print(e)

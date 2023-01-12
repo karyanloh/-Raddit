@@ -7,7 +7,6 @@ from auth import authenticator
 from routers import posts, comments, score
 
 
-
 app = FastAPI()
 
 app.add_middleware(
