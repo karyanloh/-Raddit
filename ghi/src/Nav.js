@@ -25,13 +25,13 @@ function Nav() {
                         <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" aria-current="page" to="/mysubraddits">MySubRaddits</NavLink>
+                        <NavLink className="nav-link" aria-current="page" to="/">MySubRaddits</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" aria-current="page" to="/rad">What's Rad?</NavLink>
+                        <NavLink className="nav-link" aria-current="page" to="/">What's Rad?</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" aria-current="page" to="/new">New</NavLink>
+                        <NavLink className="nav-link" aria-current="page" to="/">New</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" aria-current="page" to="/login">Login</NavLink>
