@@ -30,7 +30,7 @@ Today, I worked on:
 
 * I continued worked on the authentication for backend endpoints with teammates.
 
-## January 10, 2023
+## January 11, 2023
 Today, I worked on:
 
 * I continued worked on the authentication for backend endpoints with teammates.
