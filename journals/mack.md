@@ -31,15 +31,17 @@ Today I worked on:
 
 ## January 10, 2023
 Today I worked on:
-    -
+    - Research how to link votes with posts
 
 ## January 11, 2023
 Today I worked on:
+    - Created nav.js with links to app.js
+    - Research how to link votes with posts
     -
-
 ## January 12, 2023
 Today I worked on:
-    -
+    - Research how to set up main page, votes with posts
+    - Figuring out problems with local branches being ahead of origin branches that only I've worked in
 
 ## January 13, 2023
 Today I worked on:
