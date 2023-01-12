@@ -5,10 +5,9 @@ import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import LoginForm from "./login.js";
 import MainPage from "./MainPage";
-import SignupForm from "./signup";
+import SignUpForm from "./signup";
 import Nav from "./Nav";
 // import { AuthProvider, useToken } from "./utils.js";
-
 
 // function GetToken() {
 //   // Get token from JWT cookie (if already logged in)
@@ -31,7 +30,7 @@ function App() {
               <Route index element={<LoginForm />} />
             </Route>
             <Route path="signup">
-              <Route index element={<SignupForm />} />
+              <Route index element={<SignUpForm />} />
             </Route>
           </Routes>
         </div>
@@ -41,7 +40,6 @@ function App() {
 }
 
 export default App;
-
 
 // function App() {
 //   const [launch_info, setLaunchInfo] = useState([]);
