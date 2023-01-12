@@ -1,10 +1,9 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends,Request
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from user_queries import UserQueries
-from models import UserIn, UserOut
+from models import UserIn, UserOut,AccountToken
 from auth import authenticator
-
 
 app = FastAPI()
 app.include_router(authenticator.router)
@@ -35,15 +34,14 @@ def get_user_by_id(
 ):
     return user_queries.get_user_by_id(id)
 
-@app.get("/api/launch-details")
-def launch_details():
-    return {
-        "launch_details": {
-            "year": 2022,
-            "month": 12,
-            "day": "9",
-            "hour": 19,
-            "min": 0,
-            "tz:": "PST"
+@app.get("/token", response_model=AccountToken | None)
+async def get_token(
+    request: Request,
+    account: dict = Depends(authenticator.try_get_current_account_data)
+) -> AccountToken | None:
+    if account and authenticator.cookie_name in request.cookies:
+        return {
+            "access_token": request.cookies[authenticator.cookie_name],
+            "type": "Bearer",
+            "account": account,
         }
-    }

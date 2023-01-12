@@ -49,16 +49,19 @@ function GetToken() {
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <Nav />
-        <div className="container">
-          <Routes>
-            <Route path="login">
-              <Route index element={<LoginForm />} />
-            </Route>
-          </Routes>
-        </div>
-      </BrowserRouter>{" "}
+      {/* <AuthProvider>
+        <GetToken /> */}
+          <BrowserRouter>
+            <Nav />
+            <div className="container">
+              <Routes>
+                <Route path="login">
+                  <Route index element={<LoginForm />} />
+                </Route>
+              </Routes>
+            </div>
+          </BrowserRouter>
+      {/* </AuthProvider> */}
     </div>
   );
 }
