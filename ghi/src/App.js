@@ -1,10 +1,43 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import LoginForm from "./login.js";
+import MainPage from "./MainPage";
+import SignUpForm from "./SignUpForm";
 import Nav from "./Nav";
+
+// export default App;
+import { AuthProvider, useToken } from "./utils.js";
+
+function GetToken() {
+  // Get token from JWT cookie (if already logged in)
+  useToken();
+  return null;
+}
+
+function App() {
+  return (
+    <div>
+      {/* <AuthProvider>
+        <GetToken /> */}
+      <BrowserRouter>
+        <Nav />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="login" element={<LoginForm />} />
+            <Route path="signup" element={<SignUpForm />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+      {/* </AuthProvider> */}
+    </div>
+  );
+}
+
+export default App;
 
 // function App() {
 //   const [launch_info, setLaunchInfo] = useState([]);
@@ -36,34 +69,3 @@ import Nav from "./Nav";
 //     </div>
 //   );
 // }
-
-// export default App;
-import { AuthProvider, useToken } from "./utils.js";
-
-function GetToken() {
-  // Get token from JWT cookie (if already logged in)
-  useToken();
-  return null;
-}
-
-function App() {
-  return (
-    <div>
-      {/* <AuthProvider>
-        <GetToken /> */}
-      <BrowserRouter>
-        <Nav />
-        <div className="container">
-          <Routes>
-            <Route path="login">
-              <Route index element={<LoginForm />} />
-            </Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
-      {/* </AuthProvider> */}
-    </div>
-  );
-}
-
-export default App;
