@@ -6,6 +6,7 @@ import "./App.css";
 import LoginForm from "./login.js";
 import MainPage from "./MainPage";
 import SignupForm from "./signup";
+import CreatePostForm from "./CreatePost";
 import Nav from "./Nav";
 // import { AuthProvider, useToken } from "./utils.js";
 
@@ -29,6 +30,9 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="login">
               <Route index element={<LoginForm />} />
+            </Route>
+            <Route path="newpost">
+              <Route index element={<CreatePostForm />} />
             </Route>
             <Route path="signup">
               <Route index element={<SignupForm />} />

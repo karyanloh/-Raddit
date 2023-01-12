@@ -34,6 +34,9 @@ function Nav() {
                         <NavLink className="nav-link" to="/">New</NavLink>
                     </li>
                     <li className="nav-item">
+                        <NavLink className="nav-link" to="/newpost">Create Post</NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="nav-link" to="/login">Login</NavLink>
                     </li>
                     <li className="nav-item">
