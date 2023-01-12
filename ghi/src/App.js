@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider, useToken } from "./utils";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
@@ -10,6 +11,9 @@ import Nav from "./Nav";
 
 // export default App;
 import { AuthProvider, useToken } from "./utils.js";
+
+import CreatePostForm from "./CreatePost";
+import Nav from "./Nav";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -28,6 +32,9 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="login" element={<LoginForm />} />
+            <Route path="newpost">
+              <Route index element={<CreatePostForm />} />
+            </Route>
             <Route path="signup" element={<SignUpForm />} />
           </Routes>
         </div>
@@ -38,7 +45,6 @@ function App() {
 }
 
 export default App;
-
 // function App() {
 //   const [launch_info, setLaunchInfo] = useState([]);
 //   const [error, setError] = useState(null);
@@ -69,3 +75,4 @@ export default App;
 //     </div>
 //   );
 // }
+
