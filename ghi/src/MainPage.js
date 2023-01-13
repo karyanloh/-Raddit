@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PostScoring from "./PostScoring";
-const mockedPostListForScoreFeat = [{post_id:1, score: 2, upvote_users: [1,2,3], downvote_users: [11,12,13]}]
+const mockedPostListForScoreFeat = [{post_id:1, score: 2, upvote_users: [1,2,3,7], downvote_users: [7,11,12,13]}]
 const mockedCurrentUserIdForScoreFeat = 7
 
 
