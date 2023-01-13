@@ -38,14 +38,16 @@ function Nav() {
                         <NavLink className="nav-link" to="/newpost">Create Post</NavLink>
                     </li>
                     <li className="nav-item">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    </li>
+                    <li className="nav-item ms-auto">
+                        <NavLink className="nav-link" to="/signup">SignUp</NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="nav-link" to="/login">Login</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/signup">SignUp</NavLink>
-                    </li>
-                    <li class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button class="nav-link btn btn-link text-dark" type="submit">Logout</button>
+                        <NavLink className="nav-link" to="/">Logout</NavLink>
                     </li>
                 </ul>
             </div>
