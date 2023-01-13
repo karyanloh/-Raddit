@@ -19,7 +19,9 @@ class ContentQueries:
 
     def create_post(self, new_post):
         db = client[mongodb]
+        print(new_post)
         print('\n\n\n\n\n')
+        print('**********,', new_post)
         print('\n\n\n\n\n')
         print('queries',new_post.dict())
         print('\n\n\n\n\n')

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+// import { Link } from 'react-router-dom';
 
 
 
@@ -29,23 +29,23 @@ function CreatePost(props) {
         'title': title,
         'description': description,
         'subraddit': subraddit,
-        'user': user
+        'user_id': user
     }
-    const url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/api/posts`; 
-    console.log(data)
+
     async function post(data){
-        const url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/api/posts`; 
-        console.log(data)
-        const response = await fetch(url, {
+        const url = `http://localhost:8001/api/posts`;
+        const fetchConfig = {
             method: 'post',
-            body: data,
-        })
-        if (response.ok){
-            console.log('succesful')
-        } else {
-            console.error(response)
+            body: JSON.stringify(data),
+            headers: {
+            "Content-Type": "application/json",
+        },
         }
-    }
+        const response = await fetch(url,fetchConfig)
+        }
+
+
+
     return (
         <div className="d-flex justify-content-center" >
             <div className="shadow-none p-3 mb-5 bg-dark rounded p-4 mt-4" >
@@ -55,10 +55,6 @@ function CreatePost(props) {
                         <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required type="text" name="Title" id="Title" className="form-control" />
                         <label htmlFor="Title">Title</label>
                     </div>
-                    {/* <div className="form-floating mb-3 ">
-                        <input  placeholder="Description" required type="Description" name="Description" id="Description" className="" />
-                        <label htmlFor="Description">Description</label>
-                    </div> */}
                     <div className="form-group mb-4 ">
                         <label htmlFor="exampleFormControlTextarea1" >Example textarea</label>
                         <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="Description"/>
