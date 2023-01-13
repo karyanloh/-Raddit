@@ -39,12 +39,18 @@ function Nav() {
                     <li className="nav-item">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                     </li>
+
+                    {/* TODO: hide signup/login if logged in */}
+
                     <li className="nav-item ms-auto">
                         <NavLink className="nav-link" to="/signup">SignUp</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/login">Login</NavLink>
                     </li>
+
+                    {/* TODO: hide logout if not logged in */}
+
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/">Logout</NavLink>
                     </li>
