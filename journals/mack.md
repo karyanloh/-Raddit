@@ -20,3 +20,27 @@ Today I worked on:
     -Spent time studying relational vs non relational databases
 
 ## January 6, 2023
+Today I worked on:
+    - Went through and made ajustments to docker-compose.yaml. Ended up breaking the database and reverted back to before
+    - Continued to make notes on Feature 6 and stories planning.
+
+## January 9, 2023
+Today I worked on:
+    - Researching how to set up models with fastAPI and mongodb.
+    -
+
+## January 10, 2023
+Today I worked on:
+    -
+
+## January 11, 2023
+Today I worked on:
+    -
+
+## January 12, 2023
+Today I worked on:
+    -
+
+## January 13, 2023
+Today I worked on:
+    -
