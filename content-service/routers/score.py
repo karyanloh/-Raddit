@@ -20,12 +20,11 @@ def delete_post_score_by_id(
     content_queries: ContentQueries = Depends(),
     account: dict = Depends(authenticator.get_current_account_data)
 ):
-    return content_queries.delete_post_score(id)
     # get = content_queries.get_post_score_by_id(id)
     # upvoted_user = get['upvoted_users_id']
     # downvoted_user = get['downvoted_user_id']
     # if account['id'] == upvoted_user or account['id'] == downvoted_user:
-    #     return content_queries.delete_post_score(id)
+    return content_queries.delete_post_score(id)
     # else:
     #     raise HTTPException(status_code=401, detail="not working")
 
@@ -37,11 +36,10 @@ def update_post_score_by_id(
     content_queries: ContentQueries = Depends(),
     account: dict = Depends(authenticator.get_current_account_data)
 ):
-    return content_queries.edit_post_score(id, score)
     # get = content_queries.get_post_score_by_id(id)
     # upvoted_user = get['upvoted_users_id']
     # downvoted_user = get['downvoted_user_id']
     # if account['id'] == upvoted_user or account['id'] == downvoted_user:
-    #     return content_queries.edit_post_score(id, score)
+    return content_queries.edit_post_score(id, score)
     # else:
     #     raise HTTPException(status_code=401, detail="not working")
