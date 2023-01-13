@@ -27,12 +27,14 @@ def get_post_short_by_id(
 ):
     return content_queries.get_post_by_id(id)
 
+
 @router.get('/api/post/{id}', response_model=PostOutDetail)
 def get_post_detail_by_id(
     id: str,
     content_queries: ContentQueries = Depends(),
 ):
     return content_queries.get_post_by_id(id)
+
 
 @router.delete('/api/delete/{id}')
 def delete_post_by_id(
@@ -46,6 +48,7 @@ def delete_post_by_id(
         return content_queries.delete_post(id)
     else:
         raise HTTPException(status_code=401, detail="not working")
+
 
 @router.put('/api/post/{id}', response_model=PostOutDetail)
 def update_post_by_id(
