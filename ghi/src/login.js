@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { handleErrorMessage } from "./utils";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   async function login(username, password) {
     const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/token`;
@@ -27,7 +29,8 @@ function Login() {
         if (response.ok) {
           const data = await response.json();
           const token = data.access_token;
-          alert("success!");
+          alert("success!")
+          navigate("/");
           // DO SOMETHING WITH THE TOKEN SO YOU CAN USE IT
           // IN REQUESTS TO YOUR NON-ACCOUNTS SERVICES
         }
