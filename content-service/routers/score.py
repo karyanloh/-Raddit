@@ -13,6 +13,7 @@ def get_post_score_by_id(
 ):
     return content_queries.get_post_score_by_id(id)
 
+
 @router.delete('/api/postScore/{id}')
 def delete_post_score_by_id(
     id: str,
@@ -26,6 +27,7 @@ def delete_post_score_by_id(
         return content_queries.delete_post_score(id)
     else:
         raise HTTPException(status_code=401, detail="not working")
+
 
 @router.put('/api/postScore/{id}', response_model=PostScoreOut)
 def update_post_score_by_id(

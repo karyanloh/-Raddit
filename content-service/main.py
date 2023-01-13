@@ -1,9 +1,6 @@
-from fastapi import FastAPI, Depends,HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from pydantic import BaseModel
-from content_queries import ContentQueries
-from auth import authenticator
 from routers import posts, comments, score
 
 

@@ -8,12 +8,7 @@ import LoginForm from "./login.js";
 import MainPage from "./MainPage";
 import SignUpForm from "./SignUpForm";
 import Nav from "./Nav";
-
-// export default App;
-import { AuthProvider, useToken } from "./utils.js";
-
 import CreatePostForm from "./CreatePost";
-import Nav from "./Nav";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -75,4 +70,3 @@ export default App;
 //     </div>
 //   );
 // }
-

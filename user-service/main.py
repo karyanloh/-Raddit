@@ -1,11 +1,8 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers.auth import authenticator
 import os
 from routers import auth
 from routers import accounts
-from models import User, UserIn, UserOut
-from user_queries import UserQueries
 
 app = FastAPI()
 
@@ -19,33 +16,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.post('/api/users', response_model=UserOut)
-def create_user(
-
-    new_user: UserIn,
-    user_queries: UserQueries = Depends(),
-):
-    print('createUser triggered')
-    new_user.password = authenticator.hash_password(new_user.password)
-    return user_queries.create_user(new_user)
-
-@app.get('/api/users/{id}', response_model=UserOut)
-def get_user_by_id(
-    id: str,
-    user_queries: UserQueries = Depends(),
-):
-    return user_queries.get_user_by_id(id)
-
-@app.get("/api/launch-details")
-def launch_details():
-    return {
-        "launch_details": {
-            "year": 2023,
-            "month": 12,
-            "day": "9",
-            "hour": 19,
-            "min": 0,
-            "tz:": "PST"
-        }
-    }
+app.include_router(auth.authenticator.router)
+app.include_router(accounts.router)
