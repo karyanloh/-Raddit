@@ -59,6 +59,13 @@ def create_post(
     new_post: PostIn,
     content_queries: ContentQueries = Depends(),
 ):
+    print('\n\n\n\n\n')
+    print('\n\n\n\n\n')
+    print('main.py', new_post)
+    print('\n\n\n\n\n')
+    print('\n\n\n\n\n')
+    print('\n\n\n\n\n')
+    print('\n\n\n\n\n')
     return content_queries.create_post(new_post)
 
 @app.get('/api/main/{id}', response_model=PostOutShort)

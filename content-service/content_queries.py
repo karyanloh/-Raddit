@@ -14,6 +14,13 @@ client = pymongo.MongoClient(mongo_str)
 class ContentQueries:
     def create_post(self, new_post):
         db = client[mongodb]
+        print('\n\n\n\n\n')
+        print('\n\n\n\n\n')
+        print('queries',new_post.dict())
+        print('\n\n\n\n\n')
+        print('\n\n\n\n\n')
+        print('\n\n\n\n\n')
+        print('\n\n\n\n\n')
         result = db.posts.insert_one(new_post.dict())
         post = self.get_post_by_id(result.inserted_id)
         return post
