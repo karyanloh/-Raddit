@@ -35,3 +35,10 @@ Today, I worked on:
 
 * I continued worked on the authentication for backend endpoints with teammates.
 * I worked on the login frontend page and can get a token when I login now.
+
+
+## January 12, 2023
+Today, I worked on:
+
+* I fixed out bugs for the fontend login page likes handling errors.
+* I added some authentication for backend endpoints.

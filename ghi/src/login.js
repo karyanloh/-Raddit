@@ -41,6 +41,7 @@ function Login() {
     }
     let error = await response.json();
     alert(`Error: ${error.detail}`);
+    navigate("/signup");
     // DO SOMETHING WITH THE ERROR, IF YOU WANT
   }
   return (

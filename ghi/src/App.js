@@ -9,6 +9,7 @@ import MainPage from "./MainPage";
 import SignUpForm from "./SignUpForm";
 import Nav from "./Nav";
 import CreatePostForm from "./CreatePost";
+import LogOutButton from "./LogOutButton";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -31,6 +32,7 @@ function App() {
               <Route index element={<CreatePostForm />} />
             </Route>
             <Route path="signup" element={<SignUpForm />} />
+            <Route path="/logout" element={<LogOutButton />} />
           </Routes>
         </div>
       </BrowserRouter>
