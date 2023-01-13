@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
-// import { NavLink, Link } from "react-router-dom";
 import "./index.css";
 
 function Nav() {
-    return (
+  return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
         <div className="container-fluid">
             <NavLink className="navbar-brand" to="/">
@@ -53,6 +52,6 @@ function Nav() {
             </div>
         </div>
     </nav>
-    );
+  );
 }
 export default Nav;

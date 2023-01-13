@@ -5,18 +5,21 @@ from model import PostIn, PostOutShort, PostOutDetail, EditPost
 
 router = APIRouter()
 
+
 @router.post('/api/posts', response_model=PostIn)
 def create_post(
     new_post: PostIn,
     content_queries: ContentQueries = Depends(),
-    account: dict = Depends(authenticator.get_current_account_data)
 ):
-    if account['id'] is not None:
-        result = content_queries.create_post(new_post)
-        post_id = result['id']
-        submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
-        newer_score = content_queries.create_post_score(submit)
-        return result
+    print(new_post)
+    result = content_queries.create_post(new_post)
+    print(result)
+    post_id = result['id']
+    submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
+    newer_score = content_queries.create_post_score(submit)
+    return result
+
+
 @router.get('/api/main/{id}', response_model=PostOutShort)
 def get_post_short_by_id(
     id: str,
