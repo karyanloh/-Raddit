@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useAuthContext } from "./utils";
 // import { Link } from 'react-router-dom';
 
 
 
 function CreatePostForm(props) {
+  const { token } = useAuthContext();
   // useEffect(() => {
   //     async function getData() {
   //         const url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/api/posts`;
@@ -39,11 +41,12 @@ function CreatePostForm(props) {
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
     };
     const response = await fetch(url, fetchConfig);
   }
-  
+
 
   return (
     <div className="d-flex justify-content-center">

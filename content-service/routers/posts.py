@@ -10,14 +10,17 @@ router = APIRouter()
 def create_post(
     new_post: PostIn,
     content_queries: ContentQueries = Depends(),
+    account: dict = Depends(authenticator.get_current_account_data)
 ):
-    print(new_post)
-    result = content_queries.create_post(new_post)
-    print(result)
-    post_id = result['id']
-    submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
-    newer_score = content_queries.create_post_score(submit)
-    return result
+    if account['id'] is not None:
+        result = content_queries.create_post(new_post)
+        post_id = result['id']
+        submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
+        newer_score = content_queries.create_post_score(submit)
+        return result
+    else:
+        raise HTTPException(status_code=401, detail="not working")
+
 
 
 @router.get('/api/main/{id}', response_model=PostOutShort)
