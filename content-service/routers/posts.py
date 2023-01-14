@@ -11,9 +11,7 @@ def create_post(
     new_post: PostIn,
     content_queries: ContentQueries = Depends(),
 ):
-    print(new_post)
     result = content_queries.create_post(new_post)
-    print(result)
     post_id = result['id']
     submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
     newer_score = content_queries.create_post_score(submit)

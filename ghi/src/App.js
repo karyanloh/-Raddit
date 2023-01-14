@@ -9,6 +9,7 @@ import MainPage from "./MainPage";
 import SignUpForm from "./SignUpForm";
 import Nav from "./Nav";
 import CreatePostForm from "./CreatePost";
+import PostDetail from "./postdetail"
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -27,11 +28,9 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="login" element={<LoginForm />} />
-            <Route path="newpost">
-              <Route index element={<CreatePostForm />} />
-            </Route>
             <Route path="posts">
-              <Route index element={<CreatePostForm />} />
+              <Route index path="new" element={<CreatePostForm />} />
+              <Route path=":id" element={<PostDetail/>}/>
             </Route>
             <Route path="signup" element={<SignUpForm />} />
           </Routes>

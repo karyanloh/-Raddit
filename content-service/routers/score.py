@@ -13,6 +13,13 @@ def get_post_score_by_id(
 ):
     return content_queries.get_post_score_by_id(id)
 
+@router.get('/api/post/postScore/{post_id}', response_model=PostScoreOut)
+def get_post_score_by_post_id(
+    post_id: str,
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.get_post_score_by_post_id(post_id)
+
 
 @router.delete('/api/postScore/{id}')
 def delete_post_score_by_id(
