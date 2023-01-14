@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
+import { useAuthContext } from "./utils";
 
 function MainPage(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { token } = useAuthContext();
+
+  return (
+    <div>
+      "test":
+      {token}
+    </div>
+  );
 
   //   useEffect(() => function handleLoginClick(e) {});
 

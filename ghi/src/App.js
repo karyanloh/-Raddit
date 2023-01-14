@@ -19,25 +19,23 @@ function GetToken() {
 
 function App() {
   return (
-    <div>
-      {/* <AuthProvider>
-        <GetToken /> */}
       <BrowserRouter>
-        <Nav />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="login" element={<LoginForm />} />
-            <Route path="newpost">
-              <Route index element={<CreatePostForm />} />
-            </Route>
-            <Route path="signup" element={<SignUpForm />} />
-            <Route path="/logout" element={<LogOutButton />} />
-          </Routes>
-        </div>
+        <AuthProvider>
+          <GetToken />
+              <Nav />
+              <div className="container">
+                <Routes>
+                  <Route path="/" element={<MainPage />} />
+                  <Route path="login" element={<LoginForm />} />
+                  <Route path="newpost">
+                    <Route index element={<CreatePostForm />} />
+                  </Route>
+                  <Route path="signup" element={<SignUpForm />} />
+                  {/* <Route path="logout" element={<LogOutButton />} /> */}
+                </Routes>
+              </div>
+        </AuthProvider>
       </BrowserRouter>
-      {/* </AuthProvider> */}
-    </div>
   );
 }
 
