@@ -82,9 +82,6 @@ class ContentQueries:
     def get_post_score_by_id(self, id):
         db = client[mongodb]
         result = db.postVotes.find_one({ "_id": ObjectId(id) })
-        print('\n\n\n\n\n')
-        print('this is great')
-        print('\n\n\n\n\n')
         result['id'] = str(result['_id']) # ObjectId
         return result
 
