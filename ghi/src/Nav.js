@@ -34,7 +34,7 @@ function Nav() {
                         <NavLink className="nav-link" to="/">New</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/posts/new">Create Post</NavLink>
+                        <NavLink className="nav-link" to="/newpost">Create Post</NavLink>
                     </li>
                     <li className="nav-item">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
@@ -52,7 +52,7 @@ function Nav() {
                     {/* TODO: hide logout if not logged in */}
 
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/">Logout</NavLink>
+                        <NavLink className="nav-link" to="/logout">Logout</NavLink>
                     </li>
                 </ul>
             </div>

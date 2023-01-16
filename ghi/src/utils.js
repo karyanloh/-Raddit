@@ -96,9 +96,13 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      alert("success!");
+      navigate("/");
       return;
     }
     let error = await response.json();
+    alert(`Error: ${error.detail}`);
+    navigate("/signup");
     return handleErrorMessage(error);
   }
 
