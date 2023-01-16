@@ -1,30 +1,27 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useAuthContext } from "./utils";
+import { useToken } from "./utils";
+import { Navigate } from "react-router-dom";
+
 // import { Link } from 'react-router-dom';
 
+  // subraddit
+  let subraddits = [
+    { label: "Tech", value: "💻" },
+    { label: "Movies", value: "🎬" },
+    { label: "Music", value: "🎧" },
+    { label: "Sports", value: "🏀" },
+  ];
 
 
 function CreatePostForm(props) {
-  const { token } = useAuthContext();
-  // useEffect(() => {
-  //     async function getData() {
-  //         const url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/api/posts`;
-  //         const response = await fetch(url);
-  //         const data = await response.json();
-
-  //         if (response.ok) {
-  //             setPost(data.user);
-  //         } else {
-  //             setError(data.message);
-  //             setOwners([]);
-  //         }
-  //     }
-  //     getData();
-  // })
-
+  const [token] = useToken();
+//   const { token } = useAuthContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [subraddit, setSubraddit] = useState("");
+  //   const [subraddit, setSubraddit] = useState("");
+  // Using state to keep track of what the selected subraddit is
+  const [subraddit, setSubraddit] = useState("⬇️ Select a subraddit ⬇️");
   const [user, setUser] = useState("");
   const data = {
     title: title,
@@ -33,7 +30,6 @@ function CreatePostForm(props) {
     user_id: user,
   };
 
-
   async function post(data) {
     const url = `http://localhost:8001/api/posts`;
     const fetchConfig = {
@@ -41,16 +37,18 @@ function CreatePostForm(props) {
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     };
     const response = await fetch(url, fetchConfig);
   }
-
-
+  if (!token){
+    alert("Please login first")
+    return <Navigate to = "/login"/>
+  }
   return (
     <div className="d-flex justify-content-center">
-      <div className="shadow-none p-3 mb-5 bg-dark rounded p-4 mt-4">
+      <div className="shadow-none p-3 mb-5 bg-warning rounded p-4 mt-4">
         <h1 style={{ color: "white" }}>Create a new post !</h1>
         <form>
           <div className="form-floating ">
@@ -68,7 +66,6 @@ function CreatePostForm(props) {
           </div>
           <div className="form-group mb-4 ">
             <label htmlFor="exampleFormControlTextarea1">
-              Example textarea
             </label>
             <textarea
               type="text"
@@ -82,7 +79,6 @@ function CreatePostForm(props) {
           </div>
           <div className="form-group mb-4 ">
             <label htmlFor="exampleFormControlTextarea1">
-              Example textarea
             </label>
             <textarea
               type="text"
@@ -93,7 +89,7 @@ function CreatePostForm(props) {
               placeholder="User"
             />
           </div>
-          <div className="mb-3 ">
+          {/* <div className="mb-3 ">
             <input
               value={subraddit}
               onChange={(e) => setSubraddit(e.target.value)}
@@ -105,9 +101,27 @@ function CreatePostForm(props) {
               className="form-control"
             />
             <label htmlFor="SubRaddit">SubRaddit</label>
-            {/* <select  placeholder="SubRaddit" required name="SubRaddit" id="SubRaddit" className="form-select">
+            <select  placeholder="SubRaddit" required name="SubRaddit" id="SubRaddit" className="form-select">
                                 <option value="">Choose a SubRaddit</option>
                             </select> */}
+          {/* </div> */}
+          <div className="App">
+            {/* Displaying the value of subraddit */}
+            {subraddit}
+            <br />
+
+            <select onChange={(e) => setSubraddit(e.target.value)}>
+              <option value="⬇️ Select a subraddit⬇️">
+                {" "}
+                -- Select a subraddit --{" "}
+              </option>
+              {/* Mapping through each subraddit object in our subraddits array
+          and returning an option element with the appropriate attributes / values.
+         */}
+              {subraddits.map((subraddit) => (
+                <option key={subraddit.value} value={subraddit.value}>{subraddit.label}</option>
+              ))}
+            </select>
           </div>
           <button onClick={() => post(data)} className="btn btn-light">
             Create
