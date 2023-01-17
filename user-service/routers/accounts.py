@@ -6,7 +6,7 @@ from user_queries import UserQueries
 router = APIRouter()
 
 
-@router.post('/api/users', response_model=UserOut)
+@router.post("/api/users", response_model=UserOut)
 def create_user(
     new_user: UserIn,
     user_queries: UserQueries = Depends(),
@@ -15,7 +15,7 @@ def create_user(
     return user_queries.create_user(new_user)
 
 
-@router.get('/api/users/{id}', response_model=UserOut)
+@router.get("/api/users/{id}", response_model=UserOut)
 def get_user_by_id(
     id: str,
     user_queries: UserQueries = Depends(),
@@ -26,7 +26,7 @@ def get_user_by_id(
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    account: dict = Depends(authenticator.try_get_current_account_data)
+    account: dict = Depends(authenticator.try_get_current_account_data),
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
         return {
