@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useToken } from "./utils";
 
-
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

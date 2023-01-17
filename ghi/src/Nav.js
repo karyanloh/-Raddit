@@ -31,8 +31,7 @@ function Nav() {
 
             <li className="nav-item">
               {token && (
-                <span
-                  onClick={() => {
+                <span onClick={() => {
                     logout();
                   }}
                   role={"button"}

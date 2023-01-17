@@ -1,9 +1,6 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useAuthContext } from "./utils";
-import { useToken } from "./utils";
-import { Navigate } from "react-router-dom";
-
-// import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 // subraddit
 let subraddits = [
@@ -14,12 +11,18 @@ let subraddits = [
 ];
 
 function CreatePostForm(props) {
-  const [token] = useToken();
-  //   const { token } = useAuthContext();
+  const { token } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      alert("Login Please");
+      navigate("/login?redirect=/newpost");
+    }
+  }, [token]);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  //   const [subraddit, setSubraddit] = useState("");
-  // Using state to keep track of what the selected subraddit is
   const [subraddit, setSubraddit] = useState("⬇️ Select a subraddit ⬇️");
   const [user, setUser] = useState("");
   const data = {
@@ -31,6 +34,7 @@ function CreatePostForm(props) {
 
   async function post(data) {
     const url = `http://localhost:8001/api/posts`;
+
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
@@ -40,16 +44,26 @@ function CreatePostForm(props) {
       },
     };
     const response = await fetch(url, fetchConfig);
+    alert("Post success");
+    navigate("/");
   }
-  //   if (!token){
-  //     alert("Please login first")
-  //     return <Navigate to = "/login"/>
-  //   }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    post({
+      title: title,
+      description: description,
+      subraddit: subraddit,
+      user_id: user,
+    });
+  }
+
   return (
     <div className="d-flex justify-content-center">
       <div className="shadow-none p-3 mb-5 bg-warning rounded p-4 mt-4">
         <h1 style={{ color: "white" }}>Create a new post !</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-floating ">
             <input
               value={title}
@@ -86,22 +100,6 @@ function CreatePostForm(props) {
               placeholder="User"
             />
           </div>
-          {/* <div className="mb-3 ">
-            <input
-              value={subraddit}
-              onChange={(e) => setSubraddit(e.target.value)}
-              placeholder="SubRaddit"
-              required
-              type="text"
-              name="subraddit"
-              id="subraddit"
-              className="form-control"
-            />
-            <label htmlFor="SubRaddit">SubRaddit</label>
-            <select  placeholder="SubRaddit" required name="SubRaddit" id="SubRaddit" className="form-select">
-                                <option value="">Choose a SubRaddit</option>
-                            </select> */}
-          {/* </div> */}
           <div className="App">
             {/* Displaying the value of subraddit */}
             {subraddit}
@@ -119,9 +117,7 @@ function CreatePostForm(props) {
               ))}
             </select>
           </div>
-          <button onClick={() => post(data)} className="btn btn-light">
-            Create
-          </button>
+          <button className="btn btn-light">Create</button>
         </form>
       </div>
     </div>
