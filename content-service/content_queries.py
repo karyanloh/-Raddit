@@ -19,15 +19,6 @@ class ContentQueries:
 
     def create_post(self, new_post):
         db = client[mongodb]
-        print(new_post)
-        print('\n\n\n\n\n')
-        print('**********,', new_post)
-        print('\n\n\n\n\n')
-        print('queries',new_post.dict())
-        print('\n\n\n\n\n')
-        print('\n\n\n\n\n')
-        print('\n\n\n\n\n')
-        print('\n\n\n\n\n')
         result = db.posts.insert_one(new_post.dict())
         post = self.get_post_by_id(result.inserted_id)
         return post
@@ -91,6 +82,12 @@ class ContentQueries:
     def get_post_score_by_id(self, id):
         db = client[mongodb]
         result = db.postVotes.find_one({ "_id": ObjectId(id) })
+        result['id'] = str(result['_id']) # ObjectId
+        return result
+
+    def get_post_score_by_post_id(self, post_id):
+        db = client[mongodb]
+        result = db.postVotes.find_one({ "post_id": post_id })
         result['id'] = str(result['_id']) # ObjectId
         return result
 
