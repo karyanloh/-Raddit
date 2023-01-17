@@ -47,7 +47,7 @@ function Login() {
   // }
   return (
     <>
-      <form >
+      <form>
         <div className="mb-3">
           <label htmlFor="username">User Name</label>
           <input
@@ -75,7 +75,7 @@ function Login() {
         <button
           className="btn btn-primary"
           onClick={() => {
-            login(username,password);
+            login(username, password);
           }}
           type="button"
         >
