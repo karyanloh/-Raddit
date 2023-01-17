@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 
 function MainPage(props) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   //   useEffect(() => function handleLoginClick(e) {});
-
   //   return (
   //     <>
   //       <div>
