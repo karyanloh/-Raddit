@@ -1,9 +1,10 @@
-from fastapi import Depends,Request, APIRouter
+from fastapi import Depends, Request, APIRouter, HTTPException
 from models import UserIn, UserOut, AccountToken
 from .auth import authenticator
 from user_queries import UserQueries
 
 router = APIRouter()
+
 
 @router.post('/api/users', response_model=UserOut)
 def create_user(
@@ -13,12 +14,14 @@ def create_user(
     new_user.password = authenticator.hash_password(new_user.password)
     return user_queries.create_user(new_user)
 
+
 @router.get('/api/users/{id}', response_model=UserOut)
 def get_user_by_id(
     id: str,
     user_queries: UserQueries = Depends(),
 ):
     return user_queries.get_user_by_id(id)
+
 
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
@@ -31,3 +34,5 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+    else:
+        raise HTTPException(status_code=401, detail="not working")

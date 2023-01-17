@@ -5,6 +5,7 @@ from model import PostIn, PostOutShort, PostOutDetail, EditPost
 
 router = APIRouter()
 
+
 @router.post('/api/posts', response_model=PostIn)
 def create_post(
     new_post: PostIn,
@@ -17,6 +18,11 @@ def create_post(
         submit = {'post_id': post_id, 'score': 0, 'upvoted_users':[], 'downvoted_users':[]}
         newer_score = content_queries.create_post_score(submit)
         return result
+    else:
+        raise HTTPException(status_code=401, detail="not working")
+
+
+
 @router.get('/api/main/{id}', response_model=PostOutShort)
 def get_post_short_by_id(
     id: str,
@@ -24,12 +30,14 @@ def get_post_short_by_id(
 ):
     return content_queries.get_post_by_id(id)
 
+
 @router.get('/api/post/{id}', response_model=PostOutDetail)
 def get_post_detail_by_id(
     id: str,
     content_queries: ContentQueries = Depends(),
 ):
     return content_queries.get_post_by_id(id)
+
 
 @router.delete('/api/delete/{id}')
 def delete_post_by_id(
@@ -43,6 +51,7 @@ def delete_post_by_id(
         return content_queries.delete_post(id)
     else:
         raise HTTPException(status_code=401, detail="not working")
+
 
 @router.put('/api/post/{id}', response_model=PostOutDetail)
 def update_post_by_id(

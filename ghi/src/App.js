@@ -7,8 +7,11 @@ import "./App.css";
 import LoginForm from "./login.js";
 import MainPage from "./MainPage";
 import SignUpForm from "./SignUpForm";
-import CreatePostForm from "./CreatePost";
 import Nav from "./Nav";
+import CreatePostForm from "./CreatePost";
+import LogOutButton from "./LogOutButton";
+import PostDetail from "./postdetail"
+
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -18,8 +21,9 @@ function GetToken() {
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <GetToken />
         <Nav />
         <div className="container">
           <Routes>
@@ -27,12 +31,14 @@ function App() {
             <Route path="login" element={<LoginForm />} />
             <Route path="newpost">
               <Route index element={<CreatePostForm />} />
+              <Route path=":id" element={<PostDetail />} />
             </Route>
             <Route path="signup" element={<SignUpForm />} />
+            {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>
+        </AuthProvider>
       </BrowserRouter>
-    </AuthProvider>
   );
 }
 
@@ -67,71 +73,3 @@ export default App;
 //     </div>
 //   );
 // }
-
-// export default App;
-
-// function App() {
-//   const [launch_info, setLaunchInfo] = useState([]);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     async function getData() {
-//       let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-//       console.log('fastapi url: ', url);
-//       let response = await fetch(url);
-//       console.log("------- hello? -------");
-//       let data = await response.json();
-
-//       if (response.ok) {
-//         console.log("got launch data!");
-//         setLaunchInfo(data.launch_details);
-//       } else {
-//         console.log("drat! something happened");
-//         setError(data.message);
-//       }
-//     }
-//     getData();
-//   }, [])
-
-//   return (
-//     <div>
-//       <ErrorNotification error={error} />
-//       <Construct info={launch_info} />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-// function App() {
-//   const [launch_info, setLaunchInfo] = useState([]);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     async function getData() {
-//       let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-//       console.log('fastapi url: ', url);
-//       let response = await fetch(url);
-//       console.log("------- hello? -------");
-//       let data = await response.json();
-
-//       if (response.ok) {
-//         console.log("got launch data!");
-//         setLaunchInfo(data.launch_details);
-//       } else {
-//         console.log("drat! something happened");
-//         setError(data.message);
-//       }
-//     }
-//     getData();
-//   }, [])
-
-//   return (
-//     <div>
-//       <ErrorNotification error={error} />
-//       <Construct info={launch_info} />
-//     </div>
-//   );
-// }
-
-// export default App;

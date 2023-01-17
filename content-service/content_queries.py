@@ -85,6 +85,12 @@ class ContentQueries:
         result['id'] = str(result['_id']) # ObjectId
         return result
 
+    def get_post_score_by_post_id(self, post_id):
+        db = client[mongodb]
+        result = db.postVotes.find_one({ "post_id": post_id })
+        result['id'] = str(result['_id']) # ObjectId
+        return result
+
     def edit_post_score(self, id, score):
         db = client[mongodb]
         result = db.postVotes.update_one({ "_id": ObjectId(id) }, {"$set": {"score": score.score, "upvoted_users": score.upvoted_users, "downvoted_users": score.downvoted_users }})
