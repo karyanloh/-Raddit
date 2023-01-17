@@ -1,11 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./index.css";
 import raddit from "./raddit.png";
 import { useToken } from "./utils";
 
-
 function Nav() {
-    const [token, login, logout] = useToken();
+  const [token, login, logout] = useToken();
   return (
     <>
       <nav className="p-3 mb-2 bg-danger navbar navbar-expand-lg navbar-dark text-dark">
@@ -33,7 +32,8 @@ function Nav() {
             <li className="nav-item">
               {token && (
                 <span
-                  onClick={() => {logout();
+                  onClick={() => {
+                    logout();
                   }}
                   role={"button"}
                   className="nav-link"
@@ -57,10 +57,37 @@ function Nav() {
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link text-dark" to="/">
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle text-dark"
+                id="navbarDropdown"
+                data-bs-toggle="dropdown"
+                to="/"
+              >
                 MySubRaddits
-              </NavLink>
+              </Link>
+              <ul className="dropdown-menu dropdown-menu-right">
+                <li>
+                  <Link className="dropdown-item text-dark" to="/music">
+                    Music
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item text-dark" to="/movies">
+                    Movies
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item text-dark" to="/sports">
+                    Sports
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item text-dark" to="/tech">
+                    Technology
+                  </Link>
+                </li>
+              </ul>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link text-dark" to="/">
@@ -68,9 +95,9 @@ function Nav() {
               </NavLink>
             </li>
             <li className="nav-item">
-                <NavLink className="nav-link text-dark" to="/newpost">
-                  Create Post
-                </NavLink>
+              <NavLink className="nav-link text-dark" to="/newpost">
+                Create Post
+              </NavLink>
             </li>
             {/* <li className="nav-item">
                 <input

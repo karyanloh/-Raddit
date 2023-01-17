@@ -5,18 +5,17 @@ import { Navigate } from "react-router-dom";
 
 // import { Link } from 'react-router-dom';
 
-  // subraddit
-  let subraddits = [
-    { label: "Tech", value: "💻" },
-    { label: "Movies", value: "🎬" },
-    { label: "Music", value: "🎧" },
-    { label: "Sports", value: "🏀" },
-  ];
-
+// subraddit
+let subraddits = [
+  { label: "Tech", value: "💻" },
+  { label: "Movies", value: "🎬" },
+  { label: "Music", value: "🎧" },
+  { label: "Sports", value: "🏀" },
+];
 
 function CreatePostForm(props) {
   const [token] = useToken();
-//   const { token } = useAuthContext();
+  //   const { token } = useAuthContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   //   const [subraddit, setSubraddit] = useState("");
@@ -42,10 +41,10 @@ function CreatePostForm(props) {
     };
     const response = await fetch(url, fetchConfig);
   }
-  if (!token){
-    alert("Please login first")
-    return <Navigate to = "/login"/>
-  }
+  //   if (!token){
+  //     alert("Please login first")
+  //     return <Navigate to = "/login"/>
+  //   }
   return (
     <div className="d-flex justify-content-center">
       <div className="shadow-none p-3 mb-5 bg-warning rounded p-4 mt-4">
@@ -65,8 +64,7 @@ function CreatePostForm(props) {
             <label htmlFor="Title">Title</label>
           </div>
           <div className="form-group mb-4 ">
-            <label htmlFor="exampleFormControlTextarea1">
-            </label>
+            <label htmlFor="exampleFormControlTextarea1"></label>
             <textarea
               type="text"
               value={description}
@@ -78,8 +76,7 @@ function CreatePostForm(props) {
             />
           </div>
           <div className="form-group mb-4 ">
-            <label htmlFor="exampleFormControlTextarea1">
-            </label>
+            <label htmlFor="exampleFormControlTextarea1"></label>
             <textarea
               type="text"
               value={user}
@@ -115,11 +112,10 @@ function CreatePostForm(props) {
                 {" "}
                 -- Select a subraddit --{" "}
               </option>
-              {/* Mapping through each subraddit object in our subraddits array
-          and returning an option element with the appropriate attributes / values.
-         */}
               {subraddits.map((subraddit) => (
-                <option key={subraddit.value} value={subraddit.value}>{subraddit.label}</option>
+                <option key={subraddit.value} value={subraddit.value}>
+                  {subraddit.label}
+                </option>
               ))}
             </select>
           </div>
