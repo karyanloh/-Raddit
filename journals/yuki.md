@@ -42,17 +42,3 @@ Today, I worked on:
 
 * I fixed out bugs for the fontend login page likes handling errors.
 * I added some authentication for backend endpoints.
-
-## January 13, 2023
-Today, I worked on:
-
-* I fixed out bugs for the fontend login page by using the function in utils file.
-
-
-## January 14-16, 2023
-Today, I worked on:
-
-* I added a logout button in the navbar, reorganized the nav bar UI.
-* I added some code in nav.js so that i can conditionally show the login/signup and logout button.
-* I added a few lines of code in Createpost.js so that only login user can make a new post.
-
