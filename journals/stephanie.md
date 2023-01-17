@@ -55,3 +55,15 @@ Today, I worked on:
 - pair program with Yuki and Jeffery on Login and authentication
 - added authentication to signup form
 - added main page to ghi
+
+## January 12, 2023
+
+Today, I worked on:
+
+- fixing issues I had with SignUp form to make sure its working
+
+## January 13, 2023
+
+Today, I worked on:
+
+- completing the main page skeleton and work on incorporating components into skeleton
