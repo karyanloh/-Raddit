@@ -37,7 +37,7 @@ function Login() {
               />
             </div>
             <button
-              className="btn btn-light"
+              className="col btn btn-orange-moon"
               onClick={() => {
                 login(username, password);
               }}
