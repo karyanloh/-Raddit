@@ -26,13 +26,13 @@ class MyAuthenticator(Authenticator):
     def get_hashed_password(self, account: User):
         # Return the encrypted password value from your
         # account object
-        return account['password']
+        return account["password"]
 
     def get_account_data_for_cookie(self, account: User):
         # Return the username and the data for the cookie.
         # You must return TWO values from this method.
-        del account['password']
-        return account['username'], UserOut(**account)
+        del account["password"]
+        return account["username"], UserOut(**account)
 
 
 authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
