@@ -3,18 +3,18 @@ import PostScoring from "./PostScoring";
 const mockedPostListForScoreFeat = [{post_id:1, score: 2, upvote_users: [1,2,3,], downvote_users: [7,11,12,13]}]
 const mockedCurrentUserIdForScoreFeat = 5
 
-import { useAuthContext } from "./utils";
+// import { useAuthContext } from "./utils";
 
 function MainPage(props) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { token } = useAuthContext();
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const { token } = useAuthContext();
 
-  return (
-    <div>
-      "test":
-      {token}
-    </div>
-  );
+  // return (
+  //   <div>
+  //     "test":
+  //     {token}
+  //   </div>
+  // );
 
     // useEffect(() => function handleLoginClick(e) {});
 
