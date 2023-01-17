@@ -9,6 +9,8 @@ function PostScoring(props) {
 
     function handleUpArrowClick() {
         // TODO: POST request to persist change in score(upvoteUsers array) when uparrow clicked
+
+        // TODO: check ummm if itt well we dont need to check if its in upvote users, but we need to check if its in downvote...downvote
         setScore(score+1)
         setUpvoteUsers(upvoteUsers.concat(props.currentUserId))
     }
