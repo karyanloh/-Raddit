@@ -75,7 +75,7 @@ export function useToken() {
 
   async function logout() {
     if (token) {
-      const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/token/refresh/logout/`;
+      const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
@@ -95,15 +95,22 @@ export function useToken() {
     });
     if (response.ok) {
       const token = await getTokenInternal();
+      const location = window.location;
+      const search = location.search;
+      const redirect = search.split("=")[1] || '/';
       setToken(token);
+      alert("success!");
+      navigate(redirect);
       return;
     }
     let error = await response.json();
+    alert(`Error: ${error.detail}`);
+    navigate("/signup");
     return handleErrorMessage(error);
   }
 
   async function signup(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/accounts/`;
+    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST || 'http://localhost:8000'}/api/accounts/`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({

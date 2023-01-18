@@ -9,7 +9,6 @@ import MainPage from "./MainPage";
 import SignUpForm from "./SignUpForm";
 import Nav from "./Nav";
 import CreatePostForm from "./CreatePost";
-import LogOutButton from "./LogOutButton";
 import PostDetail from "./postdetail"
 
 
@@ -28,6 +27,10 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<MainPage />} />
+              {/* <Route index element={<MainPage1 />} />
+              <Route index element={<MainPage2 />} />
+              <Route index element={<MainPage3 />} />
+              <Route index element={<MainPage4 />} /> */}
             <Route path="login" element={<LoginForm />} />
             <Route path="newpost">
               <Route index element={<CreatePostForm />} />
@@ -37,8 +40,8 @@ function App() {
             {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>
-        </AuthProvider>
-      </BrowserRouter>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
