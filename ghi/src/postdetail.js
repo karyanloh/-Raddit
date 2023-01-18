@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function PostDetails() {
     const [post, setPost] = useState(null);
@@ -11,6 +12,8 @@ function PostDetails() {
     const edit = {
         description: description
     }
+    const navigate = useNavigate();
+
     useEffect(() => {
         async function fetchPost() {
             try {
@@ -52,7 +55,8 @@ function PostDetails() {
                         Authorization: `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiOTllYmE3ZC0wN2ExLTQ4ZTktYWQ5NC1mMGZkMzE4YmM4NzUiLCJleHAiOjE2NzQwMTExMTQsInN1YiI6InRlc3QxMjMiLCJhY2NvdW50Ijp7ImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpZCI6IjYzYzczMTAzYjM3YjE1NDNmN2Q3MjM4OCIsInVzZXJuYW1lIjoidGVzdDEyMyJ9fQ.-Fg-vdZ-hhtAiDMJxZ9FxJwoWmggXxTzLZ0cWCjH4u8'}`,
                     }
                 }
-                const editResponse = await fetch(editUrl, fetchConfig);
+        const editResponse = await fetch(editUrl, fetchConfig);
+        window.location.reload()
     }
 
     if (isLoading) {
