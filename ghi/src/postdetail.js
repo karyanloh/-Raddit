@@ -41,14 +41,15 @@ function PostDetails() {
         fetchPost();
     }, [id]);
 
-    async function put() {
+    async function put(e) {
+        e.preventDefault()
         const editUrl = `http://localhost:8001/api/post/${id}`;
                 const fetchConfig = {
                     method: "put",
                     body: JSON.stringify(edit),
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4YTM4MDIxMy1iMzNkLTQ2YzAtOTczOS04NGRiZjJjY2MzYjAiLCJleHAiOjE2NzQwMDQxNzAsInN1YiI6InJqIiwiYWNjb3VudCI6eyJlbWFpbCI6InJqQGdtYWlsLmNvbSIsImlkIjoiNjNjNzMwMjMzZDMxYjFjMWMwYTQxY2Y1IiwidXNlcm5hbWUiOiJyaiJ9fQ.pBet_LOZZJW_5WCUMT9igZ_8WCAdB_KBi_OgHism6mk'}`,
+                        Authorization: `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiOTllYmE3ZC0wN2ExLTQ4ZTktYWQ5NC1mMGZkMzE4YmM4NzUiLCJleHAiOjE2NzQwMTExMTQsInN1YiI6InRlc3QxMjMiLCJhY2NvdW50Ijp7ImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpZCI6IjYzYzczMTAzYjM3YjE1NDNmN2Q3MjM4OCIsInVzZXJuYW1lIjoidGVzdDEyMyJ9fQ.-Fg-vdZ-hhtAiDMJxZ9FxJwoWmggXxTzLZ0cWCjH4u8'}`,
                     }
                 }
                 const editResponse = await fetch(editUrl, fetchConfig);
