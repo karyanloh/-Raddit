@@ -32,8 +32,8 @@ function App() {
               <Route index element={<MainPage3 />} />
               <Route index element={<MainPage4 />} /> */}
             <Route path="login" element={<LoginForm />} />
-            <Route path="newpost">
-              <Route index element={<CreatePostForm />} />
+            <Route path="post">
+              <Route index path="new" element={<CreatePostForm />} />
               <Route path=":id" element={<PostDetail />} />
             </Route>
             <Route path="signup" element={<SignUpForm />} />
