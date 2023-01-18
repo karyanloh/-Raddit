@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PostScoring from "./PostScoring";
-const mockedPostListForScoreFeat = [{post_id:1, score: 2, upvote_users: [1,2,3,], downvote_users: [7,11,12,13]}]
-const mockedCurrentUserIdForScoreFeat = 5
+const mockedPostListForScoreFeat = [{post_id:'63c1e5399cae91a4fba75a3e', score: 2, upvote_users: [2,3,4], downvote_users: [7,11,12,13]}]
+const mockedCurrentUserIdForScoreFeat = '1'
 
 // import { useAuthContext } from "./utils";
 

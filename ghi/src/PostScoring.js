@@ -8,20 +8,23 @@ function PostScoring(props) {
     // const [currentUserId, setCurrentUserId] = useState(props.currentUserId)
 
     async function handleUpArrowClick() {
-        // TODO: POST request to persist change in score(upvoteUsers array) when uparrow clicked
+        // TODO: PUT request to persist change in score(upvoteUsers array) when uparrow clicked
         try {
-            const response = await fetch('https://localhost:8001/api/postscore{id}', {
-                method: 'POST',
+            const response = await fetch(`https://localhost:8001/api/postScore/${props.postId}`, {
+                method: 'PUT',
+                body: {},
                 headers: {
+                    Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
             })
             if (!response.ok) {
-                throw new Error(`Error! status: ${response.status}`)
+                // throw new Error(`Error! status: ${response.status}`)
+                console.log('error with score change')
             }
             const result = await response.json()
 
-            // console.log('result: ', JSON.stringify(result, null, 1))
+            console.log('result: ', JSON.stringify(result))
 
         // TODO: check if we dont need to check if its in upvote users,  we need to check if its in downvote
         setScore(score+1)
@@ -30,7 +33,8 @@ function PostScoring(props) {
         console.log('error')
         // setErr(err.message)
     } finally {
-        setScore(true)
+        setScore(score+1)
+        setUpvoteUsers(upvoteUsers.concat(props.currentUserId))
     }
     }
     function handleDownArrowClick() {
