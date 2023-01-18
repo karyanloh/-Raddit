@@ -97,20 +97,22 @@ export function useToken() {
       const token = await getTokenInternal();
       const location = window.location;
       const search = location.search;
-      const redirect = search.split("=")[1] || '/';
+      const redirect = search.split("=")[1] || "/";
       setToken(token);
-      alert("success!");
+      alert("Login Success!");
       navigate(redirect);
       return;
     }
     let error = await response.json();
-    alert(`Error: ${error.detail}`);
+    alert(`Wrong Password..Signup First`);
     navigate("/signup");
     return handleErrorMessage(error);
   }
 
   async function signup(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST || 'http://localhost:8000'}/api/accounts/`;
+    const url = `${
+      process.env.REACT_APP_SAMPLE_SERVICE_API_HOST || "http://localhost:8000"
+    }/api/accounts/`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({

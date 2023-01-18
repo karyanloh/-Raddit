@@ -8,44 +8,45 @@ function Login() {
 
   return (
     <>
-      <div className="d-flex justify-content-center">
-        <div className="shadow-none p-3 mb-5 bg-secondary rounded p-4 mt-4">
-          <h2 style={{ color: "white" }}>Login Please</h2>
-          <form>
-            <div className="mb-3">
-              <label htmlFor="username">User Name</label>
-              <input
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                type="text"
-                className="form-control"
-                id="username"
-                placeholder="Enter ursername"
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password">Password</label>
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Enter password"
-              />
-            </div>
-            <button
-              className="col btn btn-orange-moon"
-              onClick={() => {
-                login(username, password);
-              }}
-              type="button"
-            >
-              Submit
-            </button>
-          </form>
+      <div className="row login-style">
+        <div className="offset-3 col-6">
+          <div className="shadow p-4 mt-4 loginfont">
+            <h2 style={{ color: "black" }}>Please Login</h2>
+            <form>
+              <div className="form-floating mb-3">
+                <input
+                  onChange={(e) => setUsername(e.target.value)}
+                  value={username}
+                  required
+                  type="text"
+                  className="form-control"
+                  id="username"
+                />
+                <label htmlFor="username">UserName</label>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  required
+                  type="password"
+                  className="form-control"
+                  id="password"
+                />
+                <label htmlFor="password">Password</label>
+              </div>
+
+              <button
+                className="btn btn-pink-moon"
+                onClick={() => {
+                  login(username, password);
+                }}
+                type="button"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </>
