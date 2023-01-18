@@ -94,7 +94,7 @@ function Nav() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link text-dark" to="/newpost">
+              <NavLink className="nav-link text-dark" to="/post/new">
                 Create Post
               </NavLink>
             </li>

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from content_queries import ContentQueries
 from auth import authenticator
-from model import CommentIn, CommentOut, EditComment
+from model import CommentIn, CommentOut, EditComment, commentList
 
 router = APIRouter()
 
@@ -16,12 +16,20 @@ def create_comment(
         return content_queries.create_comment(new_comment)
 
 
-@router.get("/api/comment/{id}", response_model=CommentOut)
-def get_comment_by_id(
-    id: str,
+# @router.get("/api/comment/{id}", response_model=CommentOut)
+# def get_comment_by_id(
+#     id: str,
+#     content_queries: ContentQueries = Depends(),
+# ):
+#     return content_queries.get_comment_by_id(id)
+
+
+@router.get("/api/comments/{post_id}", response_model=commentList)
+def get_comments_by_post_id(
+    post_id: str,
     content_queries: ContentQueries = Depends(),
 ):
-    return content_queries.get_comment_by_id(id)
+    return content_queries.get_comments_by_post_id(post_id)
 
 
 @router.delete("/api/comment/{id}")
