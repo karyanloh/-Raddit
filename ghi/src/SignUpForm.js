@@ -6,7 +6,7 @@ function SignUpForm(props) {
   const [password, setPassword] = useState("");
 
   async function SignUp(e) {
-    e.preventDefault()
+    e.preventDefault();
     const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/users`;
     const response = await fetch(url, {
       method: "post",

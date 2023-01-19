@@ -31,7 +31,8 @@ function Nav() {
 
             <li className="nav-item">
               {token && (
-                <span onClick={() => {
+                <span
+                  onClick={() => {
                     logout();
                   }}
                   role={"button"}
@@ -56,6 +57,9 @@ function Nav() {
                 Home
               </NavLink>
             </li>
+            {/* <li>
+              <div>11</div>
+            </li> */}
             <li className="nav-item dropdown">
               <Link
                 className="nav-link dropdown-toggle text-dark"

@@ -17,7 +17,7 @@ function CreatePostForm(props) {
   useEffect(() => {
     if (!token) {
       alert("Login Please");
-      navigate("/login?redirect=/newpost");
+      navigate("/login?redirect=/post/new");
     }
   }, [token]);
 
