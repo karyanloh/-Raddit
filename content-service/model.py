@@ -19,6 +19,7 @@ class PostOutDetail(BaseModel):
     title: str
     description: str
     subraddit: str
+    user_id: str
 
 
 class EditPost(BaseModel):
