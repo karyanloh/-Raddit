@@ -52,7 +52,7 @@ function App() {
             <Route
               path="/"
               element={
-                <MainPage post={post} comments={comments} votes={votes} />
+                <MainPage posts={post} comments={comments} votes={votes} />
               }
             />
             {/* <Route index element={<MainPage1 />} />

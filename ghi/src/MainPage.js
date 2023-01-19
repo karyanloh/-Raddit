@@ -14,30 +14,49 @@ function MainPage(props) {
             <p className="lead mb-4">All things Rad(or bad) Show Raddits</p>
           </div>
         </div>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Post title</h5>
-            <p className="card-text">Post description</p>
-            <a href="#" className="card-link">
-              Link to post detail
-            </a>
-            <a href="#" className="card-link">
-              Link to comments/post details
-            </a>
-            <div className="btn-group-vertical mb-3">
-              <button type="button" className="btn btn-outline-success">
-                Rad
-              </button>
-              <button type="button" className="btn btn-outline-danger">
-                Bad
-              </button>
-            </div>
+        {console.log(props.posts)}
 
-            <p className="vote-count">votes</p>
+        {props.posts[0].map((post) => {
+          console.log(post);
+          return (
+            <div className="card-body" key={post.id}>
+              <div>
+                <div className="card">
+                  <h5 className="card-title">{post.title}</h5>
+                  <a href="#">
+                    <p className="card-text">{post.description}</p>
+                  </a>
+                  <a href="#" className="card-link">
+                    Link to comments/post details
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
+        <div className="">
+          <h5 className="">Post title</h5>
+          <p className="card-text">Post description</p>
+          <a href="#" className="card-link">
+            Link to post detail
+          </a>
+          <a href="#" className="card-link">
+            Link to comments/post details
+          </a>
+          <div className="btn-group-vertical mb-3">
+            <button type="button" className="btn btn-outline-success">
+              Rad
+            </button>
+            <button type="button" className="btn btn-outline-danger">
+              Bad
+            </button>
           </div>
+
+          <p className="vote-count">votes</p>
         </div>
       </>
-      <div>"test2":{account}</div>
+      {/* <div>"test2":{account}</div> */}
     </>
   );
 }
