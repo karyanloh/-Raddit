@@ -1,10 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "./utils";
 
-function MainPage(props) {
+function MainPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { token, account } = useAuthContext();
+  const [post, setPost] = useState({});
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+        try {
+            const postUrl = `http://localhost:8001/api/posts/`;
+            const postResponse = await fetch(postUrl);
+            const postData = await postResponse.json();
+            setPost(postData.posts);
+            setIsLoading(false)
+        } catch (error) {
+            console.error(error);
+            setPost({ error: 'Error fetching post' });
+        }
+    }
+  console.log("post", post)
+
+    if (isLoading) {
+        return <div className="spinner-border" animation="border" variant="primary" />;
+    }
+    else {
   return (
     <>
       <>
@@ -14,17 +38,15 @@ function MainPage(props) {
             <p className="lead mb-4">All things Rad(or bad) Show Raddits</p>
           </div>
         </div>
-        {console.log(props.posts)}
 
-        {props.posts[0].map((post) => {
-          console.log(post);
+        {post.map((p) => {
           return (
-            <div className="card-body" key={post.id}>
+            <div className="card-body" key={p.id}>
               <div>
                 <div className="card">
-                  <h5 className="card-title">{post.title}</h5>
+                  <h5 className="card-title">{p.title}</h5>
                   <a href="#">
-                    <p className="card-text">{post.description}</p>
+                    <p className="card-text">{p.description}</p>
                   </a>
                   <a href="#" className="card-link">
                     Link to comments/post details
@@ -59,6 +81,7 @@ function MainPage(props) {
       {/* <div>"test2":{account}</div> */}
     </>
   );
+      }
 }
 
 export default MainPage;

@@ -18,30 +18,6 @@ function GetToken() {
 }
 
 function App() {
-  const [post, setPost] = useState({});
-  const [comments, setComment] = useState({});
-  const [votes, setVote] = useState();
-  useEffect(() => {
-    async function getData() {
-      let postUrl = `http://localhost:8001/api/posts/`;
-      let postResponse = await fetch(postUrl);
-      let postData = await postResponse.json();
-      postData = Object.values(postData);
-      let commentsUrl = `http://localhost:8001/api/comments/{post_id}`;
-      let commentsResponse = await fetch(commentsUrl);
-      let commentsData = await commentsResponse.json();
-      commentsData = Object.values(commentsData);
-      if (postResponse.ok && commentsResponse.ok) {
-        console.log("got post data!");
-        setPost(postData);
-        setComment(commentsData);
-      } else {
-        console.log("error occurred fetching data");
-        // setError(data.message);
-      }
-    }
-    getData();
-  }, []);
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -52,7 +28,7 @@ function App() {
             <Route
               path="/"
               element={
-                <MainPage posts={post} comments={comments} votes={votes} />
+                <MainPage />
               }
             />
             {/* <Route index element={<MainPage1 />} />
