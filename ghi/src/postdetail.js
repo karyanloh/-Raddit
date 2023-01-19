@@ -10,6 +10,7 @@ function PostDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [description, setDescription] = useState("");
+    const [loggedInID, setloggedInID] = useState("");
     const { id } = useParams();
     const edit = {
         description: description
@@ -17,11 +18,25 @@ function PostDetails() {
     const navigate = useNavigate();
     const { token } = useAuthContext();
 
+    function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+}
+
     useEffect(() => {
         fetchPost();
         fetchScore();
         fetchComments();
-    }, [id]);
+        if (token) {
+        let data = parseJwt(token)
+        setloggedInID(data.account.id)
+        }
+    }, [id, token]);
 
     async function fetchPost() {
         try {
@@ -29,6 +44,7 @@ function PostDetails() {
             const postResponse = await fetch(postUrl);
             const postData = await postResponse.json();
             setPost(postData);
+            setDescription(postData.description)
             fetchScore(postData);
             fetchComments();
         } catch (error) {
@@ -83,6 +99,23 @@ function PostDetails() {
             console.error('Error updating post')
         }
     }
+    async function del(e) {
+        e.preventDefault()
+        const delUrl = `${api_url}delete/${id}`;
+        const fetchConfig = {
+                    method: "delete",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+        const delResponse = await fetch(delUrl,fetchConfig);
+        if(delResponse.ok) {
+
+        } else {
+            console.error('Error deleting post')
+        }
+    }
 
     if (isLoading) {
         return <div className="spinner-border" animation="border" variant="primary" />;
@@ -103,7 +136,7 @@ function PostDetails() {
                                 className="form-control"
                                 id="exampleFormControlTextarea1"
                                 rows="10"
-                                placeholder="Description"
+                                placeholder={post.description}
                                 />
                         </div>
                         <button type="submit" className="btn btn-primary">Save</button>
@@ -119,7 +152,8 @@ function PostDetails() {
         return <div>{post.error}</div>;
     }
 
-    return (
+    if (token && loggedInID == post.user_id) {
+       return (
     <div>
         <div className="card">
             <div className="card-header">
@@ -147,7 +181,7 @@ function PostDetails() {
                 <div className="d-flex justify-content-between">
                     <div>
                         <button onClick={setIsEditing} className="btn btn-secondary">Edit</button>
-                        <button className="btn btn-secondary">
+                        <button onClick={del} className="btn btn-secondary">
                             Delete
                         </button>
                     </div>
@@ -161,15 +195,113 @@ function PostDetails() {
         </div>
         {comments[0].map((comment) => {
                                 return (
-                                    <div className="card" key= {comment.id}>
-                                        <div className="card-header">
-                                            <p className="card-text">{comment.body}</p>
+                                    <div className="mt-2"  key={comment.id}>
+                                        <div className="card" >
+                                            <div className="card-header" >
+                                                <p className="card-text">{comment.id}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 );
                             })}
 
+
     </div>
     );
+    }
+    else if (token) {
+        return (
+    <div>
+        <div className="card">
+            <div className="card-header">
+                <div className="d-flex justify-content-between">
+                    <div>
+                        <h6 className="card-title">{post.title}</h6>
+                        <p className="card-subtitle mb-2 text-muted">
+                            Score: {post.score}
+                        </p>
+                    </div>
+                    <div>
+                        <button className="btn btn-secondary mr-2">
+                            Upvote
+                        </button>
+                        <button className="btn btn-secondary">
+                            Downvote
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className="card-body">
+                <p className="card-text">{post.description}</p>
+            </div>
+            <div className="card-footer">
+                <div className="d-flex justify-content-between">
+                    <div>
+                        <p className="card-subtitle mb-2 text-muted">
+                            {comments[0].length} comments
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {comments[0].map((comment) => {
+                                return (
+                                    <div className="mt-2"  key={comment.id}>
+                                        <div className="card" >
+                                            <div className="card-header" >
+                                                <p className="card-text">{comment.id}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+
+
+    </div>
+    );
+    }
+    else {
+        return (
+        <div>
+            <div className="card">
+                <div className="card-header">
+                    <div className="d-flex justify-content-between">
+                        <div>
+                            <h6 className="card-title">{post.title}</h6>
+                            <p className="card-subtitle mb-2 text-muted">
+                                Score: {post.score}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="card-body">
+                    <p className="card-text">{post.description}</p>
+                </div>
+                <div className="card-footer">
+                    <div className="d-flex justify-content-between">
+                        <div>
+                            <p className="card-subtitle mb-2 text-muted">
+                                {comments[0].length} comments
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {comments[0].map((comment) => {
+                                    return (
+                                        <div className="mt-2"  key={comment.id}>
+                                            <div className="card" >
+                                                <div className="card-header" >
+                                                    <p className="card-text">{comment.id}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+
+
+        </div>
+        );
+                            }
 }
 export default PostDetails;
