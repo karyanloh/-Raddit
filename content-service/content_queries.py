@@ -98,13 +98,26 @@ class ContentQueries:
         result["id"] = str(result["_id"])  # ObjectId
         return result
 
-    def edit_post_score(self, post_id):
+    def increase_post_score(self, post_id):
         db = client[mongodb]
         result = db.postVotes.update_one(
             {"post_id": post_id},
             {
                 "$inc": {
                     "score": 1,
+                }
+            },
+        )
+        post_score = self.get_post_score_by_post_id(post_id)
+        return post_score
+
+    def decrease_post_score(self, post_id):
+        db = client[mongodb]
+        result = db.postVotes.update_one(
+            {"post_id": post_id},
+            {
+                "$inc": {
+                    "score": -1,
                 }
             },
         )

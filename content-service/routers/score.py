@@ -54,10 +54,19 @@ def delete_post_score_by_id(
 #     #     raise HTTPException(status_code=401, detail="not working")
 
 
-@router.put("/api/postScore/{post_id}", response_model=PostScoreOut)
+@router.put("/api/postScore/upvote/{post_id}", response_model=PostScoreOut)
 def update_post_score_by_id(
     post_id: str,
     content_queries: ContentQueries = Depends(),
 ):
-    result = content_queries.edit_post_score(post_id)
+    result = content_queries.increase_post_score(post_id)
+    return result
+
+
+@router.put("/api/postScore/downvote/{post_id}", response_model=PostScoreOut)
+def update_post_score_by_id(
+    post_id: str,
+    content_queries: ContentQueries = Depends(),
+):
+    result = content_queries.decrease_post_score(post_id)
     return result
