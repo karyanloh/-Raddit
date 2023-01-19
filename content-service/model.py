@@ -43,6 +43,7 @@ class EditComment(BaseModel):
 
 class PostScoreIn(BaseModel):
     post_id: str
+    user_id: str
     upvote: bool
 
 

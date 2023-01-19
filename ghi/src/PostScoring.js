@@ -9,10 +9,12 @@ function PostScoring(props) {
 
     async function handleUpArrowClick() {
         // TODO: PUT request to persist change in score(upvoteUsers array) when uparrow clicked
+        // TODO: uparrow click adds one to post score in back end
+        // TODO: uparrow click adds user id to upvoted users array in back end
         try {
             const response = await fetch(`https://localhost:8001/api/postScore/${props.postId}`, {
                 method: 'PUT',
-                body: {},
+                body: JSON.stringify({"score":score, "upvote_users":upvoteUsers}),
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -26,7 +28,8 @@ function PostScoring(props) {
 
             console.log('result: ', JSON.stringify(result))
 
-        // TODO: check if we dont need to check if its in upvote users,  we need to check if its in downvote
+        // TODO: if already in upvote list, decrease by 1(cancel vote)
+        // TODO: if already in downvote list, increase by 2(switch vote)
         setScore(score+1)
         setUpvoteUsers(upvoteUsers.concat(props.currentUserId))
     } catch (err) {
@@ -37,11 +40,47 @@ function PostScoring(props) {
         setUpvoteUsers(upvoteUsers.concat(props.currentUserId))
     }
     }
-    function handleDownArrowClick() {
-        // TODO: POST request to persist change in score(downvoteUsers array) when downarrow clicked
+    async function handleDownArrowClick() {
+        try {
+            const response = await fetch(`https://localhost:8001/api/postScore/${props.postId}`, {
+                method: 'PUT',
+                body: JSON.stringify({"score":score, "downvote_users":downvoteUsers}),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+            if (!response.ok) {
+                // throw new Error(`Error! status: ${response.status}`)
+                console.log('error with score change')
+            }
+            const result = await response.json()
+
+            console.log('result: ', JSON.stringify(result))
+
+        // TODO: if already in upvote list, decrease by 1(cancel vote)
+        // TODO: if already in downvote list, increase by 2(switch vote)
+        setScore(score-1)
+        setUpvoteUsers(downvoteUsers.concat(props.currentUserId))
+    } catch (err) {
+        console.log('error')
+        // setErr(err.message)
+    } finally {
         setScore(score-1)
         setDownvoteUsers(downvoteUsers.concat(props.currentUserId))
     }
+    // function handleUpArrowClick() {
+    //     // TODO: PUT request to persist change in score(upvoteUsers array) when uparrow clicked
+    //     setScore(score+1)
+    //     setUpvoteUsers(upvoteUsers.concat(props.currentUserId))
+    // }
+
+    // function handleDownArrowClick() {
+    //     // TODO: PUT request to persist change in score(downvoteUsers array) when downarrow clicked
+    //     setScore(score-1)
+    //     setDownvoteUsers(downvoteUsers.concat(props.currentUserId))
+    // }
+}
 
     return (
         <div className="card post-scoring-card" >
@@ -69,4 +108,4 @@ function PostScoring(props) {
         </div>
     )
 }
-export default PostScoring
+export default PostScoring;
