@@ -71,22 +71,22 @@ function Nav() {
               </Link>
               <ul className="dropdown-menu dropdown-menu-right">
                 <li>
-                  <Link className="dropdown-item text-dark" to="/music">
+                  <Link className="dropdown-item text-dark" to="/Music">
                     Music
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item text-dark" to="/movies">
+                  <Link className="dropdown-item text-dark" to="/Movies">
                     Movies
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item text-dark" to="/sports">
+                  <Link className="dropdown-item text-dark" to="/Sports">
                     Sports
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item text-dark" to="/tech">
+                  <Link className="dropdown-item text-dark" to="/Tech">
                     Technology
                   </Link>
                 </li>

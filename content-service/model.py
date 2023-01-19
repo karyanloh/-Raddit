@@ -66,5 +66,7 @@ class commentList(BaseModel):
 
 class PostsList(BaseModel):
     posts: list[PostOutShort]
+
+    
 class PostList(BaseModel):
     posts: list[PostOutDetail]
