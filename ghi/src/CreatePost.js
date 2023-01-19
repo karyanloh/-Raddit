@@ -4,14 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 // subraddit
 let subraddits = [
-  { label: "Tech", value: "💻" },
-  { label: "Movies", value: "🎬" },
-  { label: "Music", value: "🎧" },
-  { label: "Sports", value: "🏀" },
+  { label: "Tech", value: "Tech" },
+  { label: "Movies", value: "Movies" },
+  { label: "Music", value: "Music" },
+  { label: "Sports", value: "Sports" },
+  { label: "Miscellaneous", value: "Miscellaneous" },
 ];
 
 function CreatePostForm(props) {
-  const { token } = useAuthContext();
+  const { token, account } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,13 +25,6 @@ function CreatePostForm(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [subraddit, setSubraddit] = useState("⬇️ Select a subraddit ⬇️");
-  const [user, setUser] = useState("");
-  const data = {
-    title: title,
-    description: description,
-    subraddit: subraddit,
-    user_id: user,
-  };
 
   async function post(data) {
     const url = `http://localhost:8001/api/posts`;
@@ -55,7 +49,7 @@ function CreatePostForm(props) {
       title: title,
       description: description,
       subraddit: subraddit,
-      user_id: user,
+      user_id: account,
     });
   }
 
@@ -89,19 +83,7 @@ function CreatePostForm(props) {
               placeholder="Description"
             />
           </div>
-          <div className="form-group mb-4 ">
-            <label htmlFor="exampleFormControlTextarea1"></label>
-            <textarea
-              type="text"
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              placeholder="User"
-            />
-          </div>
           <div className="App">
-            {/* Displaying the value of subraddit */}
             {subraddit}
             <br />
 

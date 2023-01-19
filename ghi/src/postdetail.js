@@ -10,33 +10,18 @@ function PostDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [description, setDescription] = useState("");
-    const [loggedInID, setloggedInID] = useState("");
     const { id } = useParams();
     const edit = {
         description: description
     }
     const navigate = useNavigate();
-    const { token } = useAuthContext();
-
-    function parseJwt (token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(jsonPayload);
-}
+    const { token, account } = useAuthContext();
 
     useEffect(() => {
         fetchPost();
         fetchScore();
         fetchComments();
-        if (token) {
-        let data = parseJwt(token)
-        setloggedInID(data.account.id)
-        }
-    }, [id, token]);
+    }, [id]);
 
     async function fetchPost() {
         try {
@@ -99,7 +84,7 @@ function PostDetails() {
             console.error('Error updating post')
         }
     }
-    async function del(e) {
+    async function Del(e) {
         e.preventDefault()
         const delUrl = `${api_url}delete/${id}`;
         const fetchConfig = {
@@ -111,7 +96,8 @@ function PostDetails() {
                 }
         const delResponse = await fetch(delUrl,fetchConfig);
         if(delResponse.ok) {
-
+            alert("Deletion success");
+            navigate("/")
         } else {
             console.error('Error deleting post')
         }
@@ -152,7 +138,7 @@ function PostDetails() {
         return <div>{post.error}</div>;
     }
 
-    if (token && loggedInID == post.user_id) {
+    if (token && (account == post.user_id)) {
        return (
     <div>
         <div className="card">
@@ -181,7 +167,7 @@ function PostDetails() {
                 <div className="d-flex justify-content-between">
                     <div>
                         <button onClick={setIsEditing} className="btn btn-secondary">Edit</button>
-                        <button onClick={del} className="btn btn-secondary">
+                        <button onClick={Del} className="btn btn-secondary">
                             Delete
                         </button>
                     </div>
@@ -193,12 +179,13 @@ function PostDetails() {
                 </div>
             </div>
         </div>
+
         {comments[0].map((comment) => {
                                 return (
                                     <div className="mt-2"  key={comment.id}>
                                         <div className="card" >
                                             <div className="card-header" >
-                                                <p className="card-text">{comment.id}</p>
+                                                <p className="card-text">{comment.body}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -249,7 +236,7 @@ function PostDetails() {
                                     <div className="mt-2"  key={comment.id}>
                                         <div className="card" >
                                             <div className="card-header" >
-                                                <p className="card-text">{comment.id}</p>
+                                                <p className="card-text">{comment.body}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -292,7 +279,7 @@ function PostDetails() {
                                         <div className="mt-2"  key={comment.id}>
                                             <div className="card" >
                                                 <div className="card-header" >
-                                                    <p className="card-text">{comment.id}</p>
+                                                    <p className="card-text">{comment.body}</p>
                                                 </div>
                                             </div>
                                         </div>
