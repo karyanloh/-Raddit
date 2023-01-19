@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useToken } from "./utils";
 // import Construct from "./Construct.js";
@@ -18,6 +18,28 @@ function GetToken() {
 }
 
 function App() {
+  const [post, setPost] = useState({});
+  const [comments, setComment] = useState({});
+  const [votes, setVote] = useState();
+  useEffect(() => {
+    async function getData() {
+      let postUrl = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/api/posts/`;
+      let postResponse = await fetch(postUrl);
+      let postData = await postResponse.json();
+      let commentsUrl = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/api/comments/`;
+      let commentsResponse = await fetch(commentsUrl);
+      let commentsData = await commentsResponse.json();
+      if (postResponse.ok && commentsResponse.ok) {
+        console.log("got post data!");
+        setPost(postData.posts);
+        setComment(commentsData.comments);
+      } else {
+        console.log("error occurred fetching data");
+        // setError(data.message);
+      }
+    }
+    getData();
+  }, []);
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -25,7 +47,12 @@ function App() {
         <Nav />
         <div className="container">
           <Routes>
-            <Route path="/" element={<MainPage />} />
+            <Route
+              path="/"
+              element={
+                <MainPage post={post} comments={comments} votes={votes} />
+              }
+            />
             {/* <Route index element={<MainPage1 />} />
               <Route index element={<MainPage2 />} />
               <Route index element={<MainPage3 />} />
@@ -48,25 +75,6 @@ export default App;
 // function App() {
 //   const [launch_info, setLaunchInfo] = useState([]);
 //   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     async function getData() {
-//       let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-//       console.log('fastapi url: ', url);
-//       let response = await fetch(url);
-//       console.log("------- hello? -------");
-//       let data = await response.json();
-
-//       if (response.ok) {
-//         console.log("got launch data!");
-//         setLaunchInfo(data.launch_details);
-//       } else {
-//         console.log("drat! something happened");
-//         setError(data.message);
-//       }
-//     }
-//     getData();
-//   }, [])
 
 //   return (
 //     <div>

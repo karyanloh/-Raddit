@@ -22,6 +22,15 @@ class ContentQueries:
         post = self.get_post_by_id(result.inserted_id)
         return post
 
+    def get_all_posts(self):
+        db = client[mongodb]
+        result = db.posts.find({})
+        posts = list(result)
+        for i in range(len(posts)):
+            posts[i] = str(posts[i])
+        results = {"posts": posts}
+        return results
+
     def get_post_by_id(self, id):
         db = client[mongodb]
         result = db.posts.find_one({"_id": ObjectId(id)})

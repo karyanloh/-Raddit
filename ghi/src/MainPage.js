@@ -5,14 +5,6 @@ function MainPage(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { token } = useAuthContext();
 
-  // return (
-  //   <div>
-  //     "test":
-  //     {token}
-  //   </div>
-  // );
-
-  //   useEffect(() => function handleLoginClick(e) {});
   return (
     <>
       <div className="px-4 py-5 my-5 text-center">
@@ -21,19 +13,6 @@ function MainPage(props) {
           <p className="lead mb-4">All things Rad(or bad) Show Raddits</p>
         </div>
       </div>
-      <div>
-        {/* {isLoggedIn ? (
-          <LogoutButton onClick={handleLogoutClick} />
-        ) : (
-          ((<LoginButton onClick={handleLoginClick} />),
-          (<SignUpButton onClick={handleSignupClick} />))
-        )} */}
-      </div>
-      {/* <div className="navbar-buttons">
-        <button>Login</button>
-        <button>Sign Up</button>
-        <button>Logout</button>
-      </div> */}
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Post title</h5>
