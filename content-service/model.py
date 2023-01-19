@@ -50,14 +50,14 @@ class EditComment(BaseModel):
 
 class PostScoreIn(BaseModel):
     post_id: str
-    score: 0
+    score: int
     upvoted_users: list[str]
     downvoted_users: list[str]
 
 
 class PostScoreOut(BaseModel):
     post_id: str
-    score: int
+    score: str
 
 
 class EditPostScore(BaseModel):

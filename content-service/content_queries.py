@@ -1,4 +1,5 @@
 import os
+import pymongo
 from bson import ObjectId
 
 dbuser = os.environ["MONGO_USER"]
@@ -97,47 +98,20 @@ class ContentQueries:
         result["id"] = str(result["_id"])  # ObjectId
         return result
 
-    # def edit_post_score(self, id, score):
-    #     db = client[mongodb]
-    #     result = db.postVotes.update_one(
-    #         {"_id": ObjectId(id)},
-    #         {
-    #             "$set": {
-    #                 "score": score.score,
-    #                 "upvoted_users": score.upvoted_users,
-    #                 "downvoted_users": score.downvoted_users,
-    #             }
-    #         },
-    #     )
-    #     post_score = self.get_post_score_by_id(id)
-    #     return post_score
-
-    def edit_post_score(self, id):
+    def edit_post_score(self, post_id):
         db = client[mongodb]
         result = db.postVotes.update_one(
-            {"_id": ObjectId(id)},
+            {"post_id": post_id},
             {
                 "$inc": {
                     "score": 1,
                 }
             },
         )
-        post_score = self.get_post_score_by_id(id)
+        post_score = self.get_post_score_by_post_id(post_id)
         return post_score
 
     def delete_post_score(self, id):
         db = client[mongodb]
         result = db.postVotes.delete_one({"_id": ObjectId(id)})
         return "Vote Deleted"
-
-
-
-
-
-
-
-
-
-
-
-Message Randy Angel
