@@ -27,7 +27,7 @@ class ContentQueries:
         result = db.posts.find({})
         posts = list(result)
         for i in range(len(posts)):
-            posts[i] = str(posts[i])
+            posts[i]['id'] = str(posts[i]['_id'])
         results = {"posts": posts}
         return results
 

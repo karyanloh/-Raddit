@@ -62,3 +62,6 @@ class EditPostScore(BaseModel):
 
 class commentList(BaseModel):
     comments: list[CommentOut]
+
+class PostList(BaseModel):
+    posts: list[PostOutDetail]

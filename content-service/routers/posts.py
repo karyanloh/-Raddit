@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from content_queries import ContentQueries
 from auth import authenticator
-from model import PostIn, PostOutShort, PostOutDetail, EditPost
-
+from model import PostIn, PostOutShort, PostOutDetail, EditPost, PostList
 router = APIRouter()
 
 
@@ -34,7 +33,7 @@ def get_post_short_by_id(
 ):
     return content_queries.get_post_by_id(id)
 
-@router.get("/api/posts", response_model=PostOutShort)
+@router.get("/api/posts", response_model=PostList)
 def get_all_posts(
     content_queries: ContentQueries = Depends()
 ):
