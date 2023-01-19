@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 let internalToken = null;
+let user_info = null;
+
 
 export function getToken() {
-  return internalToken;
+  return [internalToken, user_info];
 }
 
 export async function getTokenInternal() {
@@ -15,7 +17,8 @@ export async function getTokenInternal() {
     if (response.ok) {
       const data = await response.json();
       internalToken = data.access_token;
-      return internalToken;
+      user_info = data.account.id;
+      return [internalToken, user_info];
     }
   } catch (e) {}
   return false;
@@ -45,13 +48,16 @@ function handleErrorMessage(error) {
 export const AuthContext = createContext({
   token: null,
   setToken: () => null,
+  account: null,
+  setAccount: () => null,
 });
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [account, setAccount] = useState(null);
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setToken, account, setAccount }}>
       {children}
     </AuthContext.Provider>
   );
@@ -60,18 +66,25 @@ export const AuthProvider = ({ children }) => {
 export const useAuthContext = () => useContext(AuthContext);
 
 export function useToken() {
-  const { token, setToken } = useAuthContext();
+  const { token, setToken, account, setAccount } = useAuthContext();
+
   const navigate = useNavigate();
+
 
   useEffect(() => {
     async function fetchToken() {
-      const token = await getTokenInternal();
+      let token1 = await getTokenInternal();
+      let token = token1[0];
+      let account1 = await getTokenInternal()
+      let account = account1[1];
       setToken(token);
+      setAccount(account);
+
     }
-    if (!token) {
+    if (!(token && account)) {
       fetchToken();
     }
-  }, [setToken, token]);
+  }, [setToken, token, setAccount, account]);
 
   async function logout() {
     if (token) {
@@ -97,8 +110,9 @@ export function useToken() {
       const token = await getTokenInternal();
       const location = window.location;
       const search = location.search;
-      const redirect = search.split("=")[1] || '/';
+      const redirect = search.split("=")[1] || "/";
       setToken(token);
+      setAccount(account);
       alert("success!");
       navigate(redirect);
       return;
@@ -151,5 +165,5 @@ export function useToken() {
     return false;
   }
 
-  return [token, login, logout, signup, update];
+  return [token, login, logout, signup, update, account];
 }
