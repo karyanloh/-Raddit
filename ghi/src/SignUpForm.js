@@ -64,7 +64,7 @@ function SignUpForm(props) {
           placeholder="Password"
         />
       </div>
-      <button>Sign up!</button>
+      <button className="btn btn-light">Sign up!</button>
     </form>
   );
 }
