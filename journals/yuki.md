@@ -55,3 +55,9 @@ Today, I worked on:
 * I added a logout button in the navbar, reorganized the nav bar UI.
 * I added some code in nav.js so that i can conditionally show the login/signup and logout button.
 * I added a few lines of code in Createpost.js so that only login user can make a new post.
+
+## January 17, 2023
+Today, I worked on:
+
+* I updated login form format and handel errors.
+* I added the navlink to choose subraddit.

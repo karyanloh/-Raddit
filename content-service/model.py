@@ -19,6 +19,7 @@ class PostOutDetail(BaseModel):
     title: str
     description: str
     subraddit: str
+    user_id: str
 
 
 class EditPost(BaseModel):
@@ -63,3 +64,7 @@ class EditPostScore(BaseModel):
     score: int
     upvoted_users: list[str]
     downvoted_users: list[str]
+
+
+class commentList(BaseModel):
+    comments: list[CommentOut]

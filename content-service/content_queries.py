@@ -56,6 +56,15 @@ class ContentQueries:
         result["id"] = str(result["_id"])  # ObjectId
         return result
 
+    def get_comments_by_post_id(self, post_id):
+        db = client[mongodb]
+        results = db.comments.find({"post_id": post_id})
+        results = list(results)
+        for i in range(len(results)):
+            results[i]["id"] = str(results[i]["_id"])  # ObjectId
+        real_results = {"comments": results}
+        return real_results
+
     def delete_comment(self, id):
         db = client[mongodb]
         result = db.comments.delete_one({"_id": ObjectId(id)})
@@ -72,7 +81,6 @@ class ContentQueries:
     def create_post_score(self, new_post_score):
         db = client[mongodb]
         result = db.postVotes.insert_one(new_post_score)
-        # result = db.postVotes.insert_one(new_post_score.dict())
         post_score = self.get_post_score_by_id(result.inserted_id)
         return post_score
 

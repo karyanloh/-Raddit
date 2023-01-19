@@ -5,8 +5,9 @@ function SignUpForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function SignUp(username, email, password) {
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/users/`;
+  async function SignUp(e) {
+    e.preventDefault();
+    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/users`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
@@ -26,10 +27,11 @@ function SignUpForm(props) {
   }
 
   return (
-    <form onSubmit={() => SignUp(username, email, password)}>
+    <form onSubmit={SignUp}>
       <div className="mb-4">
         <label htmlFor="username">Username</label>
         <input
+          value={username}
           type="username"
           onChange={(e) => setUsername(e.target.value)}
           className="form-control"
@@ -41,6 +43,7 @@ function SignUpForm(props) {
       <div className="mb-4">
         <label htmlFor="email">Email address</label>
         <input
+          value={email}
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           className="form-control"
@@ -52,6 +55,7 @@ function SignUpForm(props) {
       <div className="mb-4">
         <label htmlFor="password">Password</label>
         <input
+          value={password}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           className="form-control"
