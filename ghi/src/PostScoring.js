@@ -42,7 +42,7 @@ function PostScoring(props) {
     }
     async function handleDownArrowClick() {
         try {
-            const response = await fetch(`https://localhost:8001/api/postScore/${props.postId}`, {
+            const response = await fetch(`https://localhost:8001/api/postS=core/${props.postId}`, {
                 method: 'PUT',
                 body: JSON.stringify({"score":score, "downvote_users":downvoteUsers}),
                 headers: {

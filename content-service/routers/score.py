@@ -55,7 +55,7 @@ def delete_post_score_by_id(
 
 
 @router.put("/api/postScore/upvote/{post_id}", response_model=PostScoreOut)
-def update_post_score_by_id(
+def increase_post_score_by_id(
     post_id: str,
     content_queries: ContentQueries = Depends(),
 ):
@@ -64,7 +64,7 @@ def update_post_score_by_id(
 
 
 @router.put("/api/postScore/downvote/{post_id}", response_model=PostScoreOut)
-def update_post_score_by_id(
+def decrease_post_score_by_id(
     post_id: str,
     content_queries: ContentQueries = Depends(),
 ):
