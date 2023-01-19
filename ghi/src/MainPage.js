@@ -3,13 +3,16 @@ import { useAuthContext } from "./utils";
 
 function MainPage(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { token } = useAuthContext();
+  const { token, account } = useAuthContext();
 
   return (
-    <div>
-      "test":
-      {token}
-    </div>
+    <>
+      <div>
+        "test":
+        {token}
+      </div>
+      <div>"test2":{account}</div>
+    </>
   );
 
   //   useEffect(() => function handleLoginClick(e) {});
