@@ -1,4 +1,3 @@
-import pymongo
 import os
 from bson import ObjectId
 
@@ -98,15 +97,28 @@ class ContentQueries:
         result["id"] = str(result["_id"])  # ObjectId
         return result
 
-    def edit_post_score(self, id, score):
+    # def edit_post_score(self, id, score):
+    #     db = client[mongodb]
+    #     result = db.postVotes.update_one(
+    #         {"_id": ObjectId(id)},
+    #         {
+    #             "$set": {
+    #                 "score": score.score,
+    #                 "upvoted_users": score.upvoted_users,
+    #                 "downvoted_users": score.downvoted_users,
+    #             }
+    #         },
+    #     )
+    #     post_score = self.get_post_score_by_id(id)
+    #     return post_score
+
+    def edit_post_score(self, id):
         db = client[mongodb]
         result = db.postVotes.update_one(
             {"_id": ObjectId(id)},
             {
-                "$set": {
-                    "score": score.score,
-                    "upvoted_users": score.upvoted_users,
-                    "downvoted_users": score.downvoted_users,
+                "$inc": {
+                    "score": 1,
                 }
             },
         )
@@ -117,3 +129,15 @@ class ContentQueries:
         db = client[mongodb]
         result = db.postVotes.delete_one({"_id": ObjectId(id)})
         return "Vote Deleted"
+
+
+
+
+
+
+
+
+
+
+
+Message Randy Angel
