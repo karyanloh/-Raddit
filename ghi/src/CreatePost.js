@@ -11,12 +11,21 @@ let subraddits = [
   { label: "Miscellaneous", value: "Miscellaneous" },
 ];
 
+
 function CreatePostForm(props) {
+  const [isloading, setIsLoading] = useState(true);
+
   const { token, account } = useAuthContext();
   const navigate = useNavigate();
+  function Isloading() {
+    if (token != null) {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
-    if (!token) {
+    Isloading();
+    if ((!token) && (isloading ===false)){
       alert("Login Please");
       navigate("/login?redirect=/post/new");
     }

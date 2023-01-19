@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 let internalToken = null;
 let user_info = null;
 
-
 export function getToken() {
   return [internalToken, user_info];
 }
@@ -70,16 +69,14 @@ export function useToken() {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
     async function fetchToken() {
       let token1 = await getTokenInternal();
       let token = token1[0];
-      let account1 = await getTokenInternal()
+      let account1 = await getTokenInternal();
       let account = account1[1];
       setToken(token);
       setAccount(account);
-
     }
     if (!(token && account)) {
       fetchToken();
@@ -124,7 +121,9 @@ export function useToken() {
   }
 
   async function signup(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST || 'http://localhost:8000'}/api/accounts/`;
+    const url = `${
+      process.env.REACT_APP_SAMPLE_SERVICE_API_HOST || "http://localhost:8000"
+    }/api/accounts/`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
