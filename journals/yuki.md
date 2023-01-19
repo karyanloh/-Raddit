@@ -61,3 +61,9 @@ Today, I worked on:
 
 * I updated login form format and handel errors.
 * I added the navlink to choose subraddit.
+
+## January 18, 2023
+Today, I worked on:
+
+* I added some code in utils.js so that in the frontend we can get the user_id by importing the {account} from utils.js
+* I set up the caprover account.
