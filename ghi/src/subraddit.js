@@ -14,14 +14,16 @@ function SubRaddit() {
     getData();
   }, []);
 
+
+
   async function getData() {
     try {
       const postUrl = `http://localhost:8001/api/subraddit/${subraddit}`;
       const postResponse = await fetch(postUrl);
       const postData = await postResponse.json();
       setPost(postData.posts);
-      console.log("post", postData);
       setIsLoading(false);
+
     } catch (error) {
       console.error(error);
       setPost({ error: "Error fetching post" });

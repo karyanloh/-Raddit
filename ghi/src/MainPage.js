@@ -17,7 +17,8 @@ function MainPage() {
             const postResponse = await fetch(postUrl);
             const postData = await postResponse.json();
             setPost(postData.posts);
-            setIsLoading(false)
+            setIsLoading(false);
+
         } catch (error) {
             console.error(error);
             setPost({ error: 'Error fetching post' });

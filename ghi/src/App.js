@@ -27,10 +27,6 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<MainPage />} />
-            {/* <Route index element={<MainPage1 />} />
-              <Route index element={<MainPage2 />} />
-              <Route index element={<MainPage3 />} />
-              <Route index element={<MainPage4 />} /> */}
             <Route path="login" element={<LoginForm />} />
             <Route path="post">
               <Route index path="new" element={<CreatePostForm />} />
