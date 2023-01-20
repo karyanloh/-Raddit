@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useToken } from "./utils";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
+// import Construct from "./Construct.js";
+// import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import LoginForm from "./login.js";
 import MainPage from "./MainPage";
 import SignUpForm from "./SignUpForm";
 import Nav from "./Nav";
 import CreatePostForm from "./CreatePost";
-import PostDetail from "./postdetail"
-
+import PostDetail from "./postdetail";
+import SubRaddit from "./subraddit";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -27,19 +27,13 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<MainPage />} />
-            {/* <Route index element={<MainPage1 />} />
-              <Route index element={<MainPage2 />} />
-              <Route index element={<MainPage3 />} />
-              <Route index element={<MainPage4 />} /> */}
-            <Route
-              path="login"
-              element={<LoginForm />}
-            />
+            <Route path="login" element={<LoginForm />} />
             <Route path="post">
               <Route index path="new" element={<CreatePostForm />} />
               <Route path=":id" element={<PostDetail />} />
             </Route>
             <Route path="signup" element={<SignUpForm />} />
+            <Route path=":subraddit" element={<SubRaddit />} />
             {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>
@@ -52,25 +46,6 @@ export default App;
 // function App() {
 //   const [launch_info, setLaunchInfo] = useState([]);
 //   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     async function getData() {
-//       let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-//       console.log('fastapi url: ', url);
-//       let response = await fetch(url);
-//       console.log("------- hello? -------");
-//       let data = await response.json();
-
-//       if (response.ok) {
-//         console.log("got launch data!");
-//         setLaunchInfo(data.launch_details);
-//       } else {
-//         console.log("drat! something happened");
-//         setError(data.message);
-//       }
-//     }
-//     getData();
-//   }, [])
 
 //   return (
 //     <div>

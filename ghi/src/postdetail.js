@@ -27,6 +27,7 @@ function PostDetails() {
         try {
             const postUrl = `${api_url}post/${id}`;
             const postResponse = await fetch(postUrl);
+            console.log("Response", postResponse)
             const postData = await postResponse.json();
             setPost(postData);
             setDescription(postData.description)

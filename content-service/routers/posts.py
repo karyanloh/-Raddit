@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from content_queries import ContentQueries
 from auth import authenticator
-from model import PostIn, PostOutShort, PostOutDetail, EditPost
-
+from model import PostIn, PostOutShort, PostOutDetail, EditPost, PostsList, PostList
 router = APIRouter()
 
 
@@ -33,6 +32,12 @@ def get_post_short_by_id(
     content_queries: ContentQueries = Depends(),
 ):
     return content_queries.get_post_by_id(id)
+
+@router.get("/api/posts", response_model=PostList)
+def get_all_posts(
+    content_queries: ContentQueries = Depends()
+):
+    return content_queries.get_all_posts()
 
 
 @router.get("/api/post/{id}", response_model=PostOutDetail)
@@ -70,3 +75,12 @@ def update_post_by_id(
         return content_queries.edit_post(id, description)
     else:
         raise HTTPException(status_code=401, detail="not working")
+
+
+@router.get("/api/subraddit/{subraddit}", response_model=PostsList)
+def get_post_detail_by_subraddit(
+    subraddit: str,
+    content_queries: ContentQueries = Depends(),
+
+):
+    return content_queries.get_posts_by_subraddit(subraddit)

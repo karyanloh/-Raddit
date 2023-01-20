@@ -69,26 +69,56 @@ function Nav() {
               >
                 MySubRaddits
               </Link>
-              <ul className="dropdown-menu dropdown-menu-right">
+              <ul className="dropdown-menu">
                 <li>
-                  <Link className="dropdown-item text-dark" to="/music">
+                  <a
+                    className="dropdown-item"
+                    onClick={() => {
+                      window.location.href = "/Music";
+                    }}
+                  >
                     Music
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link className="dropdown-item text-dark" to="/movies">
+                  <a
+                    className="dropdown-item"
+                    onClick={() => {
+                      window.location.href = "/Movies";
+                    }}
+                  >
                     Movies
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link className="dropdown-item text-dark" to="/sports">
-                    Sports
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item text-dark" to="/tech">
+                  <a
+                    className="dropdown-item"
+                    onClick={() => {
+                      window.location.href = "/Tech";
+                    }}
+                  >
                     Technology
-                  </Link>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    onClick={() => {
+                      window.location.href = "/Sports";
+                    }}
+                  >
+                    Sports
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    onClick={() => {
+                      window.location.href = "/Miscellaneous";
+                    }}
+                  >
+                    Miscellaneous
+                  </a>
                 </li>
               </ul>
             </li>
