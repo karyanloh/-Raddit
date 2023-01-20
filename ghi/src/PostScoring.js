@@ -17,7 +17,7 @@ function PostScoring(props) {
         }
         const scoreEditResponse = await fetch(url, fetchConfig);
         }
-        
+
     async function handleDownArrowClick() {
         const url=`http://localhost:8001/api/postScore/downvote/${post_id}`;
             const fetchConfig ={
@@ -41,7 +41,7 @@ function PostScoring(props) {
                 >
                     ^
                 </button>
-                <li className="list-group-item">{score}</li>
+
                 <button
                     onClick={() => handleDownArrowClick()}
                     type="button"

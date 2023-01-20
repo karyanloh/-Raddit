@@ -103,6 +103,33 @@ function PostDetails() {
         }
     }
 
+    async function handleUpArrowClick() {
+        const url=`http://localhost:8001/api/postScore/upvote/${id}`;
+            const fetchConfig ={
+                method: "put",
+                headers: {
+                    "Content-Type": "application/json",
+            }
+        }
+        const scoreEditResponse = await fetch(url, fetchConfig);
+        window.location.reload()
+        }
+
+
+        async function handleDownArrowClick() {
+        const url=`http://localhost:8001/api/postScore/downvote/${id}`;
+            const fetchConfig ={
+                method: "put",
+                headers: {
+                    "Content-Type": "application/json",
+            }
+
+        }
+        const scoreEditResponse = await fetch(url, fetchConfig);
+        window.location.reload()
+        }
+
+
     if (isLoading) {
         return <div className="spinner-border" animation="border" variant="primary" />;
     }
@@ -151,12 +178,21 @@ function PostDetails() {
                         </p>
                     </div>
                     <div>
-                        <button className="btn btn-secondary mr-2">
-                            Upvote
-                        </button>
-                        <button className="btn btn-secondary">
-                            Downvote
-                        </button>
+                <button
+                    onClick={() => handleUpArrowClick()}
+                    type="button"
+                    className="list-group-item list-group-item-primary list-group-item-action"
+                >
+                    ^
+                </button>
+
+                <button
+                    onClick={() => handleDownArrowClick()}
+                    type="button"
+                    className="list-group-item list-group-item-danger list-group-item-action"
+                >
+                    v
+                </button>
                     </div>
                 </div>
             </div>
@@ -209,12 +245,21 @@ function PostDetails() {
                         </p>
                     </div>
                     <div>
-                        <button className="btn btn-secondary mr-2">
-                            Upvote
-                        </button>
-                        <button className="btn btn-secondary">
-                            Downvote
-                        </button>
+                <button
+                    onClick={() => handleUpArrowClick()}
+                    type="button"
+                    className="list-group-item list-group-item-primary list-group-item-action"
+                >
+                    ^
+                </button>
+
+                <button
+                    onClick={() => handleDownArrowClick()}
+                    type="button"
+                    className="list-group-item list-group-item-danger list-group-item-action"
+                >
+                    v
+                </button>
                     </div>
                 </div>
             </div>
