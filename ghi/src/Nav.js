@@ -72,7 +72,7 @@ function Nav() {
               <ul className="dropdown-menu">
                 <li>
                   <a
-                    class="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Music";
                     }}
@@ -82,7 +82,7 @@ function Nav() {
                 </li>
                 <li>
                   <a
-                    class="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Movies";
                     }}
@@ -92,7 +92,7 @@ function Nav() {
                 </li>
                 <li>
                   <a
-                    class="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Tech";
                     }}
@@ -102,7 +102,7 @@ function Nav() {
                 </li>
                 <li>
                   <a
-                    class="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Sports";
                     }}
@@ -112,9 +112,9 @@ function Nav() {
                 </li>
                 <li>
                   <a
-                    class="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => {
-                    window.location.href = "/Miscellaneous";
+                      window.location.href = "/Miscellaneous";
                     }}
                   >
                     Miscellaneous
