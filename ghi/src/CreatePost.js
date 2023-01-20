@@ -22,7 +22,7 @@ function CreatePostForm(props) {
   //     setIsLoading(false);
   //   }
   // }
-  console.log("token",token)
+  // console.log("token",token)
   useEffect(() => {
     // Isloading();
     if (token ===undefined){

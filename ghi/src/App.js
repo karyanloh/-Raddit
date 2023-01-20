@@ -34,7 +34,6 @@ function App() {
             </Route>
             <Route path="signup" element={<SignUpForm />} />
             <Route path=":subraddit" element={<SubRaddit />} />
-            {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>
       </AuthProvider>
