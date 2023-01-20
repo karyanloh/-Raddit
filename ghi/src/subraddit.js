@@ -15,7 +15,6 @@ function SubRaddit() {
   }, []);
 
 
-
   async function getData() {
     try {
       const postUrl = `http://localhost:8001/api/subraddit/${subraddit}`;
