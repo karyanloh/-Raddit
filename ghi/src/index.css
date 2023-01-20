@@ -4,9 +4,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: verdana, arial, helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -40,13 +38,12 @@ code {
 }
 
 .nav-bg {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: #cee3f8;
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
   height: 10vh;
 }
 
-@keyframes gradient {
+/* @keyframes gradient {
   0% {
     background-position: 0% 50%;
   }
@@ -56,12 +53,31 @@ code {
   100% {
     background-position: 0% 50%;
   }
+} */
+.container {
+  display: inline-block;
+}
+.card-group {
+  margin-bottom: 8px;
+  padding-left: 3px;
+  /* display: inline-block; */
+}
+.card-title {
+  color: #0000ff;
+  font-size: 16px;
+  overflow: hidden;
+  margin-left: 1rem;
+}
+.card-link {
+  color: #0000ff;
+}
+/* .card-group .post {
+  flex: 1;
 }
 
-.post-scoring-card {
-  width: 7rem;
-}
-
-.post-scoring-card {
-  width: 7rem;
-}
+.card-group .post:first-child {
+  margin-right: 20px;
+} */
+/* .btn-group-vertical {
+  float: left;
+} */
