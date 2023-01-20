@@ -39,7 +39,7 @@ function MainPage() {
 
         {post.map((p) => {
           return (
-            <div className="card-body" key={p.id}>
+            <div className="d-block text-blue mb-8" key={p.id}>
               <div>
                 <div className="card">
                   <div className="btn-group-vertical mb-3 ">
