@@ -10,6 +10,7 @@ import SignUpForm from "./SignUpForm";
 import Nav from "./Nav";
 import CreatePostForm from "./CreatePost";
 import PostDetail from "./postdetail";
+import SubRaddit from "./subraddit";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -25,22 +26,14 @@ function App() {
         <Nav />
         <div className="container">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <MainPage />
-              }
-            />
-            {/* <Route index element={<MainPage1 />} />
-              <Route index element={<MainPage2 />} />
-              <Route index element={<MainPage3 />} />
-              <Route index element={<MainPage4 />} /> */}
+            <Route path="/" element={<MainPage />} />
             <Route path="login" element={<LoginForm />} />
             <Route path="post">
               <Route index path="new" element={<CreatePostForm />} />
               <Route path=":id" element={<PostDetail />} />
             </Route>
             <Route path="signup" element={<SignUpForm />} />
+            <Route path=":subraddit" element={<SubRaddit />} />
             {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>

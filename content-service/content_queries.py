@@ -51,8 +51,17 @@ class ContentQueries:
         post = self.get_post_by_id(id)
         return post
 
-    # comments
+# subraddits
+    def get_posts_by_subraddit(self, subraddit):
+        db = client[mongodb]
+        results = db.posts.find({"subraddit": subraddit})
+        results = list(results)
+        for i in range(len(results)):
+            results[i]["id"] = str(results[i]["_id"])  # ObjectId
+        real_results = {"posts": results}
+        return real_results
 
+# comments
     def create_comment(self, new_comment):
         db = client[mongodb]
         result = db.comments.insert_one(new_comment.dict())
