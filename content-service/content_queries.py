@@ -27,7 +27,7 @@ class ContentQueries:
         result = db.posts.find({})
         posts = list(result)
         for i in range(len(posts)):
-            posts[i]['id'] = str(posts[i]['_id'])
+            posts[i]["id"] = str(posts[i]["_id"])
         results = {"posts": posts}
         return results
 
@@ -51,7 +51,7 @@ class ContentQueries:
         post = self.get_post_by_id(id)
         return post
 
-# subraddits
+    # subraddits
     def get_posts_by_subraddit(self, subraddit):
         db = client[mongodb]
         results = db.posts.find({"subraddit": subraddit})
@@ -61,7 +61,7 @@ class ContentQueries:
         real_results = {"posts": results}
         return real_results
 
-# comments
+    # comments
     def create_comment(self, new_comment):
         db = client[mongodb]
         result = db.comments.insert_one(new_comment.dict())
