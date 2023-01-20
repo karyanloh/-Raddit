@@ -25,6 +25,18 @@ function PostScoring(props) {
         setScore(score-1)
         setDownvoteUsers(downvoteUsers.concat(props.currentUserId))
     }
+    // function handleUpArrowClick() {
+    //     // TODO: PUT request to persist change in score(upvoteUsers array) when uparrow clicked
+    //     setScore(score+1)
+    //     setUpvoteUsers(upvoteUsers.concat(props.currentUserId))
+    // }
+
+    // function handleDownArrowClick() {
+    //     // TODO: PUT request to persist change in score(downvoteUsers array) when downarrow clicked
+    //     setScore(score-1)
+    //     setDownvoteUsers(downvoteUsers.concat(props.currentUserId))
+    // }
+}
 
     return (
         <div className="card post-scoring-card" >
@@ -52,4 +64,4 @@ function PostScoring(props) {
         </div>
     )
 }
-export default PostScoring
+export default PostScoring;
