@@ -18,6 +18,9 @@ code {
     monospace;
 }
 
+.post-scoring-card {
+  width: 7rem;
+}
 .btn-pink-moon {
     background: #ec008c;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #fc6767, #ec008c);  /* Chrome 10-25, Safari 5.1-6 */
@@ -27,6 +30,11 @@ code {
 }
 
 
+
 .loginfont {
   font-family: 'Roboto Mono', monospace;
+}
+
+.post-scoring-card {
+  width: 7rem;
 }
