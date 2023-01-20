@@ -13,19 +13,19 @@ let subraddits = [
 
 
 function CreatePostForm(props) {
-  const [isloading, setIsLoading] = useState(true);
+  // const [isloading, setIsLoading] = useState(true);
 
   const { token, account } = useAuthContext();
   const navigate = useNavigate();
-  function Isloading() {
-    if (token != null) {
-      setIsLoading(false);
-    }
-  }
-
+  // function Isloading() {
+  //   if (token != null) {
+  //     setIsLoading(false);
+  //   }
+  // }
+  console.log("token",token)
   useEffect(() => {
-    Isloading();
-    if ((!token) && (isloading ===false)){
+    // Isloading();
+    if (token ===undefined){
       alert("Login Please");
       navigate("/login?redirect=/post/new");
     }
