@@ -9,8 +9,8 @@ lint-test-job:
   stage: test
   script:
     - pip install flake8
-    - flake8 user_service
-    - flake8 content_service
+    - flake8 user-service
+    - flake8 content-service
 
 # Run the unit tests
 # api-unit-test-job:
