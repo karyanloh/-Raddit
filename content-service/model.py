@@ -57,7 +57,7 @@ class PostScoreIn(BaseModel):
 
 class PostScoreOut(BaseModel):
     post_id: str
-    score: str
+    score: int
 
 
 class EditPostScore(BaseModel):
@@ -75,6 +75,6 @@ class commentList(BaseModel):
 class PostsList(BaseModel):
     posts: list[PostOutShort]
 
-    
+
 class PostList(BaseModel):
     posts: list[PostOutDetail]

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./utils";
+import { useAuthContext } from "./utils";
 
 function MainPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,12 +31,35 @@ function MainPage() {
   } else {
     return (
       <>
-        {/* <div className="px-4 py-5 my-5 text-center">
+>>>>>>>>> Temporary merge branch 2
+        <div className="px-4 py-5 my-5 text-center">
           <h1 className="display-5 fw-bold">Raddit</h1>
           <div className="col-lg-6 mx-auto">
             <p className="lead mb-4">All things Rad(or bad) Show Raddits</p>
+<<<<<<<<< Temporary merge branch 1
+            <ul>
+              {mockedPostListForScoreFeat.map((post) => { return (
+                <li key={post.post_id}>
+                  <h3>
+                    Post ID: {post.post_id}
+                  </h3>
+                  <PostScoring
+                    postId={post.post_id}
+                    score={post.score}
+                    upvoteUsers={post.upvote_users}
+                    downvoteUsers={post.downvote_users}
+                    currentUserId={mockedCurrentUserIdForScoreFeat}
+                  />
+                </li>
+              )})}
+            </ul>
           </div>
-        </div> */}
+        </div>
+      </>
+    );
+=========
+          </div>
+        </div>
 
         {post.map((p) => {
           return (
@@ -67,8 +91,11 @@ function MainPage() {
         })}
 
       </>
-    );
-  }
+      {/* <div>"test2":{account}</div> */}
+    </>
+  );
+      }
+>>>>>>>>> Temporary merge branch 2
 }
 
 export default MainPage;
