@@ -17,13 +17,14 @@ function PostDetails() {
     const navigate = useNavigate();
     const { token, account } = useAuthContext();
     const [commentBody, setCommentBody] = useState("")
+    const [toggle, setToggle] = useState(false)
     // const [postId, setPostId] = useState("")
 
     useEffect(() => {
         fetchPost();
         fetchScore();
         fetchComments();
-    }, [id]);
+    }, [id, toggle]);
 
     async function fetchPost() {
         try {
@@ -135,7 +136,7 @@ function PostDetails() {
 
 
         async function comment(data) {
-            data.preventDefault();
+            // data.preventDefault();
             const url =`http://localhost:8001/api/comments`
 
             const fetchConfig = {
@@ -149,7 +150,7 @@ function PostDetails() {
             const response = await fetch(url, fetchConfig);
             if(response.ok) {
                 const addComment = await response.json();
-                setComments(addComment);
+                setToggle(addComment);
                 setIsEditing(false);
             } else {
                 console.error('Error making comment')
