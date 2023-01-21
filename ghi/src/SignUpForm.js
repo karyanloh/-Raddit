@@ -8,7 +8,7 @@ function SignUpForm(props) {
   const navigate = useNavigate();
   async function SignUp(e) {
     e.preventDefault();
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/users`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/users`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
