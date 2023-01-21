@@ -130,6 +130,34 @@ function PostDetails() {
         window.location.reload()
         }
 
+        const [commentBody, setCommentBody] = useState("")
+        const [postId, setPostId] = useState("")
+
+        async function comment(data) {
+            const url =`http://localhost:8001/api/comments`
+
+            const fetchConfig = {
+                method: "post",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const response = await fetch(url, fetchConfig);
+            alert("Comment success");
+        }
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+
+            comment({
+                body: commentBody,
+                user_id: account,
+                post_id: postId,
+            });
+        }
+
 
     if (isLoading) {
         return <div className="spinner-border" animation="border" variant="primary" />;
@@ -209,6 +237,24 @@ function PostDetails() {
                         </button>
                     </div>
                     <div>
+                        <div>
+                            <h3 style={{ color: "red" }}>Add a comment !</h3>
+                            <form onSubmit={handleSubmit}>
+                                <div className="form-group mb-4 ">
+                                    <label htmlFor="exampleFormControlTextarea1"></label>
+                                    <textarea
+                                    type="text"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    className="form-control"
+                                    id="exampleFormControlTextarea1"
+                                    rows="2"
+                                    placeholder="Description"
+                                    />
+                                </div>
+                                <button className="btn btn-outline-danger">Add Comment</button>
+                            </form>
+                        </div>
                         <p className="card-subtitle mb-2 text-muted">
                             {comments[0].length} comments
                         </p>
@@ -270,6 +316,24 @@ function PostDetails() {
             <div className="card-footer">
                 <div className="d-flex justify-content-between">
                     <div>
+                        <div>
+                            <h3 style={{ color: "red" }}>Add a comment !</h3>
+                            <form onSubmit={handleSubmit}>
+                                <div className="form-group mb-4 ">
+                                    <label htmlFor="exampleFormControlTextarea1"></label>
+                                    <textarea
+                                    type="text"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    className="form-control"
+                                    id="exampleFormControlTextarea1"
+                                    rows="10"
+                                    placeholder="Description"
+                                    />
+                                </div>
+                                <button className="btn btn-outline-danger">Add Comment</button>
+                            </form>
+                        </div>
                         <p className="card-subtitle mb-2 text-muted">
                             {comments[0].length} comments
                         </p>
@@ -278,16 +342,16 @@ function PostDetails() {
             </div>
         </div>
         {comments[0].map((comment) => {
-                                return (
-                                    <div className="mt-2"  key={comment.id}>
-                                        <div className="card" >
-                                            <div className="card-header" >
-                                                <p className="card-text">{comment.body}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+            return (
+                <div className="mt-2"  key={comment.id}>
+                    <div className="card" >
+                        <div className="card-header" >
+                            <p className="card-text">{comment.body}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        })}
 
 
     </div>
@@ -321,16 +385,16 @@ function PostDetails() {
                 </div>
             </div>
             {comments[0].map((comment) => {
-                                    return (
-                                        <div className="mt-2"  key={comment.id}>
-                                            <div className="card" >
-                                                <div className="card-header" >
-                                                    <p className="card-text">{comment.body}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+                return (
+                    <div className="mt-2"  key={comment.id}>
+                        <div className="card" >
+                            <div className="card-header" >
+                                <p className="card-text">{comment.body}</p>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
 
 
         </div>
