@@ -47,10 +47,10 @@ function SubRaddit() {
                 <div>
                   <div className="card">
                     <h5 className="card-title">{p.title}</h5>
-                    <a href="#">
+                    <a href="/#">
                       <p className="card-text">{p.description}</p>
                     </a>
-                    <a href="#" className="card-link">
+                    <a href="/#" className="card-link">
                       Link to comments/post details
                     </a>
                   </div>
@@ -62,10 +62,10 @@ function SubRaddit() {
           <div className="">
             <h5 className="">Post title</h5>
             <p className="card-text">Post description</p>
-            <a href="#" className="card-link">
+            <a href="/#" className="card-link">
               Link to post detail
             </a>
-            <a href="#" className="card-link">
+            <a href="/#" className="card-link">
               Link to comments/post details
             </a>
             <div className="btn-group-vertical mb-3">
