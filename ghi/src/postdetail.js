@@ -16,6 +16,8 @@ function PostDetails() {
     }
     const navigate = useNavigate();
     const { token, account } = useAuthContext();
+    const [commentBody, setCommentBody] = useState("")
+    const [postId, setPostId] = useState("")
 
     useEffect(() => {
         fetchPost();
@@ -130,8 +132,7 @@ function PostDetails() {
         window.location.reload()
         }
 
-        const [commentBody, setCommentBody] = useState("")
-        const [postId, setPostId] = useState("")
+
 
         async function comment(data) {
             const url =`http://localhost:8001/api/comments`
@@ -154,7 +155,7 @@ function PostDetails() {
             comment({
                 body: commentBody,
                 user_id: account,
-                post_id: postId,
+                post_id: id,
             });
         }
 
@@ -244,12 +245,12 @@ function PostDetails() {
                                     <label htmlFor="exampleFormControlTextarea1"></label>
                                     <textarea
                                     type="text"
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
+                                    value={commentBody}
+                                    onChange={(e) => setCommentBody(e.target.value)}
                                     className="form-control"
                                     id="exampleFormControlTextarea1"
                                     rows="2"
-                                    placeholder="Description"
+                                    placeholder="Comment"
                                     />
                                 </div>
                                 <button className="btn btn-outline-danger">Add Comment</button>
@@ -324,7 +325,7 @@ function PostDetails() {
                                     <textarea
                                     type="text"
                                     value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
+                                    onChange={(e) => setCommentBody(e.target.value)}
                                     className="form-control"
                                     id="exampleFormControlTextarea1"
                                     rows="10"
