@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
@@ -17,17 +17,7 @@ function PostDetails() {
     const navigate = useNavigate();
     const { token, account } = useAuthContext();
 
-    // Wrap functions in useCallback
-    const fetchPostCallback = useCallback(fetchPost, [id, [fetchComments,fetchScore], id]);
-    const fetchScoreCallback = useCallback(fetchScore, [id]);
-    const fetchCommentsCallback = useCallback(fetchComments, [id]);
-
     useEffect(() => {
-        fetchPostCallback();
-        fetchScoreCallback();
-        fetchCommentsCallback();
-    }, [id, fetchCommentsCallback, fetchPostCallback, fetchScoreCallback]);
-
     async function fetchPost() {
         try {
             const postUrl = `${api_url}post/${id}`;
@@ -69,7 +59,10 @@ function PostDetails() {
             setComments({ error: 'Error fetching comments' });
         }
     }
+    fetchPost()
+    }, [id, fetchComments, fetchPost, fetchScore]);
 
+    
 
     async function put(e) {
         e.preventDefault()
