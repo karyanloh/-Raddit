@@ -28,7 +28,7 @@ def create_post(
             "upvoted_users": [],
             "downvoted_users": [],
         }
-        newer_score = content_queries.create_post_score(submit)
+        content_queries.create_post_score(submit)
         return result
     else:
         raise HTTPException(status_code=401, detail="not working")

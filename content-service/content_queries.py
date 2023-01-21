@@ -40,12 +40,12 @@ class ContentQueries:
     def delete_post(self, id):
         db = client[mongodb]
         result = db.posts.delete_one({"_id": ObjectId(id)})
-        return "Post Deleted"
+        return result
 
     def edit_post(self, id, description):
         db = client[mongodb]
         a = description
-        result = db.posts.update_one(
+        db.posts.update_one(
             {"_id": ObjectId(id)}, {"$set": {"description": a.description}}
         )
         post = self.get_post_by_id(id)
@@ -85,12 +85,12 @@ class ContentQueries:
 
     def delete_comment(self, id):
         db = client[mongodb]
-        result = db.comments.delete_one({"_id": ObjectId(id)})
+        db.comments.delete_one({"_id": ObjectId(id)})
         return "Comment Deleted"
 
     def edit_comment(self, id, body):
         db = client[mongodb]
-        result = db.comments.update_one(
+        db.comments.update_one(
             {"_id": ObjectId(id)}, {"$set": {"body": body.body}}
         )
         comment = self.get_comment_by_id(id)
@@ -118,7 +118,7 @@ class ContentQueries:
 
     def increase_post_score(self, post_id):
         db = client[mongodb]
-        result = db.postVotes.update_one(
+        db.postVotes.update_one(
             {"post_id": post_id},
             {
                 "$inc": {
@@ -131,7 +131,7 @@ class ContentQueries:
 
     def decrease_post_score(self, post_id):
         db = client[mongodb]
-        result = db.postVotes.update_one(
+        db.postVotes.update_one(
             {"post_id": post_id},
             {
                 "$inc": {
@@ -144,5 +144,5 @@ class ContentQueries:
 
     def delete_post_score(self, id):
         db = client[mongodb]
-        result = db.postVotes.delete_one({"_id": ObjectId(id)})
+        db.postVotes.delete_one({"_id": ObjectId(id)})
         return "Vote Deleted"
