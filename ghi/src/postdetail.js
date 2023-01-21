@@ -23,7 +23,7 @@ function PostDetails() {
         fetchPost();
         fetchScore();
         fetchComments();
-    }, [id]);
+    }, [id ]);
 
     async function fetchPost() {
         try {
@@ -146,8 +146,15 @@ function PostDetails() {
                 },
             };
             const response = await fetch(url, fetchConfig);
-            alert("Comment success");
-        }
+            if(response.ok) {
+                const addComment = await response.json();
+                setComments(addComment);
+                setIsEditing(false);
+            } else {
+                console.error('Error making comment')
+            }
+                alert("Comment success");
+            }
 
         async function handleSubmit(e) {
             e.preventDefault();
@@ -265,16 +272,16 @@ function PostDetails() {
         </div>
 
         {comments[0].map((comment) => {
-                                return (
-                                    <div className="mt-2"  key={comment.id}>
-                                        <div className="card" >
-                                            <div className="card-header" >
-                                                <p className="card-text">{comment.body}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+            return (
+                <div className="mt-2"  key={comment.id}>
+                    <div className="card" >
+                        <div className="card-header" >
+                            <p className="card-text">{comment.body}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        })}
 
 
     </div>
