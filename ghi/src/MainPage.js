@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./index.css";
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
 
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +12,7 @@ function MainPage() {
 
   async function getData() {
     try {
-      const postUrl = `http://localhost:8001/api/posts/`;
+      const postUrl = `${api_url}api/posts/`;
       const postResponse = await fetch(postUrl);
       const postData = await postResponse.json();
       setPost(postData.posts);

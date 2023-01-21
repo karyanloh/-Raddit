@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "./utils";
 import { useNavigate } from "react-router-dom";
 
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
+
 // subraddit
 let subraddits = [
   { label: "Tech", value: "Tech" },
@@ -30,7 +32,7 @@ function CreatePostForm() {
   const [subraddit, setSubraddit] = useState("⬇️ Select a subraddit ⬇️");
 
   async function post(data) {
-    const url = `http://localhost:8001/api/posts`;
+    const url = `${api_url}api/posts`;
 
     const fetchConfig = {
       method: "post",

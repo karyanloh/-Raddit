@@ -1,14 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
 
 function SubRaddit() {
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState({});
   const {subraddit} = useParams();
-  
+
   const getData = useCallback(async () => {
     try {
-      const postUrl = `http://localhost:8001/api/subraddit/${subraddit}`;
+      const postUrl = `${api_url}api/subraddit/${subraddit}`;
       const postResponse = await fetch(postUrl);
       const postData = await postResponse.json();
       setPost(postData.posts);
@@ -22,8 +23,8 @@ function SubRaddit() {
   useEffect(() => {
     getData();
   }, [getData]);
-  
-  
+
+
   if (isLoading) {
     return (
       <div className="spinner-border" animation="border" variant="primary" />
