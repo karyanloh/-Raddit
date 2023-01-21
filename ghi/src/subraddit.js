@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-
 
 function SubRaddit() {
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState({});
   const {subraddit} = useParams();
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
-
-
-  async function getData() {
+  
+  const getData = useCallback(async () => {
     try {
       const postUrl = `http://localhost:8001/api/subraddit/${subraddit}`;
       const postResponse = await fetch(postUrl);
@@ -24,9 +18,12 @@ function SubRaddit() {
       console.error(error);
       setPost({ error: "Error fetching post" });
     }
-  }
-
-
+  }, [subraddit]);
+  useEffect(() => {
+    getData();
+  }, [getData]);
+  
+  
   if (isLoading) {
     return (
       <div className="spinner-border" animation="border" variant="primary" />
