@@ -12,24 +12,18 @@ let subraddits = [
 ];
 
 
-function CreatePostForm(props) {
-  const [isloading, setIsLoading] = useState(true);
+function CreatePostForm() {
 
   const { token, account } = useAuthContext();
   const navigate = useNavigate();
-  function Isloading() {
-    if (token != null) {
-      setIsLoading(false);
-    }
-  }
+
 
   useEffect(() => {
-    Isloading();
-    if ((!token) && (isloading ===false)){
+    if (token === undefined){
       alert("Login Please");
       navigate("/login?redirect=/post/new");
     }
-  }, [token, isloading, navigate, Isloading]);
+  }, [token, navigate]);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
