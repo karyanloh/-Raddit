@@ -18,31 +18,23 @@ function PostDetails() {
     const { token, account } = useAuthContext();
 
     useEffect(() => {
-    async function fetchPost() {
+    async function fetchPostandScore() {
         try {
             const postUrl = `${api_url}post/${id}`;
             const postResponse = await fetch(postUrl);
-            console.log("Response", postResponse)
             const postData = await postResponse.json();
-            setPost(postData);
-            setDescription(postData.description)
-            fetchScore(postData);
-            fetchComments();
-        } catch (error) {
-            console.error(error);
-            setPost({ error: 'Error fetching post' });
-        }
-    }
 
-    async function fetchScore(postData) {
-        try {
             const scoreUrl = `${api_url}post/postScore/${id}`;
             const scoreResponse = await fetch(scoreUrl);
             const scoreData = await scoreResponse.json();
+
+            setPost(postData);
             setPost({ ...postData, score: scoreData.score });
+            setDescription(postData.description)
+            setIsLoading(false);
         } catch (error) {
             console.error(error);
-            setPost({ error: 'Error fetching score' });
+            setPost({ error: 'Error fetching post' });
         }
     }
 
@@ -53,16 +45,16 @@ function PostDetails() {
             let commentData = await commentsResponse.json();
             commentData = (Object.values(commentData))
             setComments(commentData);
-            setIsLoading(false);
         } catch (error) {
             console.error(error);
             setComments({ error: 'Error fetching comments' });
         }
     }
-    fetchPost()
-    }, [id, fetchComments, fetchPost, fetchScore]);
+    fetchPostandScore()
+    fetchComments()
+    }, [id]);
 
-    
+
 
     async function put(e) {
         e.preventDefault()
