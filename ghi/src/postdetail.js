@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
 
 const api_url = 'http://localhost:8001/api/'
+// const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
 function PostDetails() {
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState(null);
@@ -96,7 +97,7 @@ function PostDetails() {
     }
 
     async function handleUpArrowClick() {
-        const url=`http://localhost:8001/api/postScore/upvote/${id}`;
+        const url=`${api_url}/postScore/upvote/${id}`;
             const fetchConfig ={
                 method: "put",
                 headers: {
@@ -109,7 +110,7 @@ function PostDetails() {
 
 
         async function handleDownArrowClick() {
-        const url=`http://localhost:8001/api/postScore/downvote/${id}`;
+        const url=`${api_url}/postScore/downvote/${id}`;
             const fetchConfig ={
                 method: "put",
                 headers: {
