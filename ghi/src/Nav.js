@@ -70,54 +70,54 @@ function Nav() {
               </Link>
               <ul className="dropdown-menu">
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Music";
                     }}
                   >
                     Music
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Movies";
                     }}
                   >
                     Movies
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Tech";
                     }}
                   >
                     Technology
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Sports";
                     }}
                   >
                     Sports
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Miscellaneous";
                     }}
                   >
                     Miscellaneous
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </li>
