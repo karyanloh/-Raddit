@@ -4,7 +4,8 @@ import raddit from "./raddit_new.png";
 import { useToken } from "./utils";
 
 function Nav() {
-  const [token, login, logout] = useToken();
+  const [token, Login, logout] = useToken();
+  console.log(Login)
   return (
     <>
       <nav className="nav-bg h-18 p-3 mb-2 navbar navbar-expand-lg navbar-dark text-dark">

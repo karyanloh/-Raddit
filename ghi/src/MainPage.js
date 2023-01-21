@@ -3,9 +3,7 @@ import { useAuthContext } from "./utils";
 import "./index.css";
 
 function MainPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { token, account } = useAuthContext();
   const [post, setPost] = useState({});
 
   useEffect(() => {

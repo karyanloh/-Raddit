@@ -21,7 +21,7 @@ function PostDetails() {
         fetchPost();
         fetchScore();
         fetchComments();
-    }, [id]);
+    }, [id, fetchComments, fetchPost, fetchScore]);
 
     async function fetchPost() {
         try {
@@ -112,7 +112,7 @@ function PostDetails() {
                     "Content-Type": "application/json",
             }
         }
-        const scoreEditResponse = await fetch(url, fetchConfig);
+        await fetch(url, fetchConfig);
         window.location.reload()
         }
 
@@ -126,7 +126,7 @@ function PostDetails() {
             }
 
         }
-        const scoreEditResponse = await fetch(url, fetchConfig);
+        await fetch(url, fetchConfig);
         window.location.reload()
         }
 
@@ -166,7 +166,7 @@ function PostDetails() {
         return <div>{post.error}</div>;
     }
 
-    if (token && (account == post.user_id)) {
+    if (token && (account === post.user_id)) {
        return (
     <div>
         <div className="card">

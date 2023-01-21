@@ -29,7 +29,7 @@ function CreatePostForm(props) {
       alert("Login Please");
       navigate("/login?redirect=/post/new");
     }
-  }, [token]);
+  }, [token, isloading, navigate, Isloading]);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -46,7 +46,7 @@ function CreatePostForm(props) {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await fetch(url, fetchConfig);
+    await fetch(url, fetchConfig);
     alert("Post success");
     navigate("/");
   }
