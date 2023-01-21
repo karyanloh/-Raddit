@@ -17,13 +17,13 @@ function PostDetails() {
     const navigate = useNavigate();
     const { token, account } = useAuthContext();
     const [commentBody, setCommentBody] = useState("")
-    const [postId, setPostId] = useState("")
+    // const [postId, setPostId] = useState("")
 
     useEffect(() => {
         fetchPost();
         fetchScore();
         fetchComments();
-    }, [id ]);
+    }, [id]);
 
     async function fetchPost() {
         try {
@@ -135,6 +135,7 @@ function PostDetails() {
 
 
         async function comment(data) {
+            data.preventDefault();
             const url =`http://localhost:8001/api/comments`
 
             const fetchConfig = {
