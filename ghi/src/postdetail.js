@@ -18,7 +18,7 @@ function PostDetails() {
     const { token, account } = useAuthContext();
 
     // Wrap functions in useCallback
-    const fetchPostCallback = useCallback(fetchPost, fetchScore, fetchComments, [id]);
+    const fetchPostCallback = useCallback(fetchPost, [id, [fetchComments,fetchScore], id]);
     const fetchScoreCallback = useCallback(fetchScore, [id]);
     const fetchCommentsCallback = useCallback(fetchComments, [id]);
 
