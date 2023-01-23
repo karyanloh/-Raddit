@@ -32,7 +32,9 @@ function App() {
               <Route path=":id" element={<PostDetail />} />
             </Route>
             <Route path="signup" element={<SignUpForm />} />
-            <Route path=":subraddit" element={<SubRaddit />} />
+            <Route path="subraddit">
+              <Route path=":subraddit" element={<SubRaddit />} />
+            </Route>
             {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>
