@@ -1,7 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from content_queries import ContentQueries
 from auth import authenticator
-from model import PostIn, PostOutShort, PostOutDetail, EditPost, PostsList, PostList
+from model import (
+    PostIn,
+    PostOutShort,
+    PostOutDetail,
+    EditPost,
+    PostsList,
+    PostList,
+)
+
 router = APIRouter()
 
 
@@ -20,7 +28,7 @@ def create_post(
             "upvoted_users": [],
             "downvoted_users": [],
         }
-        newer_score = content_queries.create_post_score(submit)
+        content_queries.create_post_score(submit)
         return result
     else:
         raise HTTPException(status_code=401, detail="not working")
@@ -33,10 +41,9 @@ def get_post_short_by_id(
 ):
     return content_queries.get_post_by_id(id)
 
+
 @router.get("/api/posts", response_model=PostList)
-def get_all_posts(
-    content_queries: ContentQueries = Depends()
-):
+def get_all_posts(content_queries: ContentQueries = Depends()):
     return content_queries.get_all_posts()
 
 
@@ -81,6 +88,5 @@ def update_post_by_id(
 def get_post_detail_by_subraddit(
     subraddit: str,
     content_queries: ContentQueries = Depends(),
-
 ):
     return content_queries.get_posts_by_subraddit(subraddit)

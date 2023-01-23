@@ -4,7 +4,8 @@ import raddit from "./raddit_new.png";
 import { useToken } from "./utils";
 
 function Nav() {
-  const [token, login, logout] = useToken();
+  const [token, Login, logout] = useToken();
+  console.log(Login)
   return (
     <>
       <nav className="nav-bg h-18 p-3 mb-2 navbar navbar-expand-lg navbar-dark text-dark">
@@ -69,54 +70,54 @@ function Nav() {
               </Link>
               <ul className="dropdown-menu">
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Music";
                     }}
                   >
                     Music
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Movies";
                     }}
                   >
                     Movies
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Tech";
                     }}
                   >
                     Technology
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Sports";
                     }}
                   >
                     Sports
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Miscellaneous";
                     }}
                   >
                     Miscellaneous
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </li>
