@@ -78,7 +78,6 @@ function MainPage() {
         {displayArr.map((p) => {
           return (
             <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
-              {/* <div className="card"> */}
               <div className="btn-group-vertical mb-3 ">
                 <button
                   type="button"
@@ -101,7 +100,9 @@ function MainPage() {
             </div>
           );
         })}
-        <button onClick={handleLoadMore}>Load more</button>
+        {displayArr.length < post.length ? (
+          <button onClick={handleLoadMore}>Load more</button>
+        ) : null}
       </>
     );
   }

@@ -12,17 +12,17 @@ function Nav() {
         <div className="container-fluid ">
           <img src={raddit} alt="Logo" className="pr-2" />
           <h1 className="text-black">raddit</h1>
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          {/* <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item ms-auto">
               {!token && (
-                <NavLink className="nav-link text-white" to="/signup">
+                <NavLink className="nav-link text-dark" to="/signup">
                   SignUp
                 </NavLink>
               )}
             </li>
             <li className="nav-item">
               {!token && (
-                <NavLink className="nav-link text-white" to="/login">
+                <NavLink className="nav-link text-dark" to="/login">
                   Login
                 </NavLink>
               )}
@@ -30,23 +30,23 @@ function Nav() {
 
             {/* TODO: hide logout if not logged in */}
 
-            <li className="nav-item">
-              {token && (
-                <span
-                  onClick={() => {
-                    logout();
-                  }}
-                  role={"button"}
-                  className="nav-link"
-                >
-                  Logout
-                </span>
-              )}
-            </li>
-          </ul>
+          <li className="nav-item">
+            {token && (
+              <span
+                onClick={() => {
+                  logout();
+                }}
+                role={"button"}
+                className="nav-link"
+              >
+                Logout
+              </span>
+            )}
+          </li>
+          {/* </ul> */}
         </div>
       </nav>
-      <nav className="subnav w-100 h-10 p-3 shadow mb-5 navbar navbar-expand-sm ">
+      <nav className="subnav w-100 h-5 p-3 shadow mb-5  mt-0 navbar navbar-expand-sm fixed-top">
         <div className="collapse navbar-collapse " id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -133,6 +133,38 @@ function Nav() {
                   aria-label="Search"
                 />
               </li> */}
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item ms-auto">
+                {!token && (
+                  <NavLink className="nav-link text-dark" to="/signup">
+                    SignUp
+                  </NavLink>
+                )}
+              </li>
+              <li className="nav-item">
+                {!token && (
+                  <NavLink className="nav-link text-dark" to="/login">
+                    Login
+                  </NavLink>
+                )}
+              </li>
+
+              {/* TODO: hide logout if not logged in */}
+
+              <li className="nav-item">
+                {token && (
+                  <span
+                    onClick={() => {
+                      logout();
+                    }}
+                    role={"button"}
+                    className="nav-link"
+                  >
+                    Logout
+                  </span>
+                )}
+              </li>
+            </ul>
           </ul>
         </div>
       </nav>
