@@ -1,23 +1,15 @@
-import { useEffect, useState } from "react";
-import { useAuthContext } from "./utils";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
 
 function SubRaddit() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { token, account } = useAuthContext();
   const [post, setPost] = useState({});
   const {subraddit} = useParams();
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-
-  async function getData() {
+  const getData = useCallback(async () => {
     try {
-      const postUrl = `http://localhost:8001/api/subraddit/${subraddit}`;
+      const postUrl = `${api_url}api/subraddit/${subraddit}`;
       const postResponse = await fetch(postUrl);
       const postData = await postResponse.json();
       setPost(postData.posts);
@@ -27,7 +19,10 @@ function SubRaddit() {
       console.error(error);
       setPost({ error: "Error fetching post" });
     }
-  }
+  }, [subraddit]);
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
 
   if (isLoading) {
@@ -53,10 +48,10 @@ function SubRaddit() {
                 <div>
                   <div className="card">
                     <h5 className="card-title">{p.title}</h5>
-                    <a href="#">
+                    <a href="/#">
                       <p className="card-text">{p.description}</p>
                     </a>
-                    <a href="#" className="card-link">
+                    <a href="/#" className="card-link">
                       Link to comments/post details
                     </a>
                   </div>
@@ -68,10 +63,10 @@ function SubRaddit() {
           <div className="">
             <h5 className="">Post title</h5>
             <p className="card-text">Post description</p>
-            <a href="#" className="card-link">
+            <a href="/#" className="card-link">
               Link to post detail
             </a>
-            <a href="#" className="card-link">
+            <a href="/#" className="card-link">
               Link to comments/post details
             </a>
             <div className="btn-group-vertical mb-3">
