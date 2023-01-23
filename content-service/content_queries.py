@@ -27,7 +27,7 @@ class ContentQueries:
         result = db.posts.find({})
         posts = list(result)
         for i in range(len(posts)):
-            posts[i]['id'] = str(posts[i]['_id'])
+            posts[i]["id"] = str(posts[i]["_id"])
         results = {"posts": posts}
         return results
 
@@ -51,7 +51,7 @@ class ContentQueries:
         post = self.get_post_by_id(id)
         return post
 
-# subraddits
+    # subraddits
     def get_posts_by_subraddit(self, subraddit):
         db = client[mongodb]
         results = db.posts.find({"subraddit": subraddit})
@@ -61,7 +61,7 @@ class ContentQueries:
         real_results = {"posts": results}
         return real_results
 
-# comments
+    # comments
     def create_comment(self, new_comment):
         db = client[mongodb]
         result = db.comments.insert_one(new_comment.dict())
@@ -116,8 +116,16 @@ class ContentQueries:
         result["id"] = str(result["_id"])  # ObjectId
         return result
 
-    def increase_post_score(self, post_id):
+    def increase_post_score(
+        self, post_id
+    ):  # add user_id(and uvu list?) to params
         db = client[mongodb]
+        # if user_id in upvoteUsers list
+        #   decrease score by one
+        #   remove from list
+        # else (not in list)
+        #   increase score by one
+        #   add user_id to list
         result = db.postVotes.update_one(
             {"post_id": post_id},
             {
@@ -129,8 +137,17 @@ class ContentQueries:
         post_score = self.get_post_score_by_post_id(post_id)
         return post_score
 
-    def decrease_post_score(self, post_id):
+    def decrease_post_score(
+        self, post_id
+    ):  # add user_id(and dvu list?) to params
         db = client[mongodb]
+        # if user_id in downvoteUsers list
+        #   increase score by one
+        #   remove from list
+        # else (not in list)
+        #   decrease score by one
+        #   add user_id to list
+
         result = db.postVotes.update_one(
             {"post_id": post_id},
             {

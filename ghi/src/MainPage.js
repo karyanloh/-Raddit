@@ -42,7 +42,7 @@ function MainPage() {
             <div className="d-block text-blue mb-8" key={p.id}>
               <div>
                 <div className="card">
-                  <div className="btn-group-vertical mb-3 ">
+                  <div className="btn-group-vertical me-auto mb-3 ">
                     <button
                       type="button"
                       className="btn btn-outline-success text-left"

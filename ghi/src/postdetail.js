@@ -333,12 +333,12 @@ function PostDetails() {
                                     <label htmlFor="exampleFormControlTextarea1"></label>
                                     <textarea
                                     type="text"
-                                    value={description}
+                                    value={commentBody}
                                     onChange={(e) => setCommentBody(e.target.value)}
                                     className="form-control"
                                     id="exampleFormControlTextarea1"
-                                    rows="10"
-                                    placeholder="Description"
+                                    rows="2"
+                                    placeholder="Comment"
                                     />
                                 </div>
                                 <button className="btn btn-outline-danger">Add Comment</button>
