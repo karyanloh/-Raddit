@@ -3,8 +3,12 @@ import "./index.css";
 import raddit from "./raddit_new.png";
 import { useToken } from "./utils";
 
+function Music() {
+  window.location.assign("http://www.w3schools.com");
+}
+
 function Nav() {
-  const [token, login, logout] = useToken();
+  const [token, Login, logout] = useToken();
   return (
     <>
       <nav className="nav-bg h-18 p-3 mb-2 navbar navbar-expand-lg navbar-dark text-dark">
@@ -69,54 +73,54 @@ function Nav() {
               </Link>
               <ul className="dropdown-menu">
                 <li>
-                  <a
-                    className="dropdown-item"
+                  <Link
+                    className="dropdown-item nav-link"
                     onClick={() => {
                       window.location.href = "/Music";
                     }}
                   >
                     Music
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item"
+                  <Link
+                    className="dropdown-item nav-link"
                     onClick={() => {
                       window.location.href = "/Movies";
                     }}
                   >
                     Movies
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item"
+                  <Link
+                    className="dropdown-item nav-link"
                     onClick={() => {
                       window.location.href = "/Tech";
                     }}
                   >
                     Technology
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item"
+                  <Link
+                    className="dropdown-item nav-link"
                     onClick={() => {
                       window.location.href = "/Sports";
                     }}
                   >
                     Sports
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item"
+                  <Link
+                    className="dropdown-item nav-link"
                     onClick={() => {
                       window.location.href = "/Miscellaneous";
                     }}
                   >
                     Miscellaneous
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>

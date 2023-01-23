@@ -4,9 +4,7 @@ import { useParams } from "react-router-dom";
 
 
 function SubRaddit() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { token, account } = useAuthContext();
   const [post, setPost] = useState({});
   const {subraddit} = useParams();
 
