@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from content_queries import ContentQueries
 from auth import authenticator
-from model import PostScoreIn, PostScoreOut, EditPostScore
+from model import PostScoreOut
 
 router = APIRouter()
 

@@ -5,6 +5,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, login] = useToken();
+  console.log(token)
 
   return (
     <>

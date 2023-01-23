@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "./utils";
 import { useNavigate } from "react-router-dom";
 
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
+console.log(api_url)
+
 // subraddit
 let subraddits = [
   { label: "Tech", value: "Tech" },
@@ -12,31 +15,25 @@ let subraddits = [
 ];
 
 
-function CreatePostForm(props) {
-  const [isloading, setIsLoading] = useState(true);
+function CreatePostForm() {
 
   const { token, account } = useAuthContext();
   const navigate = useNavigate();
-  function Isloading() {
-    if (token != null) {
-      setIsLoading(false);
-    }
-  }
+
 
   useEffect(() => {
-    Isloading();
-    if ((!token) && (isloading ===false)){
+    if (token === undefined){
       alert("Login Please");
       navigate("/login?redirect=/post/new");
     }
-  }, [token]);
+  }, [token, navigate]);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [subraddit, setSubraddit] = useState("⬇️ Select a subraddit ⬇️");
 
   async function post(data) {
-    const url = `http://localhost:8001/api/posts`;
+    const url = `${api_url}api/posts`;
 
     const fetchConfig = {
       method: "post",
@@ -46,7 +43,7 @@ function CreatePostForm(props) {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await fetch(url, fetchConfig);
+    await fetch(url, fetchConfig);
     alert("Post success");
     navigate("/");
   }

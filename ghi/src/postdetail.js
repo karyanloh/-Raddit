@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
 
-const api_url = 'http://localhost:8001/api/'
+// const api_url = 'http://localhost:8001/api/'
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
 function PostDetails() {
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState(null);
@@ -21,36 +22,23 @@ function PostDetails() {
     // const [postId, setPostId] = useState("")
 
     useEffect(() => {
-        fetchPost();
-        fetchScore();
-        fetchComments();
-    }, [id, toggle]);
-
-    async function fetchPost() {
+    async function fetchPostandScore() {
         try {
             const postUrl = `${api_url}post/${id}`;
             const postResponse = await fetch(postUrl);
-            console.log("Response", postResponse)
             const postData = await postResponse.json();
-            setPost(postData);
-            setDescription(postData.description)
-            fetchScore(postData);
-            fetchComments();
-        } catch (error) {
-            console.error(error);
-            setPost({ error: 'Error fetching post' });
-        }
-    }
 
-    async function fetchScore(postData) {
-        try {
             const scoreUrl = `${api_url}post/postScore/${id}`;
             const scoreResponse = await fetch(scoreUrl);
             const scoreData = await scoreResponse.json();
+
+            setPost(postData);
             setPost({ ...postData, score: scoreData.score });
+            setDescription(postData.description)
+            setIsLoading(false);
         } catch (error) {
             console.error(error);
-            setPost({ error: 'Error fetching score' });
+            setPost({ error: 'Error fetching post' });
         }
     }
 
@@ -61,12 +49,16 @@ function PostDetails() {
             let commentData = await commentsResponse.json();
             commentData = (Object.values(commentData))
             setComments(commentData);
-            setIsLoading(false);
         } catch (error) {
             console.error(error);
             setComments({ error: 'Error fetching comments' });
         }
     }
+    fetchPostandScore()
+    fetchComments()
+    }, [id]);
+
+
 
     async function put(e) {
         e.preventDefault()
@@ -108,20 +100,20 @@ function PostDetails() {
     }
 
     async function handleUpArrowClick() {
-        const url=`http://localhost:8001/api/postScore/upvote/${id}`;
+        const url=`${api_url}postScore/upvote/${id}`;
             const fetchConfig ={
                 method: "put",
                 headers: {
                     "Content-Type": "application/json",
             }
         }
-        const scoreEditResponse = await fetch(url, fetchConfig);
+        await fetch(url, fetchConfig);
         window.location.reload()
         }
 
 
         async function handleDownArrowClick() {
-        const url=`http://localhost:8001/api/postScore/downvote/${id}`;
+        const url=`${api_url}postScore/downvote/${id}`;
             const fetchConfig ={
                 method: "put",
                 headers: {
@@ -129,7 +121,7 @@ function PostDetails() {
             }
 
         }
-        const scoreEditResponse = await fetch(url, fetchConfig);
+        await fetch(url, fetchConfig);
         window.location.reload()
         }
 
@@ -204,7 +196,7 @@ function PostDetails() {
         return <div>{post.error}</div>;
     }
 
-    if (token && (account == post.user_id)) {
+    if (token && (account === post.user_id)) {
        return (
     <div>
         <div className="card">

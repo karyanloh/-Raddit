@@ -1,17 +1,18 @@
 import { NavLink, Link } from "react-router-dom";
 import "./index.css";
-import raddit from "./raddit.png";
+import raddit from "./raddit_new.png";
 import { useToken } from "./utils";
 
 function Nav() {
-  const [token, login, logout] = useToken();
+  const [token, Login, logout] = useToken();
+  console.log(Login)
   return (
     <>
-      <nav className="nav-bg h-25 p-3 mb-2 navbar navbar-expand-lg navbar-dark text-dark">
+      <nav className="nav-bg h-18 p-3 mb-2 navbar navbar-expand-lg navbar-dark text-dark">
         <div className="d-flex flex-column justify-content-center align-items-center"></div>
         <div className="container-fluid ">
-          <img src={raddit} alt="Logo" />
-          <h1 className="display-4 text-white">Raddit</h1>
+          <img src={raddit} alt="Logo" className="pr-2" />
+          <h1 className="text-black">raddit</h1>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item ms-auto">
               {!token && (
@@ -46,7 +47,7 @@ function Nav() {
           </ul>
         </div>
       </nav>
-      <nav className="w-100 h-10 p-3 shadow p-3 mb-5 bg-white rounded navbar navbar-expand-sm navbar-dark text-dark ">
+      <nav className="subnav w-100 h-10 p-3 shadow mb-5 navbar navbar-expand-sm ">
         <div className="collapse navbar-collapse " id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -69,54 +70,54 @@ function Nav() {
               </Link>
               <ul className="dropdown-menu">
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Music";
                     }}
                   >
                     Music
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Movies";
                     }}
                   >
                     Movies
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Tech";
                     }}
                   >
                     Technology
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Sports";
                     }}
                   >
                     Sports
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
+                  <NavLink
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "/Miscellaneous";
                     }}
                   >
                     Miscellaneous
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </li>
