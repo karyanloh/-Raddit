@@ -6,10 +6,10 @@ function SignUpForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  console.log("signup form", REACT_APP_USER_SERVICE_API_HOST)
   async function SignUp(e) {
     e.preventDefault();
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}api/users`;
-    console.log(url)
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
