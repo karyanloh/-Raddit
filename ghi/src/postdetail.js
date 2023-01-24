@@ -19,6 +19,8 @@ function PostDetails() {
     const { token, account } = useAuthContext();
     const [commentBody, setCommentBody] = useState("")
     const [toggle, setToggle] = useState(false)
+    // const [hasUpvoted, setHasUpVoted] = useState(false)
+    // const [hasDownvoted, setHasDownVoted] = useState(false)
     // const [postId, setPostId] = useState("")
 
     useEffect(() => {
@@ -101,13 +103,26 @@ function PostDetails() {
 
     async function handleUpArrowClick() {
         const url=`${api_url}postScore/upvote/${id}`;
-            const fetchConfig ={
+        // user = account
+            // try {
+                const fetchConfig ={
                 method: "put",
                 headers: {
                     "Content-Type": "application/json",
+                }
+                }
+
+        const response = await fetch(url, fetchConfig);
+        if(response.ok) {
+                const upvoteScore = await response.json();
+                // setUpVote(upvoteScore);
+                setIsEditing(false);
+                // setPost({ ...postData, score: postData.score + 1 });
+
+            } else {
+                console.error('Error changing score')
             }
-        }
-        await fetch(url, fetchConfig);
+
         window.location.reload()
         }
 
@@ -210,7 +225,9 @@ function PostDetails() {
                     </div>
                     <div>
                 <button
+                // if user id in upvoted list
                     onClick={() => handleUpArrowClick()}
+                    // else pass
                     type="button"
                     className="list-group-item list-group-item-primary list-group-item-action"
                 >
@@ -270,7 +287,8 @@ function PostDetails() {
                 <div className="mt-2"  key={comment.id}>
                     <div className="card" >
                         <div className="card-header" >
-                            <p className="card-text">{comment.body}</p>
+                            <p className="card-text">{comment.body}{comment.user_id}</p>
+                            {console.log(comment)}
                         </div>
                     </div>
                 </div>
