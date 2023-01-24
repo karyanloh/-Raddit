@@ -9,6 +9,7 @@ export function getToken() {
 
 export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}token/`;
+  console.log("this is the gettokeninternal url                      ", url)
   try {
     const response = await fetch(url, {
       credentials: "include",
