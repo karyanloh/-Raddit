@@ -95,6 +95,7 @@ export function useToken() {
 
   async function login(username, password) {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}token`;
+    console.log(url)
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
