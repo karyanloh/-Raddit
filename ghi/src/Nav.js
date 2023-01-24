@@ -71,54 +71,54 @@ function Nav() {
               </Link>
               <ul className="dropdown-menu">
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "subraddit/Music";
                     }}
                   >
                     Music
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "subraddit/Movies";
                     }}
                   >
                     Movies
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "subraddit/Tech";
                     }}
                   >
                     Technology
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "subraddit/Sports";
                     }}
                   >
                     Sports
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
                       window.location.href = "subraddit/Miscellaneous";
                     }}
                   >
                     Miscellaneous
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>

@@ -10,7 +10,7 @@ function Login() {
 
   return (
     <>
-      <div className="wrapper">
+      <div className="wrapper ">
         <div className="logo">
           <img src={raddit} alt="" />
         </div>
@@ -47,7 +47,7 @@ function Login() {
             }}
             type="button"
           >
-            Login
+            Log in
           </button>
         </form>
         <div className="text-center fs-6">
