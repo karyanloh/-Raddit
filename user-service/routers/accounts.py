@@ -35,5 +35,5 @@ async def get_token(
             "account": account,
         }
 
-    else:
-        raise HTTPException(status_code=401, detail="not working")
+    # else:
+    #     raise HTTPException(status_code=401, detail="not working")

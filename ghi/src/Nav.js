@@ -3,9 +3,6 @@ import "./index.css";
 import raddit from "./raddit_new.png";
 import { useToken } from "./utils";
 
-function Music() {
-  window.location.assign("http://www.w3schools.com");
-}
 
 function Nav() {
   const [token, Login, logout] = useToken();
