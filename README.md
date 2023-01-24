@@ -17,7 +17,7 @@ Raddit - vote for your favorite contents.
 
 ## Intended Market
 
-Raddit is a social news website and forum where content is promoted by its site members through voting. Members of Raddit can post new contents in the subraddits(sports,music,movies,technology and miscellaneous). Posts can then be liked (upvoted) or disliked (downvoted) to allow more popular content to gain more visibility.
+Raddit is a social news website and forum where content is promoted by its site members through voting. Members of Raddit can post new contents in the subraddits(sports, music, movies, technology and miscellaneous). Posts can then be liked (upvoted) or disliked (downvoted) to allow more popular content to gain more visibility.
 
 ## Functionality
 
