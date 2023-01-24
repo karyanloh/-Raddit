@@ -7,12 +7,13 @@
 * Yuki (Minyue) Lu
 
 Raddit - a social news website.
+
 Raddit - vote for your favoriate contents.
 
 ## Design
 
 * [API design](https://gitlab.com/group-03-raddit-reactors/raddit-new/-/blob/main/docs/API-Design.md)
-* [Wieframe] (https://gitlab.com/group-03-raddit-reactors/raddit-new/-/blob/main/docs/wireframe.md)
+* [Wireframe](https://gitlab.com/group-03-raddit-reactors/raddit-new/-/blob/main/docs/wireframe.md)
 
 ## Intended market
 
