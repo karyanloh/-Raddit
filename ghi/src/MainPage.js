@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./index.css";
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
-console.log(api_url)
+
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState({});
