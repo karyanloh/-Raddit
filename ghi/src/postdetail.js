@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
 
-const api_url = 'http://localhost:8001/api/'
-// const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
+// const api_url = 'http://localhost:8001/api/'
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
 function PostDetails() {
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState(null);
