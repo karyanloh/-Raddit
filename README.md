@@ -8,7 +8,7 @@
 
 Raddit - a social news website.
 
-Raddit - vote for your favoriate contents.
+Raddit - vote for your favorite contents.
 
 ## Design
 
