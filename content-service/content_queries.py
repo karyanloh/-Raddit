@@ -122,19 +122,9 @@ class ContentQueries:
         db = client[mongodb]
         post_score = db.postVotes.find_one({"post_id": post_id})
         upvoted_users = post_score["upvoted_users"]
-        # if user_id in upvoted_users list
-        #   decrease score by one
-        #   remove from list
-        # else (not in list)
-        #   increase score by one
-        #   add user_id to list
+
         if user_id in upvoted_users:
-            # post_score -= 1
-            print("\n\n\nTHE FIRST ONE")
-            print(upvoted_users)
             upvoted_users.remove(user_id)
-            print("\n\n\n THE SECOND ONE")
-            print(upvoted_users)
             db.postVotes.update_one(
                 {"post_id": post_id},
                 {
@@ -144,9 +134,7 @@ class ContentQueries:
                     "$set": {"upvoted_users": upvoted_users},
                 },
             )
-            # upvoted_users.pop(user_id)
         else:
-            # post_score += 1
             upvoted_users.append(user_id)
 
             db.postVotes.update_one(
@@ -166,19 +154,9 @@ class ContentQueries:
         db = client[mongodb]
         post_score = db.postVotes.find_one({"post_id": post_id})
         downvoted_users = post_score["downvoted_users"]
-        # if user_id in downvoteUsers list
-        #   increase score by one
-        #   remove from list
-        # else (not in list)
-        #   decrease score by one
-        #   add user_id to list
+
         if user_id in downvoted_users:
-            # post_score -= 1
-            print("\n\n\nTHE FIRST ONE")
-            print(downvoted_users)
             downvoted_users.remove(user_id)
-            print("\n\n\n THE SECOND ONE")
-            print(downvoted_users)
             db.postVotes.update_one(
                 {"post_id": post_id},
                 {
@@ -189,7 +167,6 @@ class ContentQueries:
                 },
             )
         else:
-            # post_score += 1
             downvoted_users.append(user_id)
             db.postVotes.update_one(
                 {"post_id": post_id},
