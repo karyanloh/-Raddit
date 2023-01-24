@@ -19,10 +19,10 @@ function GetToken() {
 
 
 function App() {
-  const domain = 'raddit-new';
-  const basename = process.env.PUBLIC_URL.replace(domain, '');
+  // const domain = 'raddit-new';
+  // const basename = process.env.PUBLIC_URL.replace(domain, '');
   return (
-    <BrowserRouter basename={basename}>
+    <BrowserRouter basename='raddit-new'>
       <AuthProvider>
         <GetToken />
         <Nav />
