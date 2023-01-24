@@ -6,6 +6,7 @@ import { useToken } from "./utils";
 
 function Nav() {
   const [token, Login, logout] = useToken();
+  console.log(Login)
   return (
     <>
       <nav className="nav-bg h-18 p-3 mb-2 navbar navbar-expand-lg navbar-dark text-dark">
@@ -70,54 +71,54 @@ function Nav() {
               </Link>
               <ul className="dropdown-menu">
                 <li>
-                  <Link
-                    className="dropdown-item nav-link"
+                  <a
+                    className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/Music";
+                      window.location.href = "subraddit/Music";
                     }}
                   >
                     Music
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    className="dropdown-item nav-link"
+                  <a
+                    className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/Movies";
+                      window.location.href = "subraddit/Movies";
                     }}
                   >
                     Movies
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    className="dropdown-item nav-link"
+                  <a
+                    className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/Tech";
+                      window.location.href = "subraddit/Tech";
                     }}
                   >
                     Technology
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    className="dropdown-item nav-link"
+                  <a
+                    className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/Sports";
+                      window.location.href = "subraddit/Sports";
                     }}
                   >
                     Sports
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    className="dropdown-item nav-link"
+                  <a
+                    className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/Miscellaneous";
+                      window.location.href = "subraddit/Miscellaneous";
                     }}
                   >
                     Miscellaneous
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </li>

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useToken } from "./utils";
 // import Construct from "./Construct.js";
@@ -33,7 +32,10 @@ function App() {
               <Route path=":id" element={<PostDetail />} />
             </Route>
             <Route path="signup" element={<SignUpForm />} />
-            <Route path=":subraddit" element={<SubRaddit />} />
+            <Route path="subraddit">
+              <Route path=":subraddit" element={<SubRaddit />} />
+            </Route>
+            {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>
       </AuthProvider>
