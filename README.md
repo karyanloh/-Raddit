@@ -15,7 +15,7 @@ Raddit - vote for your favoriate contents.
 * [API design](https://gitlab.com/group-03-raddit-reactors/raddit-new/-/blob/main/docs/API-Design.md)
 * [Wireframe](https://gitlab.com/group-03-raddit-reactors/raddit-new/-/blob/main/docs/wireframe.md)
 
-## Intended market
+## Intended Market
 
 Raddit is a social news website and forum where content is promoted by its site members through voting. Members of Raddit can post new contents in the subraddits(sports,music,movies,technology and miscellaneous). Posts can then be liked (upvoted) or disliked (downvoted) to allow more popular content to gain more visibility.
 
@@ -39,6 +39,6 @@ To fully enjoy this application on your local machine, please make sure to follo
 
 1. Clone the repository down to your local machine
 2. CD into the new project directory
-3. Run docker volume create mongo-data, mongo2-data
-4. Run docker compose build
-5. Run docker compose up
+3. Run `docker volume create mongo-data`,`docker volume create mongo2-data`
+4. Run `docker compose build`
+5. Run `docker compose up`
