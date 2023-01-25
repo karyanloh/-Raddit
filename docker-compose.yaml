@@ -25,7 +25,7 @@ services:
       MONGO_USER: root
       MONGO_PASSWORD: password
       WAIT_HOSTS: mongo:27017
-      SIGNING_KEY: alohamora
+      SIGNING_KEY: d6bda0f9c8433150636af6a3f825301db19c7406cf8bc6811edcefbe118325f2
 
   mongo-express:
     image: mongo-express:latest
@@ -59,7 +59,7 @@ services:
       MONGO_USER: root
       MONGO_PASSWORD: password
       WAIT_HOSTS: mongo2:27017
-      SIGNING_KEY: alohamora
+      SIGNING_KEY: d6bda0f9c8433150636af6a3f825301db19c7406cf8bc6811edcefbe118325f2
   mongo2-express:
     image: mongo-express:latest
     depends_on:
@@ -83,6 +83,6 @@ services:
       HOST_OS: ${OS}
       NODE_ENV: development
       HOST: "0.0.0.0"
-      PUBLIC_URL: http://localhost:3000
-      REACT_APP_USER_SERVICE_API_HOST: http://localhost:8000
-      REACT_APP_CONTENT_SERVICE_API_HOST: http://localhost:8001
+      PUBLIC_URL: http://localhost:3000/
+      REACT_APP_USER_SERVICE_API_HOST: http://localhost:8000/
+      REACT_APP_CONTENT_SERVICE_API_HOST: http://localhost:8001/

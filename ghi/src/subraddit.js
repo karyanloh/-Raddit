@@ -1,11 +1,49 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
 
 function SubRaddit() {
+  const displayThreshold = 1;
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState({});
   const {subraddit} = useParams();
+  const [displayArr, setDisplayArr] = useState([]);
+  const [loadMore, setLoadMore] = useState(false);
+
+
+
+  useEffect(() => {
+    if (post.length > 0) {
+      let newArr = [];
+      for (let i = 0; i < displayThreshold; i++) {
+        newArr.push(post[i]);
+      }
+      setDisplayArr(newArr);
+    }
+  }, [post]);
+
+    useEffect(() => {
+      let newArr = displayArr;
+      if (loadMore === true) {
+        let remainder = post.length - newArr.length;
+        if (remainder >= displayThreshold) {
+          let starter = newArr.length;
+          for (let i = starter; i < starter + displayThreshold; i++) {
+            newArr.push(post[i]);
+          }
+          setLoadMore(false);
+        } else {
+          for (let i = post.length - remainder; i < post.length; i++) {
+            newArr.push(post[i]);
+          }
+          setLoadMore(false);
+        }
+      }
+
+      setDisplayArr(newArr);
+      setIsLoading(false);
+    }, [loadMore,displayArr,post]);
+
 
   const getData = useCallback(async () => {
     try {
@@ -20,9 +58,15 @@ function SubRaddit() {
       setPost({ error: "Error fetching post" });
     }
   }, [subraddit]);
+
   useEffect(() => {
     getData();
   }, [getData]);
+
+  function handleLoadMore() {
+    console.log("setLoadmore");
+    setLoadMore(true);
+  }
 
 
   if (isLoading) {
@@ -42,46 +86,35 @@ function SubRaddit() {
             </div>
           </div>
 
-          {post.map((p) => {
+          {displayArr.map((p) => {
             return (
-              <div className="card-body" key={p.id}>
-                <div>
-                  <div className="card">
-                    <h5 className="card-title">{p.title}</h5>
-                    <a href="/#">
-                      <p className="card-text">{p.description}</p>
-                    </a>
-                    <a href="/#" className="card-link">
-                      Link to comments/post details
-                    </a>
-                  </div>
+              <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
+                <div className="btn-group-vertical mb-3 ">
+                  <button
+                    type="button"
+                    className="btn btn-outline-success text-left"
+                  >
+                    Rad
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger text-left"
+                  >
+                    Bad
+                  </button>
+                </div>
+                <div className="post">
+                  <a href={`/raddit-new/post/${p.id}`} className="card-link">
+                    <p className="card-title">{p.title}</p>
+                  </a>
                 </div>
               </div>
             );
           })}
-
-          <div className="">
-            <h5 className="">Post title</h5>
-            <p className="card-text">Post description</p>
-            <a href="/#" className="card-link">
-              Link to post detail
-            </a>
-            <a href="/#" className="card-link">
-              Link to comments/post details
-            </a>
-            <div className="btn-group-vertical mb-3">
-              <button type="button" className="btn btn-outline-success">
-                Rad
-              </button>
-              <button type="button" className="btn btn-outline-danger">
-                Bad
-              </button>
-            </div>
-
-            <p className="vote-count">votes</p>
-          </div>
+          {displayArr.length < post.length ? (
+            <button onClick={handleLoadMore}>Load more</button>
+          ) : null}
         </>
-        {/* <div>"test2":{account}</div> */}
       </>
     );
   }

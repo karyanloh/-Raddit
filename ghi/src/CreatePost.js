@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "./utils";
 import { useNavigate } from "react-router-dom";
 
-const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
-console.log(api_url)
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
 
 // subraddit
 let subraddits = [
@@ -14,15 +13,12 @@ let subraddits = [
   { label: "Miscellaneous", value: "Miscellaneous" },
 ];
 
-
 function CreatePostForm() {
-
   const { token, account } = useAuthContext();
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    if (token === undefined){
+    if (token === undefined) {
       alert("Login Please");
       navigate("/login?redirect=/post/new");
     }

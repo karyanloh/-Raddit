@@ -17,9 +17,12 @@ function GetToken() {
   return null;
 }
 
+
 function App() {
+  // const domain = 'raddit-new';
+  // const basename = process.env.PUBLIC_URL.replace(domain, '');
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='raddit-new'>
       <AuthProvider>
         <GetToken />
         <Nav />
@@ -32,7 +35,9 @@ function App() {
               <Route path=":id" element={<PostDetail />} />
             </Route>
             <Route path="signup" element={<SignUpForm />} />
-            <Route path=":subraddit" element={<SubRaddit />} />
+            <Route path="subraddit">
+              <Route path=":subraddit" element={<SubRaddit />} />
+            </Route>
             {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>

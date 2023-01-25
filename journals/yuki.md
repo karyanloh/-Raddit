@@ -67,3 +67,19 @@ Today, I worked on:
 
 * I added some code in utils.js so that in the frontend we can get the user_id by importing the {account} from utils.js
 * I set up the caprover account.
+
+## January 19, 2023
+Today, I worked on:
+
+* I created the endpoint for the filtering feature and added the corresponding FE component
+
+## January 20-22, 2023
+Today, I worked on:
+
+* I modified login and signup forms formats.
+* I fixed bug that was identified while deployment.
+
+## January 24 on:
+
+* I did a unit test for user's authentication.
+
