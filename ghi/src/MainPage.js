@@ -61,15 +61,10 @@ function MainPage() {
   ///////////////// combine post and score array
   useEffect(() => {
     (async () => {
-      console.log("$$$$", post);
-      console.log("$$$$$   ", score);
       if (post.length !== 0 && score.length !== 0) {
-        console.log(post.length, score.length);
-
         let combinedArray = await combineData(post, score);
         setCombinedArray(combinedArray);
-        console.log(combinedArray);
-        //////set combined arr use disp[lay arr to loop through stuff to display]
+        //////set combined arr use display arr to loop through stuff to display
       }
     })();
   }, [score.length]);
@@ -101,21 +96,41 @@ function MainPage() {
     for (let i = 0; i < scoreArr.length; i++) {
       scoreMap[scoreArr[i].post_id] = scoreArr[i].score;
     }
-    console.log(scoreMap);
     for (let j = 0; j < postArr.length; j++) {
-      console.log(postArr[j].id);
       if (scoreMap[postArr[j].id] !== undefined) {
-        // console.log(scoreMap[postArr[j].id])
         combinedArray.push(postArr[j]);
         combinedArray[j]["score"] = scoreMap[postArr[j].id];
       }
     }
-    // console.log("*******", combinedArray);
     return combinedArray;
   }
 
   function handleLoadMore() {
     setLoadMore(true);
+  }
+
+  async function handleUpArrowClick(id) {
+    const url = `${api_url}api/postScore/upvote/${id}`;
+    const fetchConfig = {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await fetch(url, fetchConfig);
+    window.location.reload();
+  }
+
+  async function handleDownArrowClick(id) {
+    const url = `${api_url}api/postScore/downvote/${id}`;
+    const fetchConfig = {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await fetch(url, fetchConfig);
+    window.location.reload();
   }
 
   if (isLoading) {
@@ -132,44 +147,27 @@ function MainPage() {
         {displayArr.map((p) => {
           return (
             <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
-              {/* <div className="btn-group-vertical mb-3 ">
+              <div className="btn-group-vertical mb-3 ">
                 <button
+                  onClick={() => handleUpArrowClick(p.id)}
                   type="button"
                   className="btn btn-outline-success text-left"
                 >
+                  <i className="fa fa-chevron-up pr-2"></i>
                   Rad
                 </button>
-                <div className="score text-center">{p.score}</div>
+                <button type="button" className="btn text-left" disabled>
+                  Votes: {p.score}
+                </button>
                 <button
+                  onClick={() => handleDownArrowClick(p.id)}
                   type="button"
                   className="btn btn-outline-danger text-left"
                 >
-                  Bad
+                  <i className="fa fa-chevron-down pr-2"></i>
+                  <span>Bad</span>
                 </button>
-              </div> */}
-              <table className="btn-group-vertical mb-3 ">
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-outline-success text-left"
-                  >
-                    Rad
-                  </button>
-                </td>
-                <td>
-                  <button type="button" className="btn text-left" disabled>
-                    {p.score}
-                  </button>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-outline-danger text-left"
-                  >
-                    Bad
-                  </button>
-                </td>
-              </table>
+              </div>
               <div className="post">
                 <a href={`/post/${p.id}`} className="card-link">
                   <p className="card-title">{p.title}</p>
