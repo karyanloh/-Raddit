@@ -133,6 +133,7 @@ function MainPage() {
     return (
       <>
         {displayArr.map((p) => {
+          console.log(p);
           return (
             <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
               <div className="btn-group-vertical mb-3 ">
