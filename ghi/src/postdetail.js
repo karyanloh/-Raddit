@@ -254,7 +254,7 @@ function PostDetails() {
             <p className="card-text">{post.description}</p>
           </div>
           <div className="card-footer">
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content">
               <div>
                 <button onClick={setIsEditing} className="btn btn-secondary">
                   Edit
@@ -263,30 +263,30 @@ function PostDetails() {
                   Delete
                 </button>
               </div>
-              <div>
-                        <div>
-                            <h3 style={{ color: "red" }}>Add a comment !</h3>
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group mb-4 ">
-                                    <label htmlFor="exampleFormControlTextarea1"></label>
-                                    <textarea
-                                    type="text"
-                                    value={commentBody}
-                                    onChange={(e) => setCommentBody(e.target.value)}
-                                    className="form-control"
-                                    id="exampleFormControlTextarea1"
-                                    rows="2"
-                                    placeholder="Comment"
-                                    />
-                                </div>
-                                <button className="btn btn-outline-danger">Add Comment</button>
-                            </form>
+            </div>
+            <div>
+                <div>
+                    <h3 style={{ color: "red" }}>Add a comment !</h3>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group mb-4 ">
+                            <label htmlFor="exampleFormControlTextarea1"></label>
+                            <textarea
+                            type="text"
+                            value={commentBody}
+                            onChange={(e) => setCommentBody(e.target.value)}
+                            className="form-control"
+                            id="exampleFormControlTextarea1"
+                            rows="2"
+                            placeholder="Comment"
+                            />
                         </div>
+                        <button className="btn btn-outline-danger">Add Comment</button>
+                    </form>
+                </div>
                 <p className="card-subtitle mb-2 text-muted">
                   {comments[0].length} comments
                 </p>
               </div>
-            </div>
           </div>
         </div>
 
