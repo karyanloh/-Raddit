@@ -19,12 +19,15 @@ function MainPage() {
     if (combinedArray.length > 0) {
       let newArr = [];
       for (let i = 0; i < displayThreshold; i++) {
-        if (combinedArray.length < displayThreshold) {
+        if (
+          combinedArray.length < displayThreshold &&
+          combinedArray[i] !== undefined
+        ) {
           newArr.push(combinedArray[i]);
         }
-        newArr.push(combinedArray[i]);
       }
       setDisplayArr(newArr);
+      setIsLoading(false);
     }
   }, [combinedArray]);
 
@@ -47,7 +50,7 @@ function MainPage() {
       }
     }
     setDisplayArr(newArr);
-    setIsLoading(false);
+    // setIsLoading(false);
     setLoadMore(false);
   }, [loadMore, combinedArray, displayArr]);
 
@@ -70,7 +73,7 @@ function MainPage() {
       if (postResponse.ok && scoreResponse.ok) {
         setPost(postData.posts);
         setScore(scoreData.scores);
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
