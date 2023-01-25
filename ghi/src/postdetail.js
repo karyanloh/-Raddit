@@ -114,7 +114,7 @@ function PostDetails() {
 
         const response = await fetch(url, fetchConfig);
         if(response.ok) {
-                const upvoteScore = await response.json();
+                // const upvoteScore = await response.json();
                 // setUpVote(upvoteScore);
                 setIsEditing(false);
                 // setPost({ ...postData, score: postData.score + 1 });
