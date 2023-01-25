@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./index.css";
-const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`;
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`;
 function MainPage() {
   const displayThreshold = 10;
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { token, account } = useAuthContext();
+  // const { token, account } = useAuthContext();
   const [post, setPost] = useState([]);
   const [score, setScore] = useState([]);
   const [displayArr, setDisplayArr] = useState([]);
