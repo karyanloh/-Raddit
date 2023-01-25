@@ -1,4 +1,4 @@
-from fastapi import Depends, Request, APIRouter, HTTPException
+from fastapi import Depends, Request, APIRouter
 from models import UserIn, UserOut, AccountToken
 from .auth import authenticator
 from user_queries import UserQueries
@@ -35,5 +35,5 @@ async def get_token(
             "account": account,
         }
 
-    else:
-        raise HTTPException(status_code=401, detail="not working")
+    # else:
+    #     raise HTTPException(status_code=401, detail="not working")
