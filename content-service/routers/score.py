@@ -61,7 +61,7 @@ def delete_post_score_by_id(
 #     #     raise HTTPException(status_code=401, detail="not working")
 
 
-@router.put("/api/postScore/upvote/{post_id}", response_model=PostScoreOut)
+@router.put("/api/postScore/upvote/{id}", response_model=PostScoreOut)
 def increase_post_score_by_id(
     post_id: str,
     user_id: str,
@@ -71,7 +71,7 @@ def increase_post_score_by_id(
     return result
 
 
-@router.put("/api/postScore/downvote/{post_id}", response_model=PostScoreOut)
+@router.put("/api/postScore/downvote/{id}", response_model=PostScoreOut)
 def decrease_post_score_by_id(
     post_id: str,
     user_id: str,

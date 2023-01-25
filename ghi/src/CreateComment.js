@@ -28,7 +28,7 @@ function CreateCommentForm(props) {
 
     async function comment(data) {
 
-        const url =`${api_url}api/comments`
+        const url =`${api_url}comments`
 
         const fetchConfig = {
             method: "post",

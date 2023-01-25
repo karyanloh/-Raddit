@@ -143,7 +143,7 @@ function PostDetails() {
 
         async function comment(data) {
             // data.preventDefault();
-            const url =`${api_url}api/comments`
+            const url =`${api_url}comments`
 
             const fetchConfig = {
                 method: "post",
