@@ -8,7 +8,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  const url = `https://user-api.sept-pt-3.mod3projects.com/token/`;
+  const url = `https://user-api.sept-pt-3.mod3projects.com/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
