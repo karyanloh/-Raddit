@@ -74,7 +74,7 @@ function Nav() {
                   <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/subraddit/Music";
+                      window.location.href = "/raddit-new/subraddit/Music";
                     }}
                   >
                     Music
@@ -84,8 +84,9 @@ function Nav() {
                   <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/subraddit/Movies";
+                      window.location.href = "/raddit-new/subraddit/Movies";
                     }}
+
                   >
                     Movies
                   </Link>
@@ -94,7 +95,7 @@ function Nav() {
                   <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/subraddit/Tech";
+                      window.location.href = "/raddit-new/subraddit/Tech";
                     }}
                   >
                     Technology
@@ -104,7 +105,7 @@ function Nav() {
                   <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/subraddit/Sports";
+                      window.location.href = "/raddit-new/subraddit/Sports";
                     }}
                   >
                     Sports
@@ -114,7 +115,8 @@ function Nav() {
                   <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "/subraddit/Miscellaneous";
+                      window.location.href =
+                        "/raddit-new/subraddit/Miscellaneous";
                     }}
                   >
                     Miscellaneous

@@ -22,7 +22,7 @@ function App() {
   // const domain = 'raddit-new';
   // const basename = process.env.PUBLIC_URL.replace(domain, '');
   return (
-    <BrowserRouter basename='raddit-new'>
+    <BrowserRouter basename="raddit-new/">
       <AuthProvider>
         <GetToken />
         <Nav />
