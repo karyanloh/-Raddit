@@ -9,9 +9,8 @@ function SubRaddit() {
   const {subraddit} = useParams();
   const [displayArr, setDisplayArr] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
-  useEffect(() => {
-    getData();
-  }, []);
+
+
 
   useEffect(() => {
     if (post.length > 0) {
@@ -21,11 +20,11 @@ function SubRaddit() {
       }
       setDisplayArr(newArr);
     }
-  }, [post.length]);
+  }, [post]);
 
     useEffect(() => {
       let newArr = displayArr;
-      if (loadMore == true) {
+      if (loadMore === true) {
         let remainder = post.length - newArr.length;
         if (remainder >= displayThreshold) {
           let starter = newArr.length;
@@ -43,9 +42,7 @@ function SubRaddit() {
 
       setDisplayArr(newArr);
       setIsLoading(false);
-    }, [loadMore]);
-
-
+    }, [loadMore,displayArr,post]);
 
 
   const getData = useCallback(async () => {
@@ -61,6 +58,10 @@ function SubRaddit() {
       setPost({ error: "Error fetching post" });
     }
   }, [subraddit]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   function handleLoadMore() {
     console.log("setLoadmore");
