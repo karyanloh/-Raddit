@@ -20,11 +20,11 @@ function PostDetails() {
     useEffect(() => {
     async function fetchPostandScore() {
         try {
-            const postUrl = `${api_url}api/post/${id}`;
+            const postUrl = `${api_url}post/${id}`;
             const postResponse = await fetch(postUrl);
             const postData = await postResponse.json();
 
-            const scoreUrl = `${api_url}api/post/postScore/${id}`;
+            const scoreUrl = `${api_url}post/postScore/${id}`;
             const scoreResponse = await fetch(scoreUrl);
             const scoreData = await scoreResponse.json();
 
@@ -40,7 +40,7 @@ function PostDetails() {
 
     async function fetchComments() {
         try {
-            const commentsUrl = `${api_url}api/comments/${id}`;
+            const commentsUrl = `${api_url}comments/${id}`;
             const commentsResponse = await fetch(commentsUrl);
             let commentData = await commentsResponse.json();
             commentData = (Object.values(commentData))
@@ -58,7 +58,7 @@ function PostDetails() {
 
     async function put(e) {
         e.preventDefault()
-        const editUrl = `${api_url}api/post/${id}`;
+        const editUrl = `${api_url}post/${id}`;
                 const fetchConfig = {
                     method: "put",
                     body: JSON.stringify(edit),
