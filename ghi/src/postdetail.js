@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
 
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}api/`;
+
 function PostDetails() {
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState(null);
@@ -142,7 +143,7 @@ function PostDetails() {
 
         async function comment(data) {
             // data.preventDefault();
-            const url =`http://localhost:8001/api/comments`
+            const url =`${api_url}api/comments`
 
             const fetchConfig = {
                 method: "post",
