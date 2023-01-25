@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import "./index.css";
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`;
+
 function MainPage() {
   const displayThreshold = 10;
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // const { token, account } = useAuthContext();
   const [post, setPost] = useState([]);
   const [score, setScore] = useState([]);
   const [displayArr, setDisplayArr] = useState([]);
@@ -30,40 +29,32 @@ function MainPage() {
   }, [combinedArray]);
 
   useEffect(() => {
-    let newArr = displayArr;
-    if (loadMore === true) {
-      let remainder = combinedArray.length - newArr.length;
-      if (remainder >= displayThreshold) {
-        let starter = newArr.length;
-        for (let i = starter; i < starter + displayThreshold; i++) {
-          newArr.push(combinedArray[i]);
-        }
-        setLoadMore(false);
-      } else {
-        for (
-          let i = combinedArray.length - remainder;
-          i < combinedArray.length;
-          i++
-        ) {
-          newArr.push(combinedArray[i]);
-        }
-        setLoadMore(false);
+    if (!loadMore) return;
+    let newArr = [...displayArr];
+    let remainder = combinedArray.length - newArr.length;
+    if (remainder >= displayThreshold) {
+      let starter = newArr.length;
+      for (let i = starter; i < starter + displayThreshold; i++) {
+        newArr.push(combinedArray[i]);
+      }
+    } else {
+      for (
+        let i = combinedArray.length - remainder;
+        i < combinedArray.length;
+        i++
+      ) {
+        newArr.push(combinedArray[i]);
       }
     }
-
     setDisplayArr(newArr);
     setIsLoading(false);
-  }, [loadMore, displayArr]);
+    setLoadMore(false);
+  }, [loadMore, combinedArray]);
 
-  ///////////////// combine post and score array
   useEffect(() => {
-    (async () => {
-      if (post.length !== 0 && score.length !== 0) {
-        let combinedArray = await combineData(post, score);
-        setCombinedArray(combinedArray);
-        //////set combined arr use display arr to loop through stuff to display
-      }
-    })();
+    if (post.length === 0 || score.length === 0) return;
+    let combinedArray = combineData(post, score);
+    setCombinedArray(combinedArray);
   }, [score, post]);
 
   async function getData() {
