@@ -75,9 +75,9 @@
         }
       ]
     }
-    ``` 
-    
-### Post comments 
+    ```
+
+### Post comments
 * Endpoint path: /Raddit/id/comments
 * Endpoint method: POST
 
@@ -103,9 +103,9 @@
         }
       ]
     }
-    ```    
+    ```
 
-### Delete comments 
+### Delete comments
 * Endpoint path: /Raddit/id/comments/id
 * Endpoint method: DELETE
 
@@ -116,7 +116,7 @@
 * Response shape (JSON):
     ```json
     true
-    ``` 
+    ```
 
 ### Log in
 
@@ -152,7 +152,7 @@
     true
     ```
 
-### Update a raddit post 
+### Update a raddit post
 
 * Endpoint path: /Raddit/<int:pk>/
 * Endpoint method: PUT

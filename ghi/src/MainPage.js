@@ -11,7 +11,7 @@ function MainPage() {
 
   async function getData() {
     try {
-      const postUrl = `${api_url}api/posts/`;
+      const postUrl = `${api_url}api/posts`;
       const postResponse = await fetch(postUrl);
       const postData = await postResponse.json();
       setPost(postData.posts);
@@ -47,7 +47,7 @@ function MainPage() {
                 </button>
               </div>
               <div className="post">
-                <a href={`/post/${p.id}`} className="card-link">
+                <a href={`post/${p.id}`} className="card-link">
                   <p className="card-title">{p.title}</p>
                 </a>
               </div>

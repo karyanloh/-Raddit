@@ -3,6 +3,7 @@ import "./index.css";
 import raddit from "./raddit_new.png";
 import { useToken } from "./utils";
 
+
 function Nav() {
   const [token, Login, logout] = useToken();
   console.log('required console.log for lintr', Login)
@@ -70,54 +71,54 @@ function Nav() {
               </Link>
               <ul className="dropdown-menu">
                 <li>
-                  <NavLink
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "subraddit/Music";
+                      window.location.href = "/subraddit/Music";
                     }}
                   >
                     Music
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "subraddit/Movies";
+                      window.location.href = "/subraddit/Movies";
                     }}
                   >
                     Movies
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "subraddit/Tech";
+                      window.location.href = "/subraddit/Tech";
                     }}
                   >
                     Technology
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "subraddit/Sports";
+                      window.location.href = "/subraddit/Sports";
                     }}
                   >
                     Sports
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink
+                  <Link
                     className="dropdown-item"
                     onClick={() => {
-                      window.location.href = "subraddit/Miscellaneous";
+                      window.location.href = "/subraddit/Miscellaneous";
                     }}
                   >
                     Miscellaneous
-                  </NavLink>
+                  </Link>
                 </li>
               </ul>
             </li>
