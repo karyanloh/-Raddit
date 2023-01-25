@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
 
-const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}api/`
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}api/`;
 function PostDetails() {
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState(null);
