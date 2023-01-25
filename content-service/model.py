@@ -76,5 +76,10 @@ class PostsList(BaseModel):
     posts: list[PostOutShort]
 
 
+# mainpage using this
 class PostList(BaseModel):
     posts: list[PostOutDetail]
+
+
+class PostScoreList(BaseModel):
+    scores: list[PostScoreOut]
