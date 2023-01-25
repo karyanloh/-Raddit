@@ -78,7 +78,7 @@ function PostDetails() {
     }
     async function Del(e) {
         e.preventDefault()
-        const delUrl = `${api_url}api/delete/${id}`;
+        const delUrl = `${api_url}delete/${id}`;
         const fetchConfig = {
                     method: "delete",
                     headers: {
@@ -96,7 +96,7 @@ function PostDetails() {
     }
 
     async function handleUpArrowClick() {
-        const url=`${api_url}api/postScore/upvote/${id}`;
+        const url=`${api_url}postScore/upvote/${id}`;
             const fetchConfig ={
                 method: "put",
                 headers: {
@@ -109,7 +109,7 @@ function PostDetails() {
 
 
         async function handleDownArrowClick() {
-        const url=`${api_url}api/postScore/downvote/${id}`;
+        const url=`${api_url}postScore/downvote/${id}`;
             const fetchConfig ={
                 method: "put",
                 headers: {
