@@ -79,7 +79,16 @@ Today, I worked on:
 * I modified login and signup forms formats.
 * I fixed bug that was identified while deployment.
 
-## January 24 on:
+## January 23 on:
+Today, I worked on:
 
 * I did a unit test for user's authentication.
 
+## January 24 on:
+Today, I worked on:
+
+* I did readme documentation.
+
+## January 25 on:
+Today, I worked on:
+* I fixed bug that was identified while deployment.(subraddit url)

@@ -3,7 +3,6 @@ import { useAuthContext } from "./utils";
 import { useNavigate } from "react-router-dom";
 
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
-
 // subraddit
 let subraddits = [
   { label: "Tech", value: "Tech" },
