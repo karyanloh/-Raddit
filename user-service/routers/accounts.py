@@ -1,4 +1,4 @@
-from fastapi import Depends, Request, APIRouter, HTTPException
+from fastapi import Depends, Request, APIRouter
 from models import UserIn, UserOut, AccountToken
 from .auth import authenticator
 from user_queries import UserQueries
