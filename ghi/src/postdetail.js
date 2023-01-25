@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
 
-const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}api/`
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/api`
 function PostDetails() {
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState(null);
@@ -20,11 +20,11 @@ function PostDetails() {
     useEffect(() => {
     async function fetchPostandScore() {
         try {
-            const postUrl = `${api_url}api/post/${id}`;
+            const postUrl = `${api_url}post/${id}`;
             const postResponse = await fetch(postUrl);
             const postData = await postResponse.json();
 
-            const scoreUrl = `${api_url}api/post/postScore/${id}`;
+            const scoreUrl = `${api_url}post/postScore/${id}`;
             const scoreResponse = await fetch(scoreUrl);
             const scoreData = await scoreResponse.json();
 
@@ -40,7 +40,7 @@ function PostDetails() {
 
     async function fetchComments() {
         try {
-            const commentsUrl = `${api_url}api/comments/${id}`;
+            const commentsUrl = `${api_url}comments/${id}`;
             const commentsResponse = await fetch(commentsUrl);
             let commentData = await commentsResponse.json();
             commentData = (Object.values(commentData))
@@ -58,7 +58,7 @@ function PostDetails() {
 
     async function put(e) {
         e.preventDefault()
-        const editUrl = `${api_url}api/post/${id}`;
+        const editUrl = `${api_url}post/${id}`;
                 const fetchConfig = {
                     method: "put",
                     body: JSON.stringify(edit),
@@ -78,7 +78,7 @@ function PostDetails() {
     }
     async function Del(e) {
         e.preventDefault()
-        const delUrl = `${api_url}api/delete/${id}`;
+        const delUrl = `${api_url}delete/${id}`;
         const fetchConfig = {
                     method: "delete",
                     headers: {
@@ -96,7 +96,7 @@ function PostDetails() {
     }
 
     async function handleUpArrowClick() {
-        const url=`${api_url}api/postScore/upvote/${id}`;
+        const url=`${api_url}postScore/upvote/${id}`;
             const fetchConfig ={
                 method: "put",
                 headers: {
@@ -109,7 +109,7 @@ function PostDetails() {
 
 
         async function handleDownArrowClick() {
-        const url=`${api_url}api/postScore/downvote/${id}`;
+        const url=`${api_url}postScore/downvote/${id}`;
             const fetchConfig ={
                 method: "put",
                 headers: {
