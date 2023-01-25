@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./index.css";
-const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
-console.log(api_url)
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState({});
@@ -12,7 +11,7 @@ function MainPage() {
 
   async function getData() {
     try {
-      const postUrl = `${api_url}api/posts/`;
+      const postUrl = `${api_url}api/posts`;
       const postResponse = await fetch(postUrl);
       const postData = await postResponse.json();
       setPost(postData.posts);
@@ -48,7 +47,7 @@ function MainPage() {
                 </button>
               </div>
               <div className="post">
-                <a href={`/post/${p.id}`} className="card-link">
+                <a href={`post/${p.id}`} className="card-link">
                   <p className="card-title">{p.title}</p>
                 </a>
               </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
-const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}/`
+const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
 
 function SubRaddit() {
   const displayThreshold = 1;

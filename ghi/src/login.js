@@ -6,7 +6,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, login] = useToken();
-  console.log(token)
+  console.log('required console.log for lintr', token)
 
   return (
     <>
