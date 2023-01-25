@@ -24,7 +24,7 @@ function PostDetails() {
             const postResponse = await fetch(postUrl);
             const postData = await postResponse.json();
 
-            const scoreUrl = `${api_url}post/postScore/${id}`;
+            const scoreUrl = `${api_url}api/post/postScore/${id}`;
             const scoreResponse = await fetch(scoreUrl);
             const scoreData = await scoreResponse.json();
 
