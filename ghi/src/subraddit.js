@@ -103,7 +103,7 @@ function SubRaddit() {
                   </button>
                 </div>
                 <div className="post">
-                  <a href={`/post/${p.id}`} className="card-link">
+                  <a href={`/raddit-new/post/${p.id}`} className="card-link">
                     <p className="card-title">{p.title}</p>
                   </a>
                 </div>
