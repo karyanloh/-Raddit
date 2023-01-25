@@ -15,7 +15,7 @@ def test_get_token_returns_none_for_user_not_logged_in():
 
 def test_get_token_returns_token_for_user_logged_in():
     user = {
-        "id": 1,
+        "id": '1',
         "email": "yuki@gmail.com",
         "username": "yuki520",
     }
@@ -28,3 +28,4 @@ def test_get_token_returns_token_for_user_logged_in():
     data = response.json()
     assert data["access_token"] == "HELLO!"
     assert data["token_type"] == "Bearer"
+    assert data["account"] == user

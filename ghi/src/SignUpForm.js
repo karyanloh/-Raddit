@@ -72,7 +72,7 @@ function SignUpForm(props) {
               className="form-control"
               id="password"
               aria-describedby="password"
-              placeholder="Password"
+              placeholder="Enter Password"
             />
           </div>
           <button className="btn mt-3">Sign up</button>
