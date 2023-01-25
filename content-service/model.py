@@ -20,6 +20,8 @@ class PostOutDetail(BaseModel):
     description: str
     subraddit: str
     user_id: str
+    # upvoted_users: list[str]
+    # downvoted_user: list[str]
 
 
 class EditPost(BaseModel):
@@ -36,6 +38,7 @@ class CommentOut(BaseModel):
     id: str
     post_id: str
     body: str
+    user_id: str
 
 
 class EditComment(BaseModel):

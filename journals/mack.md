@@ -24,25 +24,73 @@ Today I worked on:
     - Went through and made ajustments to docker-compose.yaml. Ended up breaking the database and reverted back to before
     - Continued to make notes on Feature 6 and stories planning.
 
-## January 9, 2023
+## January 9, 2023 M
 Today I worked on:
     - Researching how to set up models with fastAPI and mongodb.
     -
 
-## January 10, 2023
+## January 10, 2023 T
 Today I worked on:
     - Research how to link votes with posts
 
-## January 11, 2023
+## January 11, 2023 W
 Today I worked on:
     - Created nav.js with links to app.js
     - Research how to link votes with posts
     -
-## January 12, 2023
+## January 12, 2023 R
 Today I worked on:
     - Research how to set up main page, votes with posts
     - Figuring out problems with local branches being ahead of origin branches that only I've worked in
 
-## January 13, 2023
+## January 13, 2023 F
+Today I worked on:
+    -
+
+## January 16, 2023 M
+Today I worked on:
+    -
+
+## January 17, 2023 T
+Today I worked on:
+    - BE comments
+
+## January 18, 2023 W
+Today I worked on:
+    - FE post detail with score and comments
+
+## January 19, 2023 R
+Today I worked on:
+    - fix end points for score feature
+
+## January 20, 2023 F
+Today I worked on:
+    - showing comments in the FE
+
+## January 23, 2023 M
+Today I worked on:
+    - comments persisting FE and BE
+
+## January 24, 2023 T
+Today I worked on:
+    -started writing unit tests
+    -comments BE work
+
+## January 25, 2023 W
+Today I worked on:
+    - fix bugs in deployment merges
+    - comments and votes FE
+    - write unit tests
+
+## January 26, 2023 R
+Today I worked on:
+    -
+
+## January 27, 2023 F
+Today I worked on:
+    -
+
+
+## January 30, 2023 M
 Today I worked on:
     -
