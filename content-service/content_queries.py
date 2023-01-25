@@ -104,6 +104,14 @@ class ContentQueries:
         return post_score
 
     # scores
+    def get_all_scores(self):
+        db = client[mongodb]
+        result = db.postVotes.find({})
+        scores = list(result)
+        for i in range(len(scores)):
+            scores[i]["id"] = str(scores[i]["_id"])
+        results = {"scores": scores}
+        return results
 
     def get_post_score_by_id(self, id):
         db = client[mongodb]
