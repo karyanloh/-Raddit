@@ -11,7 +11,7 @@ function MainPage() {
 
   async function getData() {
     try {
-      const postUrl = `${api_url}api/posts/`;
+      const postUrl = `${api_url}api/posts`;
       const postResponse = await fetch(postUrl);
       const postData = await postResponse.json();
       setPost(postData.posts);
