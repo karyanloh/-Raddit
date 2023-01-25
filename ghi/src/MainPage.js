@@ -49,7 +49,7 @@ function MainPage() {
     setDisplayArr(newArr);
     setIsLoading(false);
     setLoadMore(false);
-  }, [loadMore, combinedArray]);
+  }, [loadMore, combinedArray, displayArr]);
 
   useEffect(() => {
     if (post.length === 0 || score.length === 0) return;
