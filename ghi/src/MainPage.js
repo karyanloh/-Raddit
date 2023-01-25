@@ -21,7 +21,7 @@ function MainPage() {
       for (let i = 0; i < displayThreshold; i++) {
         if (
           combinedArray.length < displayThreshold &&
-          combinedArray[i] != undefined
+          combinedArray[i] !== undefined
         ) {
           newArr.push(combinedArray[i]);
         }
