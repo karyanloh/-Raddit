@@ -19,10 +19,12 @@ function MainPage() {
     if (combinedArray.length > 0) {
       let newArr = [];
       for (let i = 0; i < displayThreshold; i++) {
-        if (combinedArray.length < displayThreshold) {
+        if (
+          combinedArray.length < displayThreshold &&
+          combinedArray[i] != undefined
+        ) {
           newArr.push(combinedArray[i]);
         }
-        newArr.push(combinedArray[i]);
       }
       setDisplayArr(newArr);
       setIsLoading(false);
