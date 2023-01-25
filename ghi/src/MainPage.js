@@ -27,11 +27,11 @@ function MainPage() {
       }
       setDisplayArr(newArr);
     }
-  }, [combinedArray.length]);
+  }, [combinedArray]);
 
   useEffect(() => {
     let newArr = displayArr;
-    if (loadMore == true) {
+    if (loadMore === true) {
       let remainder = combinedArray.length - newArr.length;
       if (remainder >= displayThreshold) {
         let starter = newArr.length;
@@ -53,7 +53,7 @@ function MainPage() {
 
     setDisplayArr(newArr);
     setIsLoading(false);
-  }, [loadMore]);
+  }, [loadMore, displayArr]);
 
   ///////////////// combine post and score array
   useEffect(() => {
@@ -64,7 +64,7 @@ function MainPage() {
         //////set combined arr use display arr to loop through stuff to display
       }
     })();
-  }, [score.length]);
+  }, [score, post]);
 
   async function getData() {
     try {
