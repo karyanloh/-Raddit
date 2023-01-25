@@ -25,6 +25,7 @@ function MainPage() {
         newArr.push(combinedArray[i]);
       }
       setDisplayArr(newArr);
+      setIsLoading(false);
     }
   }, [combinedArray]);
 
@@ -47,7 +48,7 @@ function MainPage() {
       }
     }
     setDisplayArr(newArr);
-    setIsLoading(false);
+    // setIsLoading(false);
     setLoadMore(false);
   }, [loadMore, combinedArray, displayArr]);
 
@@ -70,7 +71,7 @@ function MainPage() {
       if (postResponse.ok && scoreResponse.ok) {
         setPost(postData.posts);
         setScore(scoreData.scores);
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
