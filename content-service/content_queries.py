@@ -104,6 +104,14 @@ class ContentQueries:
         return post_score
 
     # scores
+    def get_all_scores(self):
+        db = client[mongodb]
+        result = db.postVotes.find({})
+        scores = list(result)
+        for i in range(len(scores)):
+            scores[i]["id"] = str(scores[i]["_id"])
+        results = {"scores": scores}
+        return results
 
     def get_post_score_by_id(self, id):
         db = client[mongodb]
@@ -115,31 +123,68 @@ class ContentQueries:
         db = client[mongodb]
         result = db.postVotes.find_one({"post_id": post_id})
         result["id"] = str(result["_id"])  # ObjectId
+
         return result
 
-    def increase_post_score(self, post_id):
+    def increase_post_score(self, post_id, user_id):
         db = client[mongodb]
-        db.postVotes.update_one(
-            {"post_id": post_id},
-            {
-                "$inc": {
-                    "score": 1,
-                }
-            },
-        )
+        post_score = db.postVotes.find_one({"post_id": post_id})
+        upvoted_users = post_score["upvoted_users"]
+
+        if user_id in upvoted_users:
+            upvoted_users.remove(user_id)
+            db.postVotes.update_one(
+                {"post_id": post_id},
+                {
+                    "$inc": {
+                        "score": -1,
+                    },
+                    "$set": {"upvoted_users": upvoted_users},
+                },
+            )
+        else:
+            upvoted_users.append(user_id)
+
+            db.postVotes.update_one(
+                {"post_id": post_id},
+                {
+                    "$inc": {
+                        "score": 1,
+                    },
+                    "$set": {"upvoted_users": upvoted_users},
+                },
+            )
+
         post_score = self.get_post_score_by_post_id(post_id)
         return post_score
 
-    def decrease_post_score(self, post_id):
+    def decrease_post_score(self, post_id, user_id):
         db = client[mongodb]
-        db.postVotes.update_one(
-            {"post_id": post_id},
-            {
-                "$inc": {
-                    "score": -1,
-                }
-            },
-        )
+        post_score = db.postVotes.find_one({"post_id": post_id})
+        downvoted_users = post_score["downvoted_users"]
+
+        if user_id in downvoted_users:
+            downvoted_users.remove(user_id)
+            db.postVotes.update_one(
+                {"post_id": post_id},
+                {
+                    "$inc": {
+                        "score": 1,
+                    },
+                    "$set": {"downvoted_users": downvoted_users},
+                },
+            )
+        else:
+            downvoted_users.append(user_id)
+            db.postVotes.update_one(
+                {"post_id": post_id},
+                {
+                    "$inc": {
+                        "score": -1,
+                    },
+                    "$set": {"downvoted_users": downvoted_users},
+                },
+            )
         post_score = self.get_post_score_by_post_id(post_id)
         return post_score
 

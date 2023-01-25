@@ -26,7 +26,7 @@ function App() {
       <AuthProvider>
         <GetToken />
         <Nav />
-        <div className="container">
+        <div className="container-fluid">
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="login" element={<LoginForm />} />

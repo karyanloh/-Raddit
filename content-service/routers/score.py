@@ -1,9 +1,16 @@
 from fastapi import APIRouter, Depends
 from content_queries import ContentQueries
 from auth import authenticator
-from model import PostScoreOut
+from model import PostScoreOut, PostScoreList
 
 router = APIRouter()
+
+
+@router.get("/api/postScore", response_model=PostScoreList)
+def get_all_scores(
+    content_queries: ContentQueries = Depends(),
+):
+    return content_queries.get_all_scores()
 
 
 @router.get("/api/postScore/{id}", response_model=PostScoreOut)
@@ -57,16 +64,18 @@ def delete_post_score_by_id(
 @router.put("/api/postScore/upvote/{post_id}", response_model=PostScoreOut)
 def increase_post_score_by_id(
     post_id: str,
+    user_id: str,
     content_queries: ContentQueries = Depends(),
 ):
-    result = content_queries.increase_post_score(post_id)
+    result = content_queries.increase_post_score(post_id, user_id)
     return result
 
 
 @router.put("/api/postScore/downvote/{post_id}", response_model=PostScoreOut)
 def decrease_post_score_by_id(
     post_id: str,
+    user_id: str,
     content_queries: ContentQueries = Depends(),
 ):
-    result = content_queries.decrease_post_score(post_id)
+    result = content_queries.decrease_post_score(post_id, user_id)
     return result
