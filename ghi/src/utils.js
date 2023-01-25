@@ -95,7 +95,6 @@ export function useToken() {
 
   async function login(username, password) {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}token`;
-    console.log("**login url**         ", url);
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
@@ -116,7 +115,6 @@ export function useToken() {
       return;
     }
     let error = await response.json();
-    alert(`Please Signup`);
     navigate("/signup");
     return handleErrorMessage(error);
   }

@@ -5,7 +5,7 @@ import { useToken } from "./utils";
 
 function Nav() {
   const [token, Login, logout] = useToken();
-  console.log("required console.log for lintr", Login);
+  console.log("required console log for lintr", Login);
   return (
     <>
       {/* <nav className="nav-bg h-18 p-3 mb-2 navbar  navbar-dark text-dark"> */}

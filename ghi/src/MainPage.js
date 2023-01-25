@@ -50,7 +50,6 @@ function MainPage() {
       }
     }
     setDisplayArr(newArr);
-    // setIsLoading(false);
     setLoadMore(false);
   }, [loadMore, combinedArray, displayArr]);
 
@@ -73,7 +72,6 @@ function MainPage() {
       if (postResponse.ok && scoreResponse.ok) {
         setPost(postData.posts);
         setScore(scoreData.scores);
-        // setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
@@ -136,7 +134,6 @@ function MainPage() {
     return (
       <>
         {displayArr.map((p) => {
-          console.log(p);
           return (
             <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
               <div className="btn-group-vertical mb-3 ">

@@ -94,7 +94,6 @@ function PostDetails() {
     };
     const delResponse = await fetch(delUrl, fetchConfig);
     if (delResponse.ok) {
-      alert("Deletion success");
       navigate("/");
     } else {
       console.error("Error deleting post");
@@ -161,7 +160,7 @@ function PostDetails() {
             } else {
                 console.error('Error making comment')
             }
-                alert("Comment success");
+                window.location.reload();
             }
 
         async function handleSubmit(e) {
@@ -296,7 +295,6 @@ function PostDetails() {
                     <div className="card" >
                         <div className="card-header" >
                             <p className="card-text">{comment.body}{comment.user_id}</p>
-                            {console.log(comment)}
                         </div>
                     </div>
                 </div>

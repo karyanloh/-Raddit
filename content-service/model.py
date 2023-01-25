@@ -20,8 +20,6 @@ class PostOutDetail(BaseModel):
     description: str
     subraddit: str
     user_id: str
-    # upvoted_users: list[str]
-    # downvoted_user: list[str]
 
 
 class EditPost(BaseModel):
@@ -45,12 +43,6 @@ class EditComment(BaseModel):
     body: str
 
 
-# class PostScoreIn(BaseModel):
-#     post_id: str
-#     user_id: str
-#     upvote: bool
-
-
 class PostScoreIn(BaseModel):
     post_id: str
     score: int
@@ -66,8 +58,6 @@ class PostScoreOut(BaseModel):
 class EditPostScore(BaseModel):
     score: int
     upvoted_users: list[str]
-    # to increase score, add user to this list
-    # [1,2,3] - score3       [4] [1,2,3,4] - score4
     downvoted_users: list[str]
 
 
