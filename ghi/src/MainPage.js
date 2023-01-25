@@ -63,7 +63,7 @@ function MainPage() {
       const postResponse = await fetch(postUrl);
       const postData = await postResponse.json();
 
-      const scoreUrl = `${api_url}api/postScore/`;
+      const scoreUrl = `${api_url}api/postScore`;
       const scoreResponse = await fetch(scoreUrl);
       const scoreData = await scoreResponse.json();
 
