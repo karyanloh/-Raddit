@@ -110,7 +110,6 @@ export function useToken() {
       const redirect = search.split("=")[1] || "/";
       setToken(token);
       setAccount(account);
-      alert("success!");
       navigate(redirect);
       return;
     }
