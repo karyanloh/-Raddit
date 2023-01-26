@@ -3,7 +3,6 @@ import { useAuthContext } from "./utils";
 import { useNavigate } from "react-router-dom";
 
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
-
 // subraddit
 let subraddits = [
   { label: "Tech", value: "Tech" },
@@ -19,7 +18,6 @@ function CreatePostForm() {
 
   useEffect(() => {
     if (token === undefined) {
-      alert("Login Please");
       navigate("/login?redirect=/post/new");
     }
   }, [token, navigate]);
@@ -39,9 +37,9 @@ function CreatePostForm() {
         Authorization: `Bearer ${token}`,
       },
     };
-    await fetch(url, fetchConfig);
-    alert("Post success");
-    navigate("/");
+    let createPostResponse = await fetch(url, fetchConfig);
+    createPostResponse = await createPostResponse.json()
+    navigate(`/post/${createPostResponse.id}`);
   }
 
   async function handleSubmit(e) {

@@ -2,12 +2,8 @@ import os
 import pymongo
 from bson import ObjectId
 
-# dbuser = os.environ["MONGO_USER"]
-# dbpass = os.environ["MONGO_PASSWORD"]
-# dbhost = os.environ["MONGO_HOST"]
 mongodb = os.environ["DATABASE_NAME"]
 
-# mongo_str = f"mongodb://{dbuser}:{dbpass}@{dbhost}"
 mongo_str = os.environ["DATABASE_URL"]
 
 client = pymongo.MongoClient(mongo_str)
@@ -40,8 +36,8 @@ class ContentQueries:
 
     def delete_post(self, id):
         db = client[mongodb]
-        result = db.posts.delete_one({"_id": ObjectId(id)})
-        return result
+        db.posts.delete_one({"_id": ObjectId(id)})
+        return True
 
     def edit_post(self, id, description):
         db = client[mongodb]
