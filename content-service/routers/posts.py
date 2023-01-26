@@ -13,7 +13,7 @@ from model import (
 router = APIRouter()
 
 
-@router.post("/api/posts", response_model=PostIn)
+@router.post("/api/posts", response_model=PostOutShort)
 def create_post(
     new_post: PostIn,
     content_queries: ContentQueries = Depends(),

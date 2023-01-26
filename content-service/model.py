@@ -36,16 +36,11 @@ class CommentOut(BaseModel):
     id: str
     post_id: str
     body: str
+    user_id: str
 
 
 class EditComment(BaseModel):
     body: str
-
-
-# class PostScoreIn(BaseModel):
-#     post_id: str
-#     user_id: str
-#     upvote: bool
 
 
 class PostScoreIn(BaseModel):
@@ -63,8 +58,6 @@ class PostScoreOut(BaseModel):
 class EditPostScore(BaseModel):
     score: int
     upvoted_users: list[str]
-    # to increase score, add user to this list
-    # [1,2,3] - score3       [4] [1,2,3,4] - score4
     downvoted_users: list[str]
 
 
@@ -76,5 +69,10 @@ class PostsList(BaseModel):
     posts: list[PostOutShort]
 
 
+# mainpage using this
 class PostList(BaseModel):
     posts: list[PostOutDetail]
+
+
+class PostScoreList(BaseModel):
+    scores: list[PostScoreOut]
