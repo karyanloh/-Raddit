@@ -104,8 +104,13 @@
 # # from routers.posts import get_post_detail_by_id
 # from model import PostOutDetail
 # from auth import authenticator
+# from model import PostList
+# from content_queries import ContentQueries
 
 # client = TestClient(app)
+# class TestContentQueries:
+#     def get_all(self):
+#         return PostList(
 
 # expected = {
 #     "id": str,
@@ -181,3 +186,6 @@
 #     assert response.status_code == 200
 
 #     app.dependency_overrides = {}
+# def test_get_all_posts():
+#     app.dependency_overrides[ContentQueries]=TestContentQueries
+#     response = client.get("/api/posts")

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
 
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}api/`;
+
 function PostDetails() {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
@@ -15,7 +16,9 @@ function PostDetails() {
     description: description,
   };
   const navigate = useNavigate();
-  const { token, account } = useAuthContext();
+  let { token, account } = useAuthContext();
+  const [commentBody, setCommentBody] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     async function fetchPostandScore() {
@@ -52,7 +55,7 @@ function PostDetails() {
     }
     fetchPostandScore();
     fetchComments();
-  }, [id]);
+  }, [id, toggle]);
 
   async function put(e) {
     e.preventDefault();
@@ -86,7 +89,6 @@ function PostDetails() {
     };
     const delResponse = await fetch(delUrl, fetchConfig);
     if (delResponse.ok) {
-      alert("Deletion success");
       navigate("/");
     } else {
       console.error("Error deleting post");
@@ -94,11 +96,12 @@ function PostDetails() {
   }
 
   async function handleUpArrowClick() {
-    const url = `${api_url}postScore/upvote/${id}`;
+    const url = `${api_url}postScore/upvote/${id}/${account}`;
     const fetchConfig = {
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);
@@ -106,15 +109,48 @@ function PostDetails() {
   }
 
   async function handleDownArrowClick() {
-    const url = `${api_url}postScore/downvote/${id}`;
+    const url = `${api_url}postScore/downvote/${id}/${account}`;
     const fetchConfig = {
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);
     window.location.reload();
+  }
+
+  async function comment(data) {
+    const url = `${api_url}comments`;
+
+    const fetchConfig = {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      const addComment = await response.json();
+      setToggle(addComment);
+      setIsEditing(false);
+    } else {
+      console.error("Error making comment");
+    }
+    window.location.reload();
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    comment({
+      body: commentBody,
+      user_id: account,
+      post_id: id,
+    });
   }
 
   if (isLoading) {
@@ -207,6 +243,26 @@ function PostDetails() {
                 </button>
               </div>
               <div>
+                <div>
+                  <h3 style={{ color: "red" }}>Add a comment !</h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group mb-4 ">
+                      <label htmlFor="exampleFormControlTextarea1"></label>
+                      <textarea
+                        type="text"
+                        value={commentBody}
+                        onChange={(e) => setCommentBody(e.target.value)}
+                        className="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="2"
+                        placeholder="Comment"
+                      />
+                    </div>
+                    <button className="btn btn-outline-danger">
+                      Add Comment
+                    </button>
+                  </form>
+                </div>
                 <p className="card-subtitle mb-2 text-muted">
                   {comments[0].length} comments
                 </p>
@@ -265,6 +321,26 @@ function PostDetails() {
           <div className="card-footer">
             <div className="d-flex justify-content-between">
               <div>
+                <div>
+                  <h3 style={{ color: "red" }}>Add a comment !</h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group mb-4 ">
+                      <label htmlFor="exampleFormControlTextarea1"></label>
+                      <textarea
+                        type="text"
+                        value={commentBody}
+                        onChange={(e) => setCommentBody(e.target.value)}
+                        className="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="2"
+                        placeholder="Comment"
+                      />
+                    </div>
+                    <button className="btn btn-outline-danger">
+                      Add Comment
+                    </button>
+                  </form>
+                </div>
                 <p className="card-subtitle mb-2 text-muted">
                   {comments[0].length} comments
                 </p>

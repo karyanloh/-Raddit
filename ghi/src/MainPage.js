@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import "./index.css";
+import { useAuthContext } from "./utils";
+
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`;
 
 function MainPage() {
+  let { token, account } = useAuthContext();
   const displayThreshold = 10;
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState([]);
@@ -20,13 +23,11 @@ function MainPage() {
   useEffect(() => {
     if (combinedArray.length > 0) {
       let newArr = [];
-      //to handle if post is less than display threshold set
       if (combinedArray.length < displayThreshold) {
         for (let i = 0; i < combinedArray.length; i++) {
           newArr.push(combinedArray[i]);
         }
       } else {
-        //if post is more than display threshold
         for (let i = 0; i < displayThreshold; i++) {
           newArr.push(combinedArray[i]);
         }
@@ -77,7 +78,6 @@ function MainPage() {
       if (postResponse.ok && scoreResponse.ok) {
         setPost(postData.posts);
         setScore(scoreData.scores);
-        setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
@@ -105,11 +105,12 @@ function MainPage() {
   }
 
   async function handleUpArrowClick(id) {
-    const url = `${api_url}api/postScore/upvote/${id}`;
+    const url = `${api_url}api/postScore/upvote/${id}/${account}`;
     const fetchConfig = {
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);
@@ -117,11 +118,12 @@ function MainPage() {
   }
 
   async function handleDownArrowClick(id) {
-    const url = `${api_url}api/postScore/downvote/${id}`;
+    const url = `${api_url}api/postScore/downvote/${id}/${account}`;
     const fetchConfig = {
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);
@@ -138,44 +140,50 @@ function MainPage() {
     );
   } else {
     return (
-      <>
-        {displayArr.map((p) => {
-          console.log(p);
-          return (
-            <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
-              <div className="btn-group-vertical mb-3 ">
-                <button
-                  onClick={() => handleUpArrowClick(p.id)}
-                  type="button"
-                  className="btn btn-outline-success text-left"
-                >
-                  <i className="fa fa-chevron-up pr-2"></i>
-                  Rad
-                </button>
-                <button type="button" className="btn text-left" disabled>
-                  Votes: {p.score}
-                </button>
-                <button
-                  onClick={() => handleDownArrowClick(p.id)}
-                  type="button"
-                  className="btn btn-outline-danger text-left"
-                >
-                  <i className="fa fa-chevron-down pr-2"></i>
-                  <span>Bad</span>
-                </button>
-              </div>
-              <div className="post">
-                <a href={`post/${p.id}`} className="card-link">
-                  <p className="card-title">{p.title}</p>
-                </a>
-              </div>
-            </div>
-          );
-        })}
+      <div className="container">
+        <ul className="list-group">
+          {displayArr.map((p) => {
+            return (
+              <li
+                className="list-group-item list-group-item-dark border border-dark"
+                key={p.id}
+              >
+                <div className="row">
+                  <div className="col-sm-1">
+                    <button
+                      onClick={() => handleUpArrowClick(p.id)}
+                      type="button"
+                      className="btn btn-outline-success text-left"
+                    >
+                      <i className="fa fa-chevron-up pr-2"></i>
+                      Rad
+                    </button>
+                    <br />
+                    <span className="badge badge-info">{p.score}</span>
+                    <br />
+                    <button
+                      onClick={() => handleDownArrowClick(p.id)}
+                      type="button"
+                      className="btn btn-outline-danger text-left"
+                    >
+                      <i className="fa fa-chevron-down pr-2"></i>
+                      <span>Bad</span>
+                    </button>
+                  </div>
+                  <div className="col-sm-11">
+                    <a href={`post/${p.id}`}>{p.title}</a>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
         {displayArr.length < post.length ? (
-          <button onClick={handleLoadMore}>Load more</button>
+          <button onClick={handleLoadMore} className="btn btn-primary">
+            Load more
+          </button>
         ) : null}
-      </>
+      </div>
     );
   }
 }
