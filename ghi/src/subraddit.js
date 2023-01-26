@@ -15,9 +15,7 @@ function SubRaddit() {
   const [combinedArray, setCombinedArray] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
 
-  useEffect(() => {
-    getData();
-  }, []);
+
 
   useEffect(() => {
     if (combinedArray.length > 0) {
@@ -131,6 +129,10 @@ function SubRaddit() {
     await fetch(url, fetchConfig);
     window.location.reload();
   }
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   if (isLoading) {
     return (
