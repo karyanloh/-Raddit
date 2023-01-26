@@ -64,7 +64,6 @@ def decrease_post_score_by_id(
     content_queries: ContentQueries = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ):
-    user_id = user_id["account"]
     if account["id"] is not None:
         result = content_queries.decrease_post_score(post_id, user_id)
         return result
