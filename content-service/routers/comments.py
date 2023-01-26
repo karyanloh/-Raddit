@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from content_queries import ContentQueries
 from auth import authenticator
-from model import CommentIn, CommentOut, EditComment, commentList
+from model import CommentIn, commentList
 
 router = APIRouter()
 
