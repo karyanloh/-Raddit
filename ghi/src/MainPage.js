@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import "./index.css";
+import { useAuthContext } from "./utils";
+
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`;
 
 function MainPage() {
+  let { token, account } = useAuthContext();
   const displayThreshold = 10;
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState([]);
@@ -99,11 +102,14 @@ function MainPage() {
   }
 
   async function handleUpArrowClick(id) {
+    account = { account };
     const url = `${api_url}api/postScore/upvote/${id}`;
     const fetchConfig = {
       method: "put",
+      body: JSON.stringify(account),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);
@@ -111,11 +117,14 @@ function MainPage() {
   }
 
   async function handleDownArrowClick(id) {
+    account = { account };
     const url = `${api_url}api/postScore/downvote/${id}`;
     const fetchConfig = {
       method: "put",
+      body: JSON.stringify(account),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);

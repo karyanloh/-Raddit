@@ -33,7 +33,6 @@ function App() {
             <Route path="subraddit">
               <Route path=":subraddit" element={<SubRaddit />} />
             </Route>
-            {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>
       </AuthProvider>

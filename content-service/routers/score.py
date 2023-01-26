@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from content_queries import ContentQueries
 from auth import authenticator
 from model import PostScoreOut, PostScoreList
@@ -42,18 +42,28 @@ def delete_post_score_by_id(
 @router.put("/api/postScore/upvote/{post_id}", response_model=PostScoreOut)
 def increase_post_score_by_id(
     post_id: str,
-    user_id: str,
+    user_id: dict,
     content_queries: ContentQueries = Depends(),
+    account: dict = Depends(authenticator.get_current_account_data),
 ):
-    result = content_queries.increase_post_score(post_id, user_id)
-    return result
+    user_id = user_id["account"]
+    if account["id"] is not None:
+        result = content_queries.increase_post_score(post_id, user_id)
+        return result
+    else:
+        raise HTTPException(status_code=401, detail="not working")
 
 
 @router.put("/api/postScore/downvote/{post_id}", response_model=PostScoreOut)
 def decrease_post_score_by_id(
     post_id: str,
-    user_id: str,
+    user_id: dict,
     content_queries: ContentQueries = Depends(),
+    account: dict = Depends(authenticator.get_current_account_data),
 ):
-    result = content_queries.decrease_post_score(post_id, user_id)
-    return result
+    user_id = user_id["account"]
+    if account["id"] is not None:
+        result = content_queries.decrease_post_score(post_id, user_id)
+        return result
+    else:
+        raise HTTPException(status_code=401, detail="not working")
