@@ -13,14 +13,6 @@ def get_all_scores(
     return content_queries.get_all_scores()
 
 
-@router.get("/api/postScore/{id}", response_model=PostScoreOut)
-def get_post_score_by_id(
-    id: str,
-    content_queries: ContentQueries = Depends(),
-):
-    return content_queries.get_post_score_by_id(id)
-
-
 @router.get("/api/post/postScore/{post_id}", response_model=PostScoreOut)
 def get_post_score_by_post_id(
     post_id: str,
@@ -28,15 +20,6 @@ def get_post_score_by_post_id(
     content_queries: ContentQueries = Depends(),
 ):
     return content_queries.get_post_score_by_post_id(post_id)
-
-
-@router.delete("/api/postScore/{id}")
-def delete_post_score_by_id(
-    id: str,
-    content_queries: ContentQueries = Depends(),
-    account: dict = Depends(authenticator.get_current_account_data),
-):
-    return content_queries.delete_post_score(id)
 
 
 @router.put(
