@@ -21,6 +21,8 @@ api-unit-test-job:
     - cd content-service
     - pip install -r requirements.txt
     - python -m pytest
+  only:
+    - main
 
 api-unit-test-job-two:
   image: python:3-bullseye
@@ -31,6 +33,8 @@ api-unit-test-job-two:
     - cd user-service
     - pip install -r requirements.txt
     - python -m pytest
+  only:
+    - main
 
 # Build the React/JavaScript front-end
 build-front-end-job:
