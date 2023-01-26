@@ -2,8 +2,12 @@ import os
 import pymongo
 from bson import ObjectId
 
+# dbuser = os.environ["MONGO_USER"]
+# dbpass = os.environ["MONGO_PASSWORD"]
+# dbhost = os.environ["MONGO_HOST"]
 mongodb = os.environ["DATABASE_NAME"]
 
+# mongo_str = f"mongodb://{dbuser}:{dbpass}@{dbhost}"
 mongo_str = os.environ["DATABASE_URL"]
 
 client = pymongo.MongoClient(mongo_str)
@@ -36,8 +40,8 @@ class ContentQueries:
 
     def delete_post(self, id):
         db = client[mongodb]
-        db.posts.delete_one({"_id": ObjectId(id)})
-        return True
+        result = db.posts.delete_one({"_id": ObjectId(id)})
+        return result
 
     def edit_post(self, id, description):
         db = client[mongodb]
@@ -118,6 +122,8 @@ class ContentQueries:
     def get_post_score_by_post_id(self, post_id):
         db = client[mongodb]
         result = db.postVotes.find_one({"post_id": post_id})
+        print("------------RESULT")
+        print(result)
         result["id"] = str(result["_id"])  # ObjectId
 
         return result
