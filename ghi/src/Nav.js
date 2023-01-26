@@ -54,7 +54,6 @@ function Nav() {
                     onClick={() => {
                       window.location.href = "/raddit-new/subraddit/Movies";
                     }}
-
                   >
                     Movies
                   </Link>
@@ -122,7 +121,7 @@ function Nav() {
                       logout();
                     }}
                     role={"button"}
-                    className="nav-link"
+                    className="nav-link text-dark"
                   >
                     Logout
                   </span>
