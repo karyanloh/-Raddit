@@ -14,12 +14,10 @@ function MainPage() {
   const [combinedArray, setCombinedArray] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
 
-  // component did mount this should fetch data from backend
   useEffect(() => {
     getData();
   }, []);
 
-  // for initial loading of posts
   useEffect(() => {
     if (combinedArray.length > 0) {
       let newArr = [];
