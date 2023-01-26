@@ -2,12 +2,8 @@ import os
 import pymongo
 from bson import ObjectId
 
-# dbuser = os.environ["MONGO_USER"]
-# dbpass = os.environ["MONGO_PASSWORD"]
-# dbhost = os.environ["MONGO_HOST"]
 mongodb = os.environ["DATABASE_NAME"]
 
-# mongo_str = f"mongodb://{dbuser}:{dbpass}@{dbhost}"
 mongo_str = os.environ["DATABASE_URL"]
 
 client = pymongo.MongoClient(mongo_str)
@@ -122,8 +118,6 @@ class ContentQueries:
     def get_post_score_by_post_id(self, post_id):
         db = client[mongodb]
         result = db.postVotes.find_one({"post_id": post_id})
-        print("------------RESULT")
-        print(result)
         result["id"] = str(result["_id"])  # ObjectId
 
         return result
@@ -132,6 +126,7 @@ class ContentQueries:
         db = client[mongodb]
         post_score = db.postVotes.find_one({"post_id": post_id})
         upvoted_users = post_score["upvoted_users"]
+        downvoted_users = post_score["downvoted_users"]
 
         if user_id in upvoted_users:
             upvoted_users.remove(user_id)
@@ -142,6 +137,21 @@ class ContentQueries:
                         "score": -1,
                     },
                     "$set": {"upvoted_users": upvoted_users},
+                },
+            )
+        elif user_id in downvoted_users:
+            upvoted_users.append(user_id)
+            downvoted_users.remove(user_id)
+            db.postVotes.update_one(
+                {"post_id": post_id},
+                {
+                    "$inc": {
+                        "score": 2,
+                    },
+                    "$set": {
+                        "upvoted_users": upvoted_users,
+                        "downvoted_users": downvoted_users,
+                    },
                 },
             )
         else:
@@ -164,8 +174,9 @@ class ContentQueries:
         db = client[mongodb]
         post_score = db.postVotes.find_one({"post_id": post_id})
         downvoted_users = post_score["downvoted_users"]
+        upvoted_users = post_score["upvoted_users"]
 
-        if user_id in downvoted_users:
+        if user_id in downvoted_users and user_id not in upvoted_users:
             downvoted_users.remove(user_id)
             db.postVotes.update_one(
                 {"post_id": post_id},
@@ -174,6 +185,21 @@ class ContentQueries:
                         "score": 1,
                     },
                     "$set": {"downvoted_users": downvoted_users},
+                },
+            )
+        elif user_id in upvoted_users and user_id not in downvoted_users:
+            downvoted_users.append(user_id)
+            upvoted_users.remove(user_id)
+            db.postVotes.update_one(
+                {"post_id": post_id},
+                {
+                    "$inc": {
+                        "score": -2,
+                    },
+                    "$set": {
+                        "downvoted_users": downvoted_users,
+                        "upvoted_users": upvoted_users,
+                    },
                 },
             )
         else:
