@@ -39,14 +39,15 @@ def delete_post_score_by_id(
     return content_queries.delete_post_score(id)
 
 
-@router.put("/api/postScore/upvote/{post_id}", response_model=PostScoreOut)
+@router.put(
+    "/api/postScore/upvote/{post_id}/{user_id}", response_model=PostScoreOut
+)
 def increase_post_score_by_id(
     post_id: str,
-    user_id: dict,
+    user_id: str,
     content_queries: ContentQueries = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ):
-    user_id = user_id["account"]
     if account["id"] is not None:
         result = content_queries.increase_post_score(post_id, user_id)
         return result
@@ -54,14 +55,15 @@ def increase_post_score_by_id(
         raise HTTPException(status_code=401, detail="not working")
 
 
-@router.put("/api/postScore/downvote/{post_id}", response_model=PostScoreOut)
+@router.put(
+    "/api/postScore/downvote/{post_id}/{user_id}", response_model=PostScoreOut
+)
 def decrease_post_score_by_id(
     post_id: str,
-    user_id: dict,
+    user_id: str,
     content_queries: ContentQueries = Depends(),
     account: dict = Depends(authenticator.get_current_account_data),
 ):
-    user_id = user_id["account"]
     if account["id"] is not None:
         result = content_queries.decrease_post_score(post_id, user_id)
         return result
