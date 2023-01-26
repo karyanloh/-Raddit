@@ -300,7 +300,7 @@ function PostDetails() {
             <p className="card-text">{post.description}</p>
           </div>
           <div className="card-footer">
-            <div className="d-flex justify-content">
+            <div className="d-flex justify-content-between">
               <div>
                 <button onClick={setIsEditing} className="btn btn-secondary">
                   Edit
@@ -331,8 +331,9 @@ function PostDetails() {
                   </form>
                 </div>
                 <p className="card-subtitle mb-2 text-muted">
-                {comments[0].length} comments
+                  {comments[0].length} comments
                 </p>
+              </div>
             </div>
           </div>
         </div>
@@ -347,11 +348,11 @@ function PostDetails() {
                     {comment.user_id}
                   </p>
                 </div>
-            );
+              </div>
+            </div>
+          );
         })}
-
-
-    </div>
+      </div>
     );
   } else if (token) {
     return (
@@ -411,25 +412,24 @@ function PostDetails() {
                   </form>
                 </div>
                 <p className="card-subtitle mb-2 text-muted">
-                {comments[0].length} comments
+                  {comments[0].length} comments
                 </p>
+              </div>
             </div>
           </div>
         </div>
         {comments[0].map((comment) => {
-            return (
-                <div className="mt-2"  key={comment.id}>
-                    <div className="card" >
-                        <div className="card-header" >
-                            <p className="card-text">{comment.body}</p>
-                        </div>
-                    </div>
+          return (
+            <div className="mt-2" key={comment.id}>
+              <div className="card">
+                <div className="card-header">
+                  <p className="card-text">{comment.body}</p>
                 </div>
-            );
+              </div>
+            </div>
+          );
         })}
-
-
-    </div>
+      </div>
     );
   } else {
     return (
