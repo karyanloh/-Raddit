@@ -83,3 +83,7 @@ Today, I worked on:
 
 * I did a unit test for user's authentication.
 
+## January 25 on:
+
+* I fixed bug that was identified while deployment.
+* I revised the wireframe.
