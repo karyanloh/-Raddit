@@ -116,29 +116,26 @@ def fake_authenticator():
     pass
 
 
-# def test_create_post():
-#     app.dependency_overrides[
-#         authenticator.get_current_account_data
-#     ] = fake_authenticator
-#     # Arrange
-#     req = {
-#         "account": str,
-#         "title": "Unit Test",
-#         "description": "We are testing",
-#         "subraddit": "Tech",
-#     }
-#     app.dependency_overrides[ContentQueries] = MockPostQueries
+def test_create_post():
+    # Arrange
+    req = {
+        "title": "Unit Test",
+        "description": "We are testing",
+        "subraddit": "Tech",
+        "user_id": "63c730233d31b1c1c0a41cf5",
+    }
+    app.dependency_overrides[ContentQueries] = MockPostQueries
 
-#     # Act
-#     resp = client.post("/api/posts", json=req)
-#     actual = resp.json()
+    # Act
+    resp = client.post("/api/posts", json=req)
+    actual = resp.json()
 
-#     # Assert
-#     assert resp.status_code == 200
-#     assert actual == expected
+    # Assert
+    assert resp.status_code == 200
+    assert actual == expected
 
-#     # Clean up
-#     app.dependency_overrides = {}
+    # Clean up
+    app.dependency_overrides = {}
 
 
 def test_get_post_detail():
