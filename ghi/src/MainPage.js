@@ -138,43 +138,50 @@ function MainPage() {
     );
   } else {
     return (
-      <>
-        {displayArr.map((p) => {
-          return (
-            <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
-              <div className="btn-group-vertical mb-3 ">
-                <button
-                  onClick={() => handleUpArrowClick(p.id)}
-                  type="button"
-                  className="btn btn-outline-success text-left"
-                >
-                  <i className="fa fa-chevron-up pr-2"></i>
-                  Rad
-                </button>
-                <button type="button" className="btn text-left" disabled>
-                  Votes: {p.score}
-                </button>
-                <button
-                  onClick={() => handleDownArrowClick(p.id)}
-                  type="button"
-                  className="btn btn-outline-danger text-left"
-                >
-                  <i className="fa fa-chevron-down pr-2"></i>
-                  <span>Bad</span>
-                </button>
-              </div>
-              <div className="post">
-                <a href={`post/${p.id}`} className="card-link">
-                  <p className="card-title">{p.title}</p>
-                </a>
-              </div>
-            </div>
-          );
-        })}
+      <div className="container">
+        <ul className="list-group">
+          {displayArr.map((p) => {
+            return (
+              <li
+                className="list-group-item list-group-item-dark border border-dark"
+                key={p.id}
+              >
+                <div className="row">
+                  <div className="col-sm-1">
+                    <button
+                      onClick={() => handleUpArrowClick(p.id)}
+                      type="button"
+                      className="btn btn-outline-success text-left"
+                    >
+                      <i className="fa fa-chevron-up pr-2"></i>
+                      Rad
+                    </button>
+                    <br />
+                    <span className="badge badge-info">{p.score}</span>
+                    <br />
+                    <button
+                      onClick={() => handleDownArrowClick(p.id)}
+                      type="button"
+                      className="btn btn-outline-danger text-left"
+                    >
+                      <i className="fa fa-chevron-down pr-2"></i>
+                      <span>Bad</span>
+                    </button>
+                  </div>
+                  <div className="col-sm-11">
+                    <a href={`post/${p.id}`}>{p.title}</a>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
         {displayArr.length < post.length ? (
-          <button onClick={handleLoadMore}>Load more</button>
+          <button onClick={handleLoadMore} className="btn btn-primary">
+            Load more
+          </button>
         ) : null}
-      </>
+      </div>
     );
   }
 }

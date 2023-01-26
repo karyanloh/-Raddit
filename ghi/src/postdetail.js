@@ -343,10 +343,7 @@ function PostDetails() {
             <div className="mt-2" key={comment.id}>
               <div className="card">
                 <div className="card-header">
-                  <p className="card-text">
-                    {comment.body}
-                    {comment.user_id}
-                  </p>
+                  <p className="card-text">{comment.body}</p>
                 </div>
               </div>
             </div>
