@@ -153,39 +153,6 @@ function PostDetails() {
     });
   }
 
-  async function comment(data) {
-    const url = `${api_url}comments`;
-
-    const fetchConfig = {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      const addComment = await response.json();
-      setToggle(addComment);
-      setIsEditing(false);
-    } else {
-      console.error("Error making comment");
-    }
-    window.location.reload();
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    comment({
-      body: commentBody,
-      user_id: account,
-      post_id: id,
-    });
-  }
-
-
   if (isLoading) {
     return (
       <div className="spinner-border" animation="border" variant="primary" />
