@@ -39,7 +39,7 @@ function SignUpForm(props) {
         <div className="text-center mt-4 name">Raddit</div>
         <form className="p-3 mt-3" onSubmit={SignUp}>
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-user"></span>
+            <span className="fas"></span>
             <input
               value={username}
               type="username"
@@ -51,7 +51,7 @@ function SignUpForm(props) {
             />
           </div>
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-key"></span>
+            <span className="fas"></span>
             <input
               value={email}
               type="email"
@@ -63,7 +63,7 @@ function SignUpForm(props) {
             />
           </div>
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-key"></span>
+            <span className="fas"></span>
             <input
               value={password}
               type="password"
