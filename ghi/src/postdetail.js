@@ -6,22 +6,19 @@ import { useAuthContext } from "./utils";
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}api/`;
 
 function PostDetails() {
-    const [post, setPost] = useState(null);
-    const [comments, setComments] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isEditing, setIsEditing] = useState(false);
-    const [description, setDescription] = useState("");
-    const { id } = useParams();
-    const edit = {
-        description: description
-    }
-    const navigate = useNavigate();
-    const { token, account } = useAuthContext();
-    const [commentBody, setCommentBody] = useState("")
-    const [toggle, setToggle] = useState(false)
-    // const [hasUpvoted, setHasUpVoted] = useState(false)
-    // const [hasDownvoted, setHasDownVoted] = useState(false)
-    // const [postId, setPostId] = useState("")
+  const [post, setPost] = useState(null);
+  const [comments, setComments] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [description, setDescription] = useState("");
+  const { id } = useParams();
+  const edit = {
+    description: description,
+  };
+  const navigate = useNavigate();
+  let { token, account } = useAuthContext();
+  const [commentBody, setCommentBody] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     async function fetchPostandScore() {
@@ -58,9 +55,7 @@ function PostDetails() {
     }
     fetchPostandScore();
     fetchComments();
-    }, [id,toggle]);
-
-
+  }, [id, toggle]);
 
   async function put(e) {
     e.preventDefault();
@@ -100,78 +95,67 @@ function PostDetails() {
     }
   }
 
-    async function handleUpArrowClick() {
-        const url=`${api_url}postScore/upvote/${id}`;
-        // user = account
-            // try {
-                const fetchConfig ={
-                method: "put",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-                }
-
-        const response = await fetch(url, fetchConfig);
-        if(response.ok) {
-                // const upvoteScore = await response.json();
-                // setUpVote(upvoteScore);
-                setIsEditing(false);
-                // setPost({ ...postData, score: postData.score + 1 });
-
-            } else {
-                console.error('Error changing score')
-            }
-
-        window.location.reload()
-        }
-
-
-  async function handleDownArrowClick() {
-    const url = `${api_url}postScore/downvote/${id}`;
+  async function handleUpArrowClick() {
+    account = { account };
+    const url = `${api_url}postScore/upvote/${id}`;
     const fetchConfig = {
       method: "put",
+      body: JSON.stringify(account),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);
     window.location.reload();
   }
 
+  async function handleDownArrowClick() {
+    account = { account };
+    const url = `${api_url}postScore/downvote/${id}`;
+    const fetchConfig = {
+      method: "put",
+      body: JSON.stringify(account),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    await fetch(url, fetchConfig);
+    window.location.reload();
+  }
 
+  async function comment(data) {
+    const url = `${api_url}comments`;
 
-        async function comment(data) {
-            // data.preventDefault();
-            const url =`${api_url}comments`
+    const fetchConfig = {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      const addComment = await response.json();
+      setToggle(addComment);
+      setIsEditing(false);
+    } else {
+      console.error("Error making comment");
+    }
+    window.location.reload();
+  }
 
-            const fetchConfig = {
-                method: "post",
-                body: JSON.stringify(data),
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-            const response = await fetch(url, fetchConfig);
-            if(response.ok) {
-                const addComment = await response.json();
-                setToggle(addComment);
-                setIsEditing(false);
-            } else {
-                console.error('Error making comment')
-            }
-                window.location.reload();
-            }
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-        async function handleSubmit(e) {
-            e.preventDefault();
-
-            comment({
-                body: commentBody,
-                user_id: account,
-                post_id: id,
-            });
-        }
+    comment({
+      body: commentBody,
+      user_id: account,
+      post_id: id,
+    });
+  }
 
   if (isLoading) {
     return (
@@ -263,24 +247,26 @@ function PostDetails() {
                 </button>
               </div>
               <div>
-                        <div>
-                            <h3 style={{ color: "red" }}>Add a comment !</h3>
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group mb-4 ">
-                                    <label htmlFor="exampleFormControlTextarea1"></label>
-                                    <textarea
-                                    type="text"
-                                    value={commentBody}
-                                    onChange={(e) => setCommentBody(e.target.value)}
-                                    className="form-control"
-                                    id="exampleFormControlTextarea1"
-                                    rows="2"
-                                    placeholder="Comment"
-                                    />
-                                </div>
-                                <button className="btn btn-outline-danger">Add Comment</button>
-                            </form>
-                        </div>
+                <div>
+                  <h3 style={{ color: "red" }}>Add a comment !</h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group mb-4 ">
+                      <label htmlFor="exampleFormControlTextarea1"></label>
+                      <textarea
+                        type="text"
+                        value={commentBody}
+                        onChange={(e) => setCommentBody(e.target.value)}
+                        className="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="2"
+                        placeholder="Comment"
+                      />
+                    </div>
+                    <button className="btn btn-outline-danger">
+                      Add Comment
+                    </button>
+                  </form>
+                </div>
                 <p className="card-subtitle mb-2 text-muted">
                   {comments[0].length} comments
                 </p>
@@ -290,19 +276,20 @@ function PostDetails() {
         </div>
 
         {comments[0].map((comment) => {
-            return (
-                <div className="mt-2"  key={comment.id}>
-                    <div className="card" >
-                        <div className="card-header" >
-                            <p className="card-text">{comment.body}{comment.user_id}</p>
-                        </div>
-                    </div>
+          return (
+            <div className="mt-2" key={comment.id}>
+              <div className="card">
+                <div className="card-header">
+                  <p className="card-text">
+                    {comment.body}
+                    {comment.user_id}
+                  </p>
                 </div>
-            );
+              </div>
+            </div>
+          );
         })}
-
-
-    </div>
+      </div>
     );
   } else if (token) {
     return (
@@ -341,24 +328,26 @@ function PostDetails() {
           <div className="card-footer">
             <div className="d-flex justify-content-between">
               <div>
-                        <div>
-                            <h3 style={{ color: "red" }}>Add a comment !</h3>
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group mb-4 ">
-                                    <label htmlFor="exampleFormControlTextarea1"></label>
-                                    <textarea
-                                    type="text"
-                                    value={commentBody}
-                                    onChange={(e) => setCommentBody(e.target.value)}
-                                    className="form-control"
-                                    id="exampleFormControlTextarea1"
-                                    rows="2"
-                                    placeholder="Comment"
-                                    />
-                                </div>
-                                <button className="btn btn-outline-danger">Add Comment</button>
-                            </form>
-                        </div>
+                <div>
+                  <h3 style={{ color: "red" }}>Add a comment !</h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group mb-4 ">
+                      <label htmlFor="exampleFormControlTextarea1"></label>
+                      <textarea
+                        type="text"
+                        value={commentBody}
+                        onChange={(e) => setCommentBody(e.target.value)}
+                        className="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="2"
+                        placeholder="Comment"
+                      />
+                    </div>
+                    <button className="btn btn-outline-danger">
+                      Add Comment
+                    </button>
+                  </form>
+                </div>
                 <p className="card-subtitle mb-2 text-muted">
                   {comments[0].length} comments
                 </p>
@@ -367,19 +356,17 @@ function PostDetails() {
           </div>
         </div>
         {comments[0].map((comment) => {
-            return (
-                <div className="mt-2"  key={comment.id}>
-                    <div className="card" >
-                        <div className="card-header" >
-                            <p className="card-text">{comment.body}</p>
-                        </div>
-                    </div>
+          return (
+            <div className="mt-2" key={comment.id}>
+              <div className="card">
+                <div className="card-header">
+                  <p className="card-text">{comment.body}</p>
                 </div>
-            );
+              </div>
+            </div>
+          );
         })}
-
-
-    </div>
+      </div>
     );
   } else {
     return (
