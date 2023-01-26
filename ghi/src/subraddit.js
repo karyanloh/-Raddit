@@ -1,50 +1,68 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
+import "./index.css";
+import { useAuthContext } from "./utils";
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
 
 function SubRaddit() {
-  const displayThreshold = 1;
+  let { token, account } = useAuthContext();
+  const displayThreshold = 10;
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState({});
+  const [score, setScore] = useState([]);
   const {subraddit} = useParams();
   const [displayArr, setDisplayArr] = useState([]);
+  const [combinedArray, setCombinedArray] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
 
 
 
   useEffect(() => {
-    if (post.length > 0) {
+    if (combinedArray.length > 0) {
       let newArr = [];
-      for (let i = 0; i < displayThreshold; i++) {
-        newArr.push(post[i]);
-      }
-      setDisplayArr(newArr);
-    }
-  }, [post]);
-
-    useEffect(() => {
-      let newArr = displayArr;
-      if (loadMore === true) {
-        let remainder = post.length - newArr.length;
-        if (remainder >= displayThreshold) {
-          let starter = newArr.length;
-          for (let i = starter; i < starter + displayThreshold; i++) {
-            newArr.push(post[i]);
-          }
-          setLoadMore(false);
-        } else {
-          for (let i = post.length - remainder; i < post.length; i++) {
-            newArr.push(post[i]);
-          }
-          setLoadMore(false);
+      if (combinedArray.length < displayThreshold) {
+        for (let i = 0; i < combinedArray.length; i++) {
+          newArr.push(combinedArray[i]);
+        }
+      } else {
+        for (let i = 0; i < displayThreshold; i++) {
+          newArr.push(combinedArray[i]);
         }
       }
-
       setDisplayArr(newArr);
       setIsLoading(false);
-    }, [loadMore,displayArr,post]);
+    }
+  }, [combinedArray]);
 
+  useEffect(() => {
+    if (!loadMore) return;
+    let newArr = [...displayArr];
+    let remainder = combinedArray.length - newArr.length;
+    if (remainder >= displayThreshold) {
+      let starter = newArr.length;
+      for (let i = starter; i < starter + displayThreshold; i++) {
+        newArr.push(combinedArray[i]);
+      }
+    } else {
+      for (
+        let i = combinedArray.length - remainder;
+        i < combinedArray.length;
+        i++
+      ) {
+        newArr.push(combinedArray[i]);
+      }
+    }
+    setDisplayArr(newArr);
+    setLoadMore(false);
+  }, [loadMore, combinedArray, displayArr]);
 
+  useEffect(() => {
+    if (post.length === 0 || score.length === 0) return;
+    let combinedArray = combineData(post, score);
+    setCombinedArray(combinedArray);
+  }, [score, post]);
+
+  // subraddit
   const getData = useCallback(async () => {
     try {
       const postUrl = `${api_url}api/subraddit/${subraddit}`;
@@ -53,20 +71,68 @@ function SubRaddit() {
       setPost(postData.posts);
       setIsLoading(false);
 
+      const scoreUrl = `${api_url}api/postScore`;
+      const scoreResponse = await fetch(scoreUrl);
+      const scoreData = await scoreResponse.json();
+      if (postResponse.ok && scoreResponse.ok) {
+        setPost(postData.posts);
+        setScore(scoreData.scores);
+      }
     } catch (error) {
       console.error(error);
       setPost({ error: "Error fetching post" });
     }
   }, [subraddit]);
 
-  useEffect(() => {
-    getData();
-  }, [getData]);
+
+  function combineData(postArr, scoreArr) {
+    let combinedArray = [];
+    let scoreMap = {};
+    for (let i = 0; i < scoreArr.length; i++) {
+      scoreMap[scoreArr[i].post_id] = scoreArr[i].score;
+    }
+    for (let j = 0; j < postArr.length; j++) {
+      if (scoreMap[postArr[j].id] !== undefined) {
+        combinedArray.push(postArr[j]);
+        combinedArray[j]["score"] = scoreMap[postArr[j].id];
+      }
+    }
+    return combinedArray;
+  }
 
   function handleLoadMore() {
     setLoadMore(true);
   }
 
+  async function handleUpArrowClick(id) {
+    const url = `${api_url}api/postScore/upvote/${id}/${account}`;
+    const fetchConfig = {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    await fetch(url, fetchConfig);
+    window.location.reload();
+  }
+
+  async function handleDownArrowClick(id) {
+    const url = `${api_url}api/postScore/downvote/${id}/${account}`;
+    const fetchConfig = {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    await fetch(url, fetchConfig);
+    window.location.reload();
+  }
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   if (isLoading) {
     return (
@@ -85,38 +151,56 @@ function SubRaddit() {
             </div>
           </div>
 
-          {displayArr.map((p) => {
-            return (
-              <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
-                <div className="btn-group-vertical mb-3 ">
-                  <button
-                    type="button"
-                    className="btn btn-outline-success text-left"
+          <div className="container">
+            <ul className="list-group">
+              {displayArr.map((p) => {
+                return (
+                  <li
+                    className="list-group-item list-group-item-dark border border-dark"
+                    key={p.id}
                   >
-                    Rad
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-outline-danger text-left"
-                  >
-                    Bad
-                  </button>
-                </div>
-                <div className="post">
-                  <a href={`/raddit-new/post/${p.id}`} className="card-link">
-                    <p className="card-title">{p.title}</p>
-                  </a>
-                </div>
-              </div>
-            );
-          })}
-          {displayArr.length < post.length ? (
-            <button onClick={handleLoadMore}>Load more</button>
-          ) : null}
+                    <div className="row">
+                      <div className="col-sm-1">
+                        <button
+                          onClick={() => handleUpArrowClick(p.id)}
+                          type="button"
+                          className="btn btn-outline-success text-left"
+                        >
+                          <i className="fa fa-chevron-up pr-2"></i>
+                          Rad
+                        </button>
+                        <br />
+                        <span className="badge badge-info">{p.score}</span>
+                        <br />
+                        <button
+                          onClick={() => handleDownArrowClick(p.id)}
+                          type="button"
+                          className="btn btn-outline-danger text-left"
+                        >
+                          <i className="fa fa-chevron-down pr-2"></i>
+                          <span>Bad</span>
+                        </button>
+                      </div>
+                      <div className="col-sm-11">
+                        <a href={`/raddit-new/post/${p.id}`}>{p.title}</a>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            {displayArr.length < post.length ? (
+              <button onClick={handleLoadMore} className="btn btn-primary">
+                Load more
+              </button>
+            ) : null}
+          </div>
         </>
       </>
     );
   }
 }
+
+
 
 export default SubRaddit;

@@ -113,7 +113,7 @@ function Nav() {
                       logout();
                     }}
                     role={"button"}
-                    className="nav-link"
+                    className="nav-link text-dark"
                   >
                     Logout
                   </span>
