@@ -64,7 +64,6 @@ function SubRaddit() {
   }, [getData]);
 
   function handleLoadMore() {
-    console.log("setLoadmore");
     setLoadMore(true);
   }
 

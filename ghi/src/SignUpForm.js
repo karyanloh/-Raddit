@@ -26,7 +26,6 @@ function SignUpForm(props) {
       setUsername("");
       setEmail("");
       setPassword("");
-      alert("sucess!")
       navigate("/login");
     }
   }
