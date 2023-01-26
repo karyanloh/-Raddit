@@ -11,18 +11,23 @@ function MainPage() {
   const [combinedArray, setCombinedArray] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
 
+  // component did mount this should fetch data from backend
   useEffect(() => {
     getData();
   }, []);
 
+  // for initial loading of posts
   useEffect(() => {
     if (combinedArray.length > 0) {
       let newArr = [];
-      for (let i = 0; i < displayThreshold; i++) {
-        if (
-          combinedArray.length < displayThreshold &&
-          combinedArray[i] !== undefined
-        ) {
+      //to handle if post is less than display threshold set
+      if (combinedArray.length < displayThreshold) {
+        for (let i = 0; i < combinedArray.length; i++) {
+          newArr.push(combinedArray[i]);
+        }
+      } else {
+        //if post is more than display threshold
+        for (let i = 0; i < displayThreshold; i++) {
           newArr.push(combinedArray[i]);
         }
       }
@@ -50,7 +55,6 @@ function MainPage() {
       }
     }
     setDisplayArr(newArr);
-    // setIsLoading(false);
     setLoadMore(false);
   }, [loadMore, combinedArray, displayArr]);
 
@@ -73,7 +77,7 @@ function MainPage() {
       if (postResponse.ok && scoreResponse.ok) {
         setPost(postData.posts);
         setScore(scoreData.scores);
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
