@@ -96,11 +96,9 @@ function PostDetails() {
   }
 
   async function handleUpArrowClick() {
-    account = { account };
-    const url = `${api_url}postScore/upvote/${id}`;
+    const url = `${api_url}postScore/upvote/${id}/${account}`;
     const fetchConfig = {
       method: "put",
-      body: JSON.stringify(account),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -111,11 +109,9 @@ function PostDetails() {
   }
 
   async function handleDownArrowClick() {
-    account = { account };
-    const url = `${api_url}postScore/downvote/${id}`;
+    const url = `${api_url}postScore/downvote/${id}/${account}`;
     const fetchConfig = {
       method: "put",
-      body: JSON.stringify(account),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
