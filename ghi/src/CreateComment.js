@@ -15,14 +15,6 @@ function CreateCommentForm(props) {
         }
     }
 
-    // useEffect(() => {
-    //     Isloading();
-    //     if ((!token) && (isloading ===false)){
-    //     alert("Login Please");
-    //     navigate("/login?redirect=/api/comments");
-    //     }
-    // }, [token], isloading,);
-
     const [commentBody, setCommentBody] = useState("")
     const [postId, setPostId] = useState("")
 
@@ -39,8 +31,6 @@ function CreateCommentForm(props) {
             },
         };
     const response = await fetch(url, fetchConfig);
-    alert("Comment success");
-    // navigate("/");
   }
 
     async function handleSubmit(e) {

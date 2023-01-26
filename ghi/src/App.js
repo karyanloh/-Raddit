@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useToken } from "./utils";
-// import Construct from "./Construct.js";
-// import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import LoginForm from "./login.js";
 import MainPage from "./MainPage";
@@ -12,15 +10,12 @@ import PostDetail from "./postdetail";
 import SubRaddit from "./subraddit";
 
 function GetToken() {
-  // Get token from JWT cookie (if already logged in)
   useToken();
   return null;
 }
 
 
 function App() {
-  // const domain = 'raddit-new';
-  // const basename = process.env.PUBLIC_URL.replace(domain, '');
   return (
     <BrowserRouter basename="raddit-new/">
       <AuthProvider>
@@ -38,7 +33,6 @@ function App() {
             <Route path="subraddit">
               <Route path=":subraddit" element={<SubRaddit />} />
             </Route>
-            {/* <Route path="logout" element={<LogOutButton />} /> */}
           </Routes>
         </div>
       </AuthProvider>
@@ -47,14 +41,3 @@ function App() {
 }
 
 export default App;
-// function App() {
-//   const [launch_info, setLaunchInfo] = useState([]);
-//   const [error, setError] = useState(null);
-
-//   return (
-//     <div>
-//       <ErrorNotification error={error} />
-//       <Construct info={launch_info} />
-//     </div>
-//   );
-// }

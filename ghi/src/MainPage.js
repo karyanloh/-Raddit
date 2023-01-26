@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import "./index.css";
+import { useAuthContext } from "./utils";
+
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`;
 
 function MainPage() {
+  let { token, account } = useAuthContext();
   const displayThreshold = 10;
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState([]);
@@ -18,11 +21,12 @@ function MainPage() {
   useEffect(() => {
     if (combinedArray.length > 0) {
       let newArr = [];
-      for (let i = 0; i < displayThreshold; i++) {
-        if (
-          combinedArray.length < displayThreshold &&
-          combinedArray[i] !== undefined
-        ) {
+      if (combinedArray.length < displayThreshold) {
+        for (let i = 0; i < combinedArray.length; i++) {
+          newArr.push(combinedArray[i]);
+        }
+      } else {
+        for (let i = 0; i < displayThreshold; i++) {
           newArr.push(combinedArray[i]);
         }
       }
@@ -50,7 +54,6 @@ function MainPage() {
       }
     }
     setDisplayArr(newArr);
-    // setIsLoading(false);
     setLoadMore(false);
   }, [loadMore, combinedArray, displayArr]);
 
@@ -73,7 +76,6 @@ function MainPage() {
       if (postResponse.ok && scoreResponse.ok) {
         setPost(postData.posts);
         setScore(scoreData.scores);
-        // setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
@@ -101,11 +103,12 @@ function MainPage() {
   }
 
   async function handleUpArrowClick(id) {
-    const url = `${api_url}api/postScore/upvote/${id}`;
+    const url = `${api_url}api/postScore/upvote/${id}/${account}`;
     const fetchConfig = {
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);
@@ -113,11 +116,12 @@ function MainPage() {
   }
 
   async function handleDownArrowClick(id) {
-    const url = `${api_url}api/postScore/downvote/${id}`;
+    const url = `${api_url}api/postScore/downvote/${id}/${account}`;
     const fetchConfig = {
       method: "put",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     await fetch(url, fetchConfig);
@@ -136,7 +140,6 @@ function MainPage() {
     return (
       <>
         {displayArr.map((p) => {
-          console.log(p);
           return (
             <div className=" card-group text-blue ml-3 mb-8" key={p.id}>
               <div className="btn-group-vertical mb-3 ">
