@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from auth import authenticator
+# from auth import authenticator
 from main import app
 from routers.score import PostScoreOut
 from content_queries import ContentQueries
