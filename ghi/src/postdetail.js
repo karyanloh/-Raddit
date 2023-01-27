@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./utils";
-import raddit from "./raddit_new.png";
-
 
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}api/`;
 
@@ -244,17 +242,14 @@ function PostDetails() {
                   Delete
                 </button>
               </div>
-              <div className = "container-fluid">
-                <div className = "wrapper" >
-                    <div className="logo">
-                        <img src={raddit} alt="" />
-                    </div>
-                  <div className = "text-center mt-3 name">Raddit comment</div>
-                  <form className="p-3 mt-3" onSubmit={handleSubmit}>
-                    <div className="form-field d-flex align-items-center">
+              <div>
+                <div>
+                  <h3 style={{ color: "red" }}>Add a comment !</h3>
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group mb-4 ">
                       <label htmlFor="exampleFormControlTextarea1"></label>
-                      <input
-                        required type="text"
+                      <textarea
+                        type="text"
                         value={commentBody}
                         onChange={(e) => setCommentBody(e.target.value)}
                         className="form-control"
