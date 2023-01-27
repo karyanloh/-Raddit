@@ -22,11 +22,17 @@ function SignUpForm(props) {
         "Content-Type": "application/json",
       },
     });
-    if (response.ok) {
+    let jsonResponse = await response.json();
+    if (response.ok && jsonResponse !== null) {
       setUsername("");
       setEmail("");
       setPassword("");
+      console.log("success");
       navigate("/login");
+    } else {
+      alert(
+        "Your signup failed. The most likely reason is you tried a username that is taken."
+      );
     }
   }
 
@@ -39,7 +45,7 @@ function SignUpForm(props) {
         <div className="text-center mt-4 name">Raddit</div>
         <form className="p-3 mt-3" onSubmit={SignUp}>
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-user"></span>
+            <span className="fas"></span>
             <input
               value={username}
               type="username"
@@ -51,7 +57,7 @@ function SignUpForm(props) {
             />
           </div>
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-key"></span>
+            <span className="fas"></span>
             <input
               value={email}
               type="email"
@@ -63,7 +69,7 @@ function SignUpForm(props) {
             />
           </div>
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-key"></span>
+            <span className="fas"></span>
             <input
               value={password}
               type="password"
@@ -77,7 +83,7 @@ function SignUpForm(props) {
           <button className="btn mt-3">Sign up</button>
         </form>
         <div className="text-center fs-6">
-          <a href="/login">Already a user? Log in now</a>
+          <a href="/raddit-new/login">Already a user? Log in now</a>
         </div>
       </div>
     </>

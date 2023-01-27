@@ -12,16 +12,29 @@ lint-test-job:
     - flake8 user-service
     - flake8 content-service
 
-# Run the unit tests
-# api-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   needs:
-#     - lint-test-job
-#   script:
-#     - cd sample_service
-#     - pip install -r requirements.txt
-#     - python -m pytest
+api-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd content-service
+    - pip install -r requirements.txt
+    - python -m pytest
+  only:
+    - main
+
+api-unit-test-job-two:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd user-service
+    - pip install -r requirements.txt
+    - python -m pytest
+  only:
+    - main
 
 # Build the React/JavaScript front-end
 build-front-end-job:

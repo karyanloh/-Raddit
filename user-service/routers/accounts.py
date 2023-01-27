@@ -6,13 +6,17 @@ from user_queries import UserQueries
 router = APIRouter()
 
 
-@router.post("/api/users", response_model=UserOut)
+@router.post("/api/users", response_model=UserOut | None)
 def create_user(
     new_user: UserIn,
     user_queries: UserQueries = Depends(),
 ):
     new_user.password = authenticator.hash_password(new_user.password)
-    return user_queries.create_user(new_user)
+    result = user_queries.create_user(new_user)
+    if  result is None:
+        return None
+    else:
+        return result
 
 
 @router.get("/api/users/{id}", response_model=UserOut)

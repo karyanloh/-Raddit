@@ -1,7 +1,9 @@
 ## API Design
 
+## POSTS
+
 ### Get a list of Posts
-* Endpoint path: /Raddit
+* Endpoint path: /api/posts
 * Endpoint method: GET
 * Response: A list of user posts
 * Response shape:
@@ -9,26 +11,11 @@
     {
       "posts": [
         {
+          "id": string,
           "title": string,
-          "upvote_count": number,
-          "number_of_comments": number
-        }
-      ]
-    }
-    ```
-
-### Get detail of a Post
-* Endpoint path: /Raddit/id
-* Endpoint method: GET
-* Response: A detailed view of a single post
-* Response shape:
-    ```json
-    {
-      "post": [
-        {
-          "title": string,
-          "content" : string,
-          "upvote_count": number,
+          "description": string,
+          "subraddit": string,
+          "user_id": string
         }
       ]
     }
@@ -36,7 +23,7 @@
 
 ### Create a new post
 
-* Endpoint path: /Raddit
+* Endpoint path: /api/posts
 * Endpoint method: POST
 
 * Headers:
@@ -46,9 +33,9 @@
     ```json
     {
       "title": string,
-      "text": string,
-      "my_profile":boolean,
-      "subraddit_choice":string
+      "description": string,
+      "subraddit": string,
+      "user_id": string
     }
     ```
 
@@ -56,29 +43,93 @@
 * Response shape:
     ```json
     {
-      "success": boolean,
-      "message": string
+      "id": string,
+      "title": string,
+      "subraddit": string
     }
     ```
 
-### Get comments
-* Endpoint path: /Raddit/id/comments
+### Get detail of a Post
+* Endpoint path: /api/posts/{id}
 * Endpoint method: GET
-* Response: A list of comments for a post
+* Response: A detailed view of a single post
 * Response shape:
     ```json
     {
-      "post": [
+      "id": string,
+      "title": string,
+      "description": string,
+      "subraddit": string,
+      "user_id": string
+    }
+    ```
+
+### Update a raddit post
+
+* Endpoint path: /api/posts/{id}
+* Endpoint method: PUT
+
+* Headers:
+  * Authorization: Bearer token
+
+* Request: Update a post
+* Request body:
+    ```json
+    {
+      "description": string
+    }
+    ```
+
+* Response shape:
+    ```json
+    {
+      "id": string,
+      "title": string,
+      "description": string,
+      "subraddit": string,
+      "user_id": string
+    }
+    ```
+
+### Delete a raddit post
+
+* Endpoint path: /api/delete/{id}
+* Endpoint method: DELETE
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Return message for successful deletion of post
+* Response shape (JSON):
+    ```json
         {
-          "body" : string,
-          "upvote_count": number,
+            'message': 'Deleted post'
+        }
+    ```
+
+## Subraddit
+
+### Get post detail by subraddit (filter)
+* Endpoint path: /api/subraddit/{subraddit}
+* Endpoint method: GET
+* Response: Get post detail by subraddit
+* Response shape:
+    ```json
+    {
+      "posts": [
+        {
+          "id": string,
+          "title": string,
+          "subraddit": string
         }
       ]
     }
     ```
 
+## Comments
+
 ### Post comments
-* Endpoint path: /Raddit/id/comments
+* Endpoint path: /api/comments
 * Endpoint method: POST
 
 * Headers:
@@ -87,36 +138,103 @@
 * Request body:
     ```json
     {
-      "title": string,
-      "body": string
+      "post_id": string,
+      "body": string,
+      "user_id": string
     }
     ```
 
+* Response: comment detail for a post
+* Response shape:
+    ```json
+    {
+      "post_id": string,
+      "body": string,
+      "user_id": string
+    }
+    ```
+
+### Get comment detail by post_id
+* Endpoint path: /api/comments/{post_id}
+* Endpoint method: GET
 * Response: A list of comments for a post
 * Response shape:
     ```json
     {
-      "post": [
+      "comments": [
         {
-          "title": string,
-          "body" : string
+          "id": string,
+          "post_id": string,
+          "body": string,
+          "user_id": string
         }
       ]
     }
     ```
 
-### Delete comments
-* Endpoint path: /Raddit/id/comments/id
-* Endpoint method: DELETE
+## PostScores
+
+### Get all postscores
+* Endpoint path: /api/postScore
+* Endpoint method: GET
+* Response: A list of postscores
+* Response shape:
+    ```json
+    {
+      "scores": [
+        {
+          "post_id": string,
+          "score": int
+        }
+      ]
+    }
+    ```
+
+### Get postscore for a specific post_id
+* Endpoint path: /api/post/postScore/{post_id}
+* Endpoint method: GET
+* Response: postscore for a specific post_id
+* Response shape:
+    ```json
+    {
+      "post_id": string,
+      "score": int
+    }
+    ```
+
+### Increase post score by post id for a logged in user
+* Endpoint path: /api/postScore/upvote/{post_id}/{user_id}
+* Endpoint method: PUT
 
 * Headers:
   * Authorization: Bearer token
 
-* Response: Delete a comment
-* Response shape (JSON):
+* Response:  postscore for a specific post_id
+* Response shape:
     ```json
-    true
+    {
+      "post_id": string,
+      "score": int
+    }
     ```
+
+### Decrease post score by post id for a logged in user
+* Endpoint path: /api/postScore/downvote/{post_id}/{user_id}
+* Endpoint method: PUT
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: postscore for a specific post_id
+* Response shape:
+    ```json
+    {
+      "post_id": string,
+      "score": int
+    }
+    ```
+
+## Log in & Sign up
 
 ### Log in
 
@@ -131,10 +249,8 @@
 * Response shape (JSON):
     ```json
     {
-      "account": {
-        «key»: type»,
-      },
-      "token": string
+      "access_token": string,
+      "token_type": Bearer
     }
     ```
 
@@ -152,54 +268,64 @@
     true
     ```
 
-### Update a raddit post
+### Log in (Get token)
 
-* Endpoint path: /Raddit/<int:pk>/
-* Endpoint method: PUT
+* Endpoint path: /token
+* Endpoint method: GET
 
-* Headers:
-  * Authorization: Bearer token
+* Request shape (form):
+  * username: string
+  * password: string
 
-
-* Request: Update a post
-* Request body:
-    ```json
-    {
-      "title": string,
-      "text": string,
-      "my_profile":boolean,
-      "subraddit_choice":string
-    }
-    ```
-* Response: An indication of success or failure
-* Response shape:
-    ```json
-    {
-      "success": boolean,
-      "message": string
-    }
-    ```
-
-
-### Delete a raddit post
-
-* Endpoint path: /raddit/<int:id>/
-* Endpoint method: DELETE
-
-* Headers:
-  * Authorization: Bearer token
-
-* Request shape (JSON):
-    ```json
-        {
-            "id": integer
-        }
-    ```
-
-* Response: Return message for successful deletion of post
+* Response: Account information and a token
 * Response shape (JSON):
     ```json
-        {
-            'message': 'Deleted post'
-        }
+    {
+      "access_token": string,
+      "token_type": Bearer,
+      "account": {
+        "email": string,
+        "id": string,
+        "username": string
+      }
+    }
+    ```
+
+### Sign up (create user)
+
+* Endpoint path: /api/users
+* Endpoint method: POST
+
+* Response: Account information and a token
+* Response shape (JSON):
+    ```json
+  {
+    "email": string,
+    "id": string,
+    "username":string
+  }
+    ```
+
+### Sign up (get user detail)
+
+* Endpoint path: /api/users/{id}
+* Endpoint method: GET
+
+* Request shape (form):
+  ```json
+  {
+    "email": string,
+    "password": string,
+    "username": string
+  }
+    ```
+
+* Response: Account information and a token
+* Response shape (JSON):
+    ```json
+  {
+    "email":string,
+    "id": string,
+    "username": string
+  }
     ```

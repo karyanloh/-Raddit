@@ -17,7 +17,7 @@ function Login() {
         <div className="text-center mt-4 name">Raddit</div>
         <form className="p-3 mt-3">
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-user"></span>
+            <span className="fas"></span>
             <input
               onChange={(e) => setUsername(e.target.value)}
               value={username}
@@ -29,7 +29,7 @@ function Login() {
             />
           </div>
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-key"></span>
+            <span className="fas"></span>
             <input
               onChange={(e) => setPassword(e.target.value)}
               value={password}
@@ -51,7 +51,7 @@ function Login() {
           </button>
         </form>
         <div className="text-center fs-6">
-          <a href="/signup">Not a user? Sign up now</a>
+          <a href="/raddit-new/signup">Not a user? Sign up now</a>
         </div>
       </div>
     </>
