@@ -51,7 +51,7 @@ function Login() {
           </button>
         </form>
         <div className="text-center fs-6">
-          <a href="/signup">Not a user? Sign up now</a>
+          <a href="/raddit-new/signup">Not a user? Sign up now</a>
         </div>
       </div>
     </>
