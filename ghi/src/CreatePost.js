@@ -76,6 +76,7 @@ function CreatePostForm() {
             <textarea
               type="text"
               value={description}
+              required
               onChange={(e) => setDescription(e.target.value)}
               className="form-control"
               id="exampleFormControlTextarea1"
@@ -87,7 +88,7 @@ function CreatePostForm() {
             {subraddit}
             <br />
 
-            <select onChange={(e) => setSubraddit(e.target.value)}>
+            <select onChange={(e) => setSubraddit(e.target.value)} required>
               <option value="⬇️ Select a subraddit⬇️">
                 {" "}
                 -- Select a subraddit --{" "}
