@@ -126,8 +126,9 @@ class ContentQueries:
         db = client[mongodb]
         post_score = db.postVotes.find_one({"post_id": post_id})
         upvoted_users = post_score["upvoted_users"]
+        downvoted_users = post_score["downvoted_users"]
 
-        if user_id in upvoted_users:
+        if user_id in upvoted_users and user_id not in downvoted_users:
             upvoted_users.remove(user_id)
             db.postVotes.update_one(
                 {"post_id": post_id},
@@ -136,6 +137,21 @@ class ContentQueries:
                         "score": -1,
                     },
                     "$set": {"upvoted_users": upvoted_users},
+                },
+            )
+        elif user_id in downvoted_users:
+            upvoted_users.append(user_id)
+            downvoted_users.remove(user_id)
+            db.postVotes.update_one(
+                {"post_id": post_id},
+                {
+                    "$inc": {
+                        "score": 2,
+                    },
+                    "$set": {
+                        "upvoted_users": upvoted_users,
+                        "downvoted_users": downvoted_users,
+                    },
                 },
             )
         else:
@@ -158,8 +174,9 @@ class ContentQueries:
         db = client[mongodb]
         post_score = db.postVotes.find_one({"post_id": post_id})
         downvoted_users = post_score["downvoted_users"]
+        upvoted_users = post_score["upvoted_users"]
 
-        if user_id in downvoted_users:
+        if user_id in downvoted_users and user_id not in upvoted_users:
             downvoted_users.remove(user_id)
             db.postVotes.update_one(
                 {"post_id": post_id},
@@ -168,6 +185,21 @@ class ContentQueries:
                         "score": 1,
                     },
                     "$set": {"downvoted_users": downvoted_users},
+                },
+            )
+        elif user_id in upvoted_users and user_id not in downvoted_users:
+            downvoted_users.append(user_id)
+            upvoted_users.remove(user_id)
+            db.postVotes.update_one(
+                {"post_id": post_id},
+                {
+                    "$inc": {
+                        "score": -2,
+                    },
+                    "$set": {
+                        "downvoted_users": downvoted_users,
+                        "upvoted_users": upvoted_users,
+                    },
                 },
             )
         else:
