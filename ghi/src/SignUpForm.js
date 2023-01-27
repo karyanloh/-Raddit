@@ -77,7 +77,7 @@ function SignUpForm(props) {
           <button className="btn mt-3">Sign up</button>
         </form>
         <div className="text-center fs-6">
-          <a href="/login">Already a user? Log in now</a>
+          <a href="/raddit-new/login">Already a user? Log in now</a>
         </div>
       </div>
     </>

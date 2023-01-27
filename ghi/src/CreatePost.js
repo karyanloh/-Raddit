@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 const api_url = `${process.env.REACT_APP_CONTENT_SERVICE_API_HOST}`
 // subraddit
 let subraddits = [
-  { label: "Tech", value: "Tech" },
-  { label: "Movies", value: "Movies" },
-  { label: "Music", value: "Music" },
-  { label: "Sports", value: "Sports" },
-  { label: "Miscellaneous", value: "Miscellaneous" },
+  { label: "💻", value: "Tech" },
+  { label: "🎬", value: "Movies" },
+  { label: "🎧", value: "Music" },
+  { label: "🏀", value: "Sports" },
+  { label: "🍙", value: "Miscellaneous" },
 ];
 
 function CreatePostForm() {
@@ -55,7 +55,7 @@ function CreatePostForm() {
 
   return (
     <div className="d-flex justify-content-center">
-      <div className="shadow-none p-3 mb-5 bg-warning rounded p-4 mt-4">
+      <div className="shadow-none p-3 mb-5 post-color rounded p-4 mt-4">
         <h1 style={{ color: "white" }}>Create a new post !</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-floating ">
@@ -67,7 +67,7 @@ function CreatePostForm() {
               type="text"
               name="Title"
               id="Title"
-              className="form-control"
+              className="form-control "
             />
             <label htmlFor="Title">Title</label>
           </div>
@@ -99,7 +99,7 @@ function CreatePostForm() {
               ))}
             </select>
           </div>
-          <button className="btn btn-light">Create</button>
+          <button className="btn btn-light vertical-center">Create</button>
         </form>
       </div>
     </div>
