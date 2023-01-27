@@ -68,3 +68,4 @@ To fully enjoy this application on your local machine, please make sure to follo
 3. Run `docker volume create mongo-data`,`docker volume create mongo2-data`
 4. Run `docker compose build`
 5. Run `docker compose up`
+6. Go to `http://localhost:3000/raddit-new/` to explore this application~
