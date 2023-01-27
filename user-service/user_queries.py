@@ -13,7 +13,7 @@ client = pymongo.MongoClient(mongo_str)
 class UserQueries:
     def create_user(self, new_user):
         db = client[mongodb]
-        if db.users.find_one({"username": new_user.username}) == None:
+        if db.users.find_one({"username": new_user.username}) is None:
             result = db.users.insert_one(new_user.dict())
             user = self.get_user_by_id(result.inserted_id)
             return user

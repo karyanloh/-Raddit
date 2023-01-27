@@ -13,7 +13,7 @@ def create_user(
 ):
     new_user.password = authenticator.hash_password(new_user.password)
     result = user_queries.create_user(new_user)
-    if  result is None:
+    if result is None:
         return None
     else:
         return result
