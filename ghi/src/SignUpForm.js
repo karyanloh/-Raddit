@@ -22,11 +22,17 @@ function SignUpForm(props) {
         "Content-Type": "application/json",
       },
     });
-    if (response.ok) {
+    let jsonResponse = await response.json();
+    if (response.ok && jsonResponse !== null) {
       setUsername("");
       setEmail("");
       setPassword("");
+      console.log("success");
       navigate("/login");
+    } else {
+      alert(
+        "Your signup failed. The most likely reason is you tried a username that is taken."
+      );
     }
   }
 
