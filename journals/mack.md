@@ -45,15 +45,18 @@ Today I worked on:
 
 ## January 13, 2023 F
 Today I worked on:
-    -
+    - planning for comments and votes on posts
 
 ## January 16, 2023 M
 Today I worked on:
-    -
+    - editing code
+    - pseudocoding comments for posts
+    - pseudocoding votes for posts
 
 ## January 17, 2023 T
 Today I worked on:
-    - BE comments
+    - creating comments on posts in the BE
+    - editing styling for FE comments
 
 ## January 18, 2023 W
 Today I worked on:
@@ -84,13 +87,12 @@ Today I worked on:
 
 ## January 26, 2023 R
 Today I worked on:
-    -
+    - Finished up user voting either up or down
+    - Displaying score reflecting up/down votes
+    - README revisions
+    - endpoint revisions
 
 ## January 27, 2023 F
 Today I worked on:
-    -
-
-
-## January 30, 2023 M
-Today I worked on:
-    -
+    - finished project
+    - demo
