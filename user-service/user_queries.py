@@ -16,9 +16,6 @@ class UserQueries:
         if db.users.find_one({"username": new_user.username}) == None:
             result = db.users.insert_one(new_user.dict())
             user = self.get_user_by_id(result.inserted_id)
-            print("\n\n\n\n\n")
-            print(user)
-            print("\n\n\n\n\n")
             return user
         else:
             return None
