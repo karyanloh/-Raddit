@@ -128,7 +128,7 @@ class ContentQueries:
         upvoted_users = post_score["upvoted_users"]
         downvoted_users = post_score["downvoted_users"]
 
-        if user_id in upvoted_users:
+        if user_id in upvoted_users and user_id not in downvoted_users:
             upvoted_users.remove(user_id)
             db.postVotes.update_one(
                 {"post_id": post_id},
